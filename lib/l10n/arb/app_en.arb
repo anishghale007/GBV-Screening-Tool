@@ -1,7 +1,76 @@
 {
     "@@locale": "en",
-    "counterAppBarTitle": "Counter",
-    "@counterAppBarTitle": {
-        "description": "Text shown in the AppBar of the Counter Page"
-    }
+    "appTitle": "My Wellbeing",
+    "@appTitle": {
+        "description": "Neutral app title shown in app bar and store listing"
+    },
+    "languageSelectionTitle": "Choose Language",
+    "@languageSelectionTitle": {
+        "description": "Title on the language selection screen"
+    },
+    "nepali": "Nepali",
+    "english": "English",
+    "continueButton": "Continue",
+    "@continueButton": {
+        "description": "Generic continue button label"
+    },
+    "backButton": "Back",
+    "skipButton": "Skip",
+    "listenButton": "Listen",
+    "@listenButton": {
+        "description": "Button label to play audio narration"
+    },
+    "replayButton": "Replay",
+    "nextButton": "Next",
+    "previousButton": "Previous",
+    "preferNotToSay": "Prefer not to say",
+    "@preferNotToSay": {
+        "description": "Option to skip answering a screening question"
+    },
+    "questionProgress": "Question {current} of {total}",
+    "@questionProgress": {
+        "description": "Progress indicator showing current question number",
+        "placeholders": {
+            "current": {
+                "type": "int"
+            },
+            "total": {
+                "type": "int"
+            }
+        }
+    },
+    "enterPin": "Enter PIN",
+    "@enterPin": {
+        "description": "Prompt shown on the PIN lock screen"
+    },
+    "createPin": "Create a PIN",
+    "confirmPin": "Confirm your PIN",
+    "incorrectPin": "Incorrect PIN. Please try again.",
+    "settings": "Settings",
+    "accessibilitySettings": "Accessibility",
+    "textSize": "Text Size",
+    "textSizeSmall": "Small",
+    "textSizeMedium": "Medium",
+    "textSizeLarge": "Large",
+    "highContrast": "High Contrast",
+    "reduceAnimations": "Reduce Animations",
+    "largeTouchTargets": "Large Touch Targets",
+    "hapticFeedback": "Haptic Feedback",
+    "screenReaderMode": "Screen Reader Mode",
+    "adhdMode": "Focus Mode",
+    "dyslexiaMode": "Dyslexia-Friendly Text",
+    "visionImpairedMode": "Enhanced Visibility",
+    "lowLiteracyMode": "Simple Mode",
+    "autoPlayAudio": "Auto-Play Audio",
+    "supportResources": "Support Resources",
+    "@supportResources": {
+        "description": "Title for the support/help directory"
+    },
+    "emergencyContacts": "Emergency Contacts",
+    "helpline": "Women's Helpline",
+    "counselor": "Counselor",
+    "localSupport": "Local Support Services",
+    "quickExitMessage": "Press and hold to exit safely",
+    "completionTitle": "Thank You",
+    "completionMessage": "Here are some suggested next steps for you."
 }

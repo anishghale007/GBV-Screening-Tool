@@ -1,0 +1,54 @@
+{
+    "@@locale": "ne",
+    "appTitle": "मेरो स्वास्थ्य",
+    "languageSelectionTitle": "भाषा छान्नुहोस्",
+    "nepali": "नेपाली",
+    "english": "अंग्रेजी",
+    "continueButton": "जारी राख्नुहोस्",
+    "backButton": "पछाडि",
+    "skipButton": "छोड्नुहोस्",
+    "listenButton": "सुन्नुहोस्",
+    "replayButton": "फेरि सुन्नुहोस्",
+    "nextButton": "अर्को",
+    "previousButton": "अघिल्लो",
+    "preferNotToSay": "भन्न चाहन्नँ",
+    "questionProgress": "प्रश्न {current} / {total}",
+    "@questionProgress": {
+        "placeholders": {
+            "current": {
+                "type": "int"
+            },
+            "total": {
+                "type": "int"
+            }
+        }
+    },
+    "enterPin": "PIN प्रविष्ट गर्नुहोस्",
+    "createPin": "PIN बनाउनुहोस्",
+    "confirmPin": "PIN पुष्टि गर्नुहोस्",
+    "incorrectPin": "गलत PIN। फेरि प्रयास गर्नुहोस्।",
+    "settings": "सेटिङहरू",
+    "accessibilitySettings": "पहुँचयोग्यता",
+    "textSize": "अक्षरको आकार",
+    "textSizeSmall": "सानो",
+    "textSizeMedium": "मध्यम",
+    "textSizeLarge": "ठूलो",
+    "highContrast": "उच्च कन्ट्रास्ट",
+    "reduceAnimations": "एनिमेसन घटाउनुहोस्",
+    "largeTouchTargets": "ठूला बटनहरू",
+    "hapticFeedback": "स्पर्श प्रतिक्रिया",
+    "screenReaderMode": "स्क्रिन रिडर मोड",
+    "adhdMode": "फोकस मोड",
+    "dyslexiaMode": "पढ्न सजिलो अक्षर",
+    "visionImpairedMode": "बढी देखिने मोड",
+    "lowLiteracyMode": "सरल मोड",
+    "autoPlayAudio": "स्वत: अडियो बजाउनुहोस्",
+    "supportResources": "सहायता स्रोतहरू",
+    "emergencyContacts": "आपतकालीन सम्पर्कहरू",
+    "helpline": "महिला हेल्पलाइन",
+    "counselor": "परामर्शदाता",
+    "localSupport": "स्थानीय सहायता सेवाहरू",
+    "quickExitMessage": "सुरक्षित रूपमा बाहिर निस्कन थिचिराख्नुहोस्",
+    "completionTitle": "धन्यवाद",
+    "completionMessage": "तपाईंका लागि केही सुझावहरू यहाँ छन्।"
+}

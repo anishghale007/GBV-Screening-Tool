@@ -1,28 +1,80 @@
 name: gbv
-description: A Very Good Project created by Very Good CLI.
+description: GBV Screening Tool — Offline, on-device screening for women.
 version: 1.0.0+1
 publish_to: none
 
 environment:
-  sdk: ">=2.18.0 <3.0.0"
-  flutter: 3.3.8
+  sdk: ">=3.9.0 <4.0.0"
 
 dependencies:
-  bloc: ^8.1.0
+  # State Management
+  bloc: ^8.1.4
+  flutter_bloc: ^8.1.6
+  equatable: ^2.1.0
+
+  # Flutter SDK
   flutter:
     sdk: flutter
-  flutter_bloc: ^8.1.1
   flutter_localizations:
     sdk: flutter
-  intl: ^0.17.0
+
+  # Networking 
+  connectivity_plus: ^7.3.1
+  dio: ^5.11.0
+
+  # Functional Programming
+  dartz: ^0.10.1
+
+  # UI & Layout
+  flutter_screenutil: ^5.9.3
+  flutter_svg: ^2.3.0
+  auto_size_text: ^3.0.0
+  google_fonts: ^6.2.1
+
+  # Navigation
+  go_router: ^14.8.1
+
+  # Dependency Injection
+  get_it: ^9.2.1
+
+  # Localization
+  intl: ^0.20.2
+
+  # Security & Storage
+  flutter_secure_storage: ^9.2.4
+  encrypt: ^5.0.3
+  shared_preferences: ^2.5.5
+  path_provider: ^2.1.5
+
+  # Permissions & Privacy
+  permission_handler: ^13.0.1
+  privacy_screen: ^0.0.8
+
+  # Audio
+  audioplayers: ^6.4.0
+
+  # Utilities
+  url_launcher: ^6.3.2
+  json_annotation: ^4.9.0
+  speech_to_text: ^7.4.0
+  flutter_tts: ^4.2.5
 
 dev_dependencies:
   bloc_test: ^9.1.0
   flutter_test:
     sdk: flutter
   mocktail: ^0.3.0
-  very_good_analysis: ^3.1.0
+  very_good_analysis: ^6.0.0
+  build_runner: ^2.4.14
+  json_serializable: ^6.9.4
 
 flutter:
   uses-material-design: true
+  assets:
+    - assets/images/
+    - assets/images/questions/
+    - assets/icons/
+    - assets/audio/ne/
+    - assets/audio/en/
+    - assets/fonts/
   generate: true
