@@ -31,3 +31,12 @@ class AudioException implements Exception {
   @override
   String toString() => 'AudioException: $message';
 }
+
+/// Thrown when the device has no internet connection.
+class NoInternetException implements Exception {
+  const NoInternetException([this.message = 'No internet connection']);
+  final String message;
+
+  @override
+  String toString() => 'NoInternetException: $message';
+}
