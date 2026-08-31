@@ -21,4 +21,5 @@ export 'theme/app_colors.dart';
 export 'theme/app_spacing.dart';
 export 'theme/app_text_styles.dart';
 export 'theme/app_theme.dart';
+export 'utils/string_extensions.dart';
 export 'utils/text_validator.dart';

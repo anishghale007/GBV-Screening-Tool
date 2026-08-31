@@ -1,10 +1,11 @@
 import 'package:gbv/core/constants/app_constants.dart';
+import 'package:gbv/core/utils/string_extensions.dart';
 
 /// Common text validation utilities for form inputs, PIN validation, etc.
 abstract final class TextValidator {
   /// Validates that a string value is not null or empty/whitespace only.
   static String? validateNotEmpty(String? value, [String? errorMessage]) {
-    if (value == null || value.trim().isEmpty) {
+    if (value.isNullOrBlank) {
       return errorMessage ?? 'This field cannot be empty';
     }
     return null;
@@ -12,11 +13,11 @@ abstract final class TextValidator {
 
   /// Validates a 4-digit numeric PIN (FR-SAFE-06).
   static String? validatePin(String? value, [String? errorMessage]) {
-    if (value == null || value.trim().isEmpty) {
+    if (value.isNullOrBlank) {
       return errorMessage ?? 'PIN is required';
     }
-    final isRightLength = value.length == AppConstants.pinLength;
-    final isNumeric = RegExp(r'^\d+$').hasMatch(value);
+    final isRightLength = value!.length == AppConstants.pinLength;
+    final isNumeric = value.isNumeric;
     if (!isRightLength || !isNumeric) {
       return errorMessage ??
           'PIN must be exactly ${AppConstants.pinLength} digits';
@@ -41,11 +42,10 @@ abstract final class TextValidator {
 
   /// Validates a phone number format (for support directory emergency numbers).
   static String? validatePhoneNumber(String? value, [String? errorMessage]) {
-    if (value == null || value.trim().isEmpty) {
+    if (value.isNullOrBlank) {
       return errorMessage ?? 'Phone number is required';
     }
-    final cleanNumber = value.replaceAll(RegExp(r'[\s\-\(\)]'), '');
-    if (!RegExp(r'^\+?[0-9]{7,15}$').hasMatch(cleanNumber)) {
+    if (!value!.isValidPhoneNumber) {
       return errorMessage ?? 'Enter a valid phone number';
     }
     return null;
