@@ -3,6 +3,7 @@ import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
 import 'package:flutter/widgets.dart';
+import 'package:gbv/injection_container.dart';
 
 class AppBlocObserver extends BlocObserver {
   @override
@@ -24,6 +25,9 @@ Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
   };
 
   Bloc.observer = AppBlocObserver();
+
+  WidgetsFlutterBinding.ensureInitialized();
+  await initDependencies();
 
   await runZonedGuarded(
     () async => runApp(await builder()),

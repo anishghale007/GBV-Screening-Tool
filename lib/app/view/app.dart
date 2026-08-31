@@ -1,22 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:gbv/l10n/arb/app_localizations.dart';
+import 'package:gbv/core/core.dart';
+import 'package:gbv/l10n/l10n.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData(
-        appBarTheme: const AppBarTheme(backgroundColor: Color(0xFF13B9FF)),
-        colorScheme: ColorScheme.fromSwatch(
-          accentColor: const Color(0xFF13B9FF),
-        ),
-      ),
+    return MaterialApp.router(
+      title: 'My Wellbeing',
+      debugShowCheckedModeBanner: false,
+      theme: AppTheme.lightTheme,
+      darkTheme: AppTheme.highContrastTheme,
+      routerConfig: appRouter,
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
-      // home: const CounterPage(),
-      home: const SizedBox(),
     );
   }
 }
