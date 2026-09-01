@@ -64,7 +64,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   mocktail: ^0.3.0
-  very_good_analysis: ^6.0.0
+  very_good_analysis: ^10.3.0
   build_runner: ^2.4.14
   json_serializable: ^6.9.4
 
