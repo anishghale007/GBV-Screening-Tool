@@ -18,7 +18,7 @@ dependencies:
   flutter_localizations:
     sdk: flutter
 
-  # Networking 
+  # Networking
   connectivity_plus: ^7.3.1
   dio: ^5.11.0
 
@@ -46,8 +46,7 @@ dependencies:
   shared_preferences: ^2.5.5
   path_provider: ^2.1.5
 
-  # Permissions & Privacy
-  permission_handler: ^13.0.1
+  permission_handler: ^11.3.1
   privacy_screen: ^0.0.8
 
   # Audio
