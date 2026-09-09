@@ -2,6 +2,7 @@
 ///
 /// Using a dedicated class prevents stringly-typed route references.
 abstract final class AppRoutes {
+  static const String splash = '/splash';
   static const String onboarding = '/onboarding';
   static const String pinSetup = '/pin-setup';
   static const String pinLock = '/pin-lock';

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gbv/core/routing/app_routes.dart';
+import 'package:gbv/features/home/view/home_page.dart';
+import 'package:gbv/features/splash/view/splash_page.dart';
 import 'package:go_router/go_router.dart';
 
 /// Central GoRouter configuration.
@@ -9,9 +11,14 @@ import 'package:go_router/go_router.dart';
 ///
 /// Placeholder pages are used until feature views are implemented.
 final GoRouter appRouter = GoRouter(
-  initialLocation: AppRoutes.onboarding,
+  initialLocation: AppRoutes.splash,
   debugLogDiagnostics: true,
   routes: [
+    GoRoute(
+      path: AppRoutes.splash,
+      name: 'splash',
+      builder: (context, state) => const SplashPage(),
+    ),
     GoRoute(
       path: AppRoutes.onboarding,
       name: 'onboarding',
@@ -30,7 +37,7 @@ final GoRouter appRouter = GoRouter(
     GoRoute(
       path: AppRoutes.home,
       name: 'home',
-      builder: (context, state) => const _PlaceholderPage(title: 'Home'),
+      builder: (context, state) => const HomePage(),
     ),
     GoRoute(
       path: AppRoutes.screening,
