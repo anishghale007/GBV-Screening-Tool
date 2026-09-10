@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gbv/common/common.dart';
 import 'package:gbv/core/core.dart';
+import 'package:gbv/features/accessibility/view/accessibility_page.dart';
 import 'package:gbv/injection_container.dart';
 import 'package:go_router/go_router.dart';
 
@@ -181,9 +182,7 @@ class _IncidentSelectionPageState extends State<IncidentSelectionPage> {
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          context.push(AppRoutes.accessibility);
-        },
+        onPressed: () => AccessibilityBottomSheet.show(context),
         tooltip: l10n.accessibilitySettings,
         child: const Icon(Icons.accessible_forward_rounded),
       ),

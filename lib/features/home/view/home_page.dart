@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gbv/common/common.dart';
 import 'package:gbv/core/core.dart';
+import 'package:gbv/features/accessibility/view/accessibility_page.dart';
 import 'package:go_router/go_router.dart';
 
 /// Simple Home screen serving as the central hub for the screening tool.
@@ -23,12 +24,12 @@ class HomePage extends StatelessWidget {
           IconButton(
             icon: const Icon(Icons.accessibility_new_rounded),
             tooltip: context.l10n.accessibilitySettings,
-            onPressed: () => context.push(AppRoutes.accessibility),
+            onPressed: () => AccessibilityBottomSheet.show(context),
           ),
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => context.push(AppRoutes.accessibility),
+        onPressed: () => AccessibilityBottomSheet.show(context),
         tooltip: context.l10n.accessibilitySettings,
         child: const Icon(Icons.accessible_forward_rounded),
       ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gbv/core/routing/app_routes.dart';
+import 'package:gbv/features/accessibility/view/accessibility_page.dart';
 import 'package:gbv/features/home/view/home_page.dart';
 import 'package:gbv/features/screening/view/gender_selection_page.dart';
 import 'package:gbv/features/screening/view/incident_selection_page.dart';
@@ -70,8 +71,7 @@ final GoRouter appRouter = GoRouter(
     GoRoute(
       path: AppRoutes.accessibility,
       name: 'accessibility',
-      builder: (context, state) =>
-          const _PlaceholderPage(title: 'Accessibility'),
+      builder: (context, state) => const AccessibilityPage(),
     ),
     GoRoute(
       path: AppRoutes.quickExit,
