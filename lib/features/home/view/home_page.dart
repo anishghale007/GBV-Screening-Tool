@@ -19,6 +19,7 @@ class HomePage extends StatelessWidget {
           ),
         ),
         actions: [
+          const LocaleSwitch(),
           IconButton(
             icon: const Icon(Icons.accessibility_new_rounded),
             tooltip: context.l10n.accessibilitySettings,

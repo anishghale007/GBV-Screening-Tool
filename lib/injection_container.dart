@@ -3,11 +3,13 @@ import 'package:dio/dio.dart';
 import 'package:gbv/core/audio/audio_service.dart';
 import 'package:gbv/core/connectivity/connectivity_dio_interceptor.dart';
 import 'package:gbv/core/connectivity/connectivity_service.dart';
+import 'package:gbv/core/localization/locale_cubit.dart';
 import 'package:gbv/core/services/stt_helper.dart';
 import 'package:gbv/core/services/tts_helper.dart';
 import 'package:gbv/core/storage/encrypted_storage_service.dart';
 import 'package:gbv/core/storage/secure_storage_service.dart';
 import 'package:get_it/get_it.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 /// Global service locator instance.
 final GetIt sl = GetIt.instance;
@@ -47,6 +49,14 @@ Future<void> initDependencies() async {
 
     // Speech-To-Text (STT) helper.
     ..registerLazySingleton<SttHelper>(SttHelper.new);
+
+  // Local storage & language preference
+  final sharedPreferences = await SharedPreferences.getInstance();
+  sl
+    ..registerSingleton<SharedPreferences>(sharedPreferences)
+    ..registerLazySingleton<LocaleCubit>(
+      () => LocaleCubit(sl<SharedPreferences>()),
+    );
 
   // Initialize connectivity status check
   await sl<ConnectivityService>().init();

@@ -72,5 +72,53 @@
     "localSupport": "Local Support Services",
     "quickExitMessage": "Press and hold to exit safely",
     "completionTitle": "Thank You",
-    "completionMessage": "Here are some suggested next steps for you."
+    "completionMessage": "Here are some suggested next steps for you.",
+    "screeningTitle": "Screening",
+    "@screeningTitle": {
+        "description": "App bar title on screening pages"
+    },
+    "genderSelectionTitle": "How would you like to be represented?",
+    "@genderSelectionTitle": {
+        "description": "Heading on the gender selection screen"
+    },
+    "genderSelectionSubtitle": "This is used only to tailor question wording. Your choice is not stored anywhere.",
+    "@genderSelectionSubtitle": {
+        "description": "Privacy note below the gender question heading"
+    },
+    "genderWoman": "Woman",
+    "genderMan": "Man",
+    "genderNonBinary": "Non-binary",
+    "privacyBannerText": "This app is encrypted. No local log or background footprint is kept.",
+    "@privacyBannerText": {
+        "description": "Short privacy assurance shown at the bottom of screening pages"
+    },
+    "incidentSelectionTitle": "Which categories best describe the situation?",
+    "@incidentSelectionTitle": {
+        "description": "Title on the incident category selection screen"
+    },
+    "incidentSelectionSubtitle": "Select all that apply. This helps categorize resources.",
+    "@incidentSelectionSubtitle": {
+        "description": "Subtitle explaining multi-select for categories"
+    },
+    "categoryStalking": "Stalking",
+    "categoryStalkingDesc": "Constantly followed or watched without consent",
+    "categoryCyberbullying": "Cyberbullying",
+    "categoryCyberbullyingDesc": "Harassment over messages, social media, apps",
+    "categorySlander": "Slander / False Rumours",
+    "categorySlanderDesc": "Spreading damaging fake reports about you",
+    "categoryLeakedImages": "Leaked / Fake Images",
+    "categoryLeakedImagesDesc": "Private or manipulated photos shared online",
+    "categorySharingDetails": "Sharing private details",
+    "categorySharingDetailsDesc": "Exposing addresses, contacts, schedules publicly",
+    "categoryFakeAccounts": "Fake accounts",
+    "categoryFakeAccountsDesc": "Impersonator profile created with your identity",
+    "categoryThreats": "Threats",
+    "categoryThreatsDesc": "Violent warnings of blackmail and leverage",
+    "categoryOfflineEscalation": "Offline escalation",
+    "categoryOfflineEscalationDesc": "Incidents spilling into real-world workspace or home",
+    "categorySexualHarassment": "Sexual harassment",
+    "categorySexualHarassmentDesc": "Unwelcome sexual comments or actions online",
+    "categoryPoliticalIntimidation": "Political intimidation",
+    "categoryPoliticalIntimidationDesc": "Targeted systemic pressure or civic silencing",
+    "notSureSkipSelection": "I'm not sure / skip selection"
 }

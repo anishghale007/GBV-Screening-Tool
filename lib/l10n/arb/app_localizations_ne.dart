@@ -132,4 +132,107 @@ class AppLocalizationsNe extends AppLocalizations {
 
   @override
   String get completionMessage => 'तपाईंका लागि केही सुझावहरू यहाँ छन्।';
+
+  @override
+  String get screeningTitle => 'स्क्रिनिङ';
+
+  @override
+  String get genderSelectionTitle => 'तपाईं कसरी प्रतिनिधित्व गर्न चाहनुहुन्छ?';
+
+  @override
+  String get genderSelectionSubtitle =>
+      'यो केवल प्रश्नको शब्दावली अनुकूल गर्न प्रयोग गरिन्छ। तपाईंको छनोट कहीँ पनि भण्डारण गरिँदैन।';
+
+  @override
+  String get genderWoman => 'महिला';
+
+  @override
+  String get genderMan => 'पुरुष';
+
+  @override
+  String get genderNonBinary => 'नन-बाइनरी';
+
+  @override
+  String get privacyBannerText =>
+      'यो एप इन्क्रिप्टेड छ। कुनै स्थानीय लग वा पृष्ठभूमि फुटप्रिन्ट राखिँदैन।';
+
+  @override
+  String get incidentSelectionTitle =>
+      'कुन वर्गले तपाईंको अवस्थालाई सबैभन्दा राम्रोसँग वर्णन गर्छ?';
+
+  @override
+  String get incidentSelectionSubtitle =>
+      'लागु हुने सबै छान्नुहोस्। यसले स्रोतहरू वर्गीकरण गर्न मद्दत गर्छ।';
+
+  @override
+  String get categoryStalking => 'पछ्याउने / निगरानी (Stalking)';
+
+  @override
+  String get categoryStalkingDesc =>
+      'सहमति बिना निरन्तर पछ्याइने वा निगरानी गरिने';
+
+  @override
+  String get categoryCyberbullying => 'अनलाइन दुर्व्यवहार (Cyberbullying)';
+
+  @override
+  String get categoryCyberbullyingDesc =>
+      'सन्देश, सामाजिक सञ्जाल, वा एपहरू मार्फत हुने उत्पीडन';
+
+  @override
+  String get categorySlander => 'झूटा हल्ला / बदनामी';
+
+  @override
+  String get categorySlanderDesc =>
+      'तपाईंको बारेमा हानिकारक झूटा अफवाह फैलाउने';
+
+  @override
+  String get categoryLeakedImages => 'तस्बिर चुहावट / नक्कली तस्बिर';
+
+  @override
+  String get categoryLeakedImagesDesc =>
+      'अनलाइनमा साझा गरिएका निजी वा छेडछाड गरिएका तस्बिरहरू';
+
+  @override
+  String get categorySharingDetails => 'निजी विवरण सार्वजनिक गर्ने';
+
+  @override
+  String get categorySharingDetailsDesc =>
+      'ठेगाना, सम्पर्क, वा कार्यतालिका सार्वजनिक रूपमा खुलाउने';
+
+  @override
+  String get categoryFakeAccounts => 'नक्कली खाताहरू';
+
+  @override
+  String get categoryFakeAccountsDesc =>
+      'तपाईंको पहिचान प्रयोग गरी बनाइएको नक्कली प्रोफाइल';
+
+  @override
+  String get categoryThreats => 'धम्की';
+
+  @override
+  String get categoryThreatsDesc => 'ब्ल्याकमेल वा दबाबका हिंस्रक चेतावनीहरू';
+
+  @override
+  String get categoryOfflineEscalation => 'अफलाइन प्रभाव';
+
+  @override
+  String get categoryOfflineEscalationDesc =>
+      'कार्यस्थल वा घरसम्म आइपुग्ने घटनाहरू';
+
+  @override
+  String get categorySexualHarassment => 'यौन दुर्व्यवहार';
+
+  @override
+  String get categorySexualHarassmentDesc =>
+      'अनलाइनमा गरिने अवाञ्छित यौनजन्य टिप्पणी वा कार्यहरू';
+
+  @override
+  String get categoryPoliticalIntimidation => 'राजनीतिक त्रास';
+
+  @override
+  String get categoryPoliticalIntimidationDesc =>
+      'लक्षित प्रणालीगत दबाब वा आवाज दबाउने प्रयास';
+
+  @override
+  String get notSureSkipSelection => 'म निश्चित छैन / छनोट छोड्नुहोस्';
 }

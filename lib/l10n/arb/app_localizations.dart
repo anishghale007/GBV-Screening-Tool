@@ -343,6 +343,186 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Here are some suggested next steps for you.'**
   String get completionMessage;
+
+  /// App bar title on screening pages
+  ///
+  /// In en, this message translates to:
+  /// **'Screening'**
+  String get screeningTitle;
+
+  /// Heading on the gender selection screen
+  ///
+  /// In en, this message translates to:
+  /// **'How would you like to be represented?'**
+  String get genderSelectionTitle;
+
+  /// Privacy note below the gender question heading
+  ///
+  /// In en, this message translates to:
+  /// **'This is used only to tailor question wording. Your choice is not stored anywhere.'**
+  String get genderSelectionSubtitle;
+
+  /// No description provided for @genderWoman.
+  ///
+  /// In en, this message translates to:
+  /// **'Woman'**
+  String get genderWoman;
+
+  /// No description provided for @genderMan.
+  ///
+  /// In en, this message translates to:
+  /// **'Man'**
+  String get genderMan;
+
+  /// No description provided for @genderNonBinary.
+  ///
+  /// In en, this message translates to:
+  /// **'Non-binary'**
+  String get genderNonBinary;
+
+  /// Short privacy assurance shown at the bottom of screening pages
+  ///
+  /// In en, this message translates to:
+  /// **'This app is encrypted. No local log or background footprint is kept.'**
+  String get privacyBannerText;
+
+  /// Title on the incident category selection screen
+  ///
+  /// In en, this message translates to:
+  /// **'Which categories best describe the situation?'**
+  String get incidentSelectionTitle;
+
+  /// Subtitle explaining multi-select for categories
+  ///
+  /// In en, this message translates to:
+  /// **'Select all that apply. This helps categorize resources.'**
+  String get incidentSelectionSubtitle;
+
+  /// No description provided for @categoryStalking.
+  ///
+  /// In en, this message translates to:
+  /// **'Stalking'**
+  String get categoryStalking;
+
+  /// No description provided for @categoryStalkingDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Constantly followed or watched without consent'**
+  String get categoryStalkingDesc;
+
+  /// No description provided for @categoryCyberbullying.
+  ///
+  /// In en, this message translates to:
+  /// **'Cyberbullying'**
+  String get categoryCyberbullying;
+
+  /// No description provided for @categoryCyberbullyingDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Harassment over messages, social media, apps'**
+  String get categoryCyberbullyingDesc;
+
+  /// No description provided for @categorySlander.
+  ///
+  /// In en, this message translates to:
+  /// **'Slander / False Rumours'**
+  String get categorySlander;
+
+  /// No description provided for @categorySlanderDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Spreading damaging fake reports about you'**
+  String get categorySlanderDesc;
+
+  /// No description provided for @categoryLeakedImages.
+  ///
+  /// In en, this message translates to:
+  /// **'Leaked / Fake Images'**
+  String get categoryLeakedImages;
+
+  /// No description provided for @categoryLeakedImagesDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Private or manipulated photos shared online'**
+  String get categoryLeakedImagesDesc;
+
+  /// No description provided for @categorySharingDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'Sharing private details'**
+  String get categorySharingDetails;
+
+  /// No description provided for @categorySharingDetailsDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Exposing addresses, contacts, schedules publicly'**
+  String get categorySharingDetailsDesc;
+
+  /// No description provided for @categoryFakeAccounts.
+  ///
+  /// In en, this message translates to:
+  /// **'Fake accounts'**
+  String get categoryFakeAccounts;
+
+  /// No description provided for @categoryFakeAccountsDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Impersonator profile created with your identity'**
+  String get categoryFakeAccountsDesc;
+
+  /// No description provided for @categoryThreats.
+  ///
+  /// In en, this message translates to:
+  /// **'Threats'**
+  String get categoryThreats;
+
+  /// No description provided for @categoryThreatsDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Violent warnings of blackmail and leverage'**
+  String get categoryThreatsDesc;
+
+  /// No description provided for @categoryOfflineEscalation.
+  ///
+  /// In en, this message translates to:
+  /// **'Offline escalation'**
+  String get categoryOfflineEscalation;
+
+  /// No description provided for @categoryOfflineEscalationDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Incidents spilling into real-world workspace or home'**
+  String get categoryOfflineEscalationDesc;
+
+  /// No description provided for @categorySexualHarassment.
+  ///
+  /// In en, this message translates to:
+  /// **'Sexual harassment'**
+  String get categorySexualHarassment;
+
+  /// No description provided for @categorySexualHarassmentDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Unwelcome sexual comments or actions online'**
+  String get categorySexualHarassmentDesc;
+
+  /// No description provided for @categoryPoliticalIntimidation.
+  ///
+  /// In en, this message translates to:
+  /// **'Political intimidation'**
+  String get categoryPoliticalIntimidation;
+
+  /// No description provided for @categoryPoliticalIntimidationDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Targeted systemic pressure or civic silencing'**
+  String get categoryPoliticalIntimidationDesc;
+
+  /// No description provided for @notSureSkipSelection.
+  ///
+  /// In en, this message translates to:
+  /// **'I\'m not sure / skip selection'**
+  String get notSureSkipSelection;
 }
 
 class _AppLocalizationsDelegate

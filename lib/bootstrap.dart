@@ -26,11 +26,9 @@ Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
 
   Bloc.observer = AppBlocObserver();
 
-  WidgetsFlutterBinding.ensureInitialized();
-  await initDependencies();
-
-  await runZonedGuarded(
-    () async => runApp(await builder()),
-    (error, stackTrace) => log(error.toString(), stackTrace: stackTrace),
-  );
+  await runZonedGuarded(() async {
+    WidgetsFlutterBinding.ensureInitialized();
+    await initDependencies();
+    runApp(await builder());
+  }, (error, stackTrace) => log(error.toString(), stackTrace: stackTrace));
 }
