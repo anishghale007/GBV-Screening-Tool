@@ -5,23 +5,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gbv/common/common.dart';
 import 'package:gbv/core/core.dart';
+import 'package:gbv/core/enums/incident_category.dart';
 import 'package:gbv/features/accessibility/view/accessibility_page.dart';
 import 'package:gbv/injection_container.dart';
 import 'package:go_router/go_router.dart';
-
-/// Available incident categories for multi-selection.
-enum IncidentCategory {
-  stalking,
-  cyberbullying,
-  slander,
-  leakedImages,
-  sharingDetails,
-  fakeAccounts,
-  threats,
-  offlineEscalation,
-  sexualHarassment,
-  politicalIntimidation,
-}
 
 /// Incident selection screen allowing users to choose all categories
 /// that describe their situation, with TTS and multi-select support.
@@ -96,8 +83,7 @@ class _IncidentSelectionPageState extends State<IncidentSelectionPage> {
   }
 
   void _onContinue() {
-    // Navigate to the pathway / questions flow
-    context.push(AppRoutes.pathway);
+    context.push(AppRoutes.questions);
   }
 
   @override
@@ -371,10 +357,7 @@ class _IncidentCategoryTile extends StatelessWidget {
               const SizedBox(width: AppSpacing.sm),
 
               // Audio narration button
-              _AudioIconButton(
-                onTap: onAudioTap,
-                isPlaying: isPlaying,
-              ),
+              _AudioIconButton(onTap: onAudioTap, isPlaying: isPlaying),
               const SizedBox(width: AppSpacing.sm),
 
               // Custom Rounded Checkbox
@@ -422,22 +405,22 @@ class _CustomCheckbox extends StatelessWidget {
 
 /// Audio narration button.
 class _AudioIconButton extends StatelessWidget {
-  const _AudioIconButton({
-    required this.onTap,
-    this.isPlaying = false,
-  });
+  const _AudioIconButton({required this.onTap, this.isPlaying = false});
 
   final VoidCallback onTap;
   final bool isPlaying;
 
   @override
   Widget build(BuildContext context) {
-    final backgroundColor =
-        isPlaying ? AppColors.primary : AppColors.surfaceVariant;
-    final iconColor =
-        isPlaying ? AppColors.textOnPrimary : AppColors.textSecondary;
-    final borderColor =
-        isPlaying ? AppColors.primary : AppColors.borderSelected;
+    final backgroundColor = isPlaying
+        ? AppColors.primary
+        : AppColors.surfaceVariant;
+    final iconColor = isPlaying
+        ? AppColors.textOnPrimary
+        : AppColors.textSecondary;
+    final borderColor = isPlaying
+        ? AppColors.primary
+        : AppColors.borderSelected;
 
     return GestureDetector(
       onTap: onTap,
@@ -456,10 +439,7 @@ class _AudioIconButton extends StatelessWidget {
             AssetConstants.audioLinesIcon,
             height: 18,
             width: 18,
-            colorFilter: ColorFilter.mode(
-              iconColor,
-              BlendMode.srcIn,
-            ),
+            colorFilter: ColorFilter.mode(iconColor, BlendMode.srcIn),
           ),
         ),
       ),

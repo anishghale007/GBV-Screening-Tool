@@ -4,6 +4,7 @@ import 'package:gbv/features/accessibility/view/accessibility_page.dart';
 import 'package:gbv/features/home/view/home_page.dart';
 import 'package:gbv/features/screening/view/gender_selection_page.dart';
 import 'package:gbv/features/screening/view/incident_selection_page.dart';
+import 'package:gbv/features/screening/view/screening_questions_page.dart';
 import 'package:gbv/features/splash/view/splash_page.dart';
 import 'package:go_router/go_router.dart';
 
@@ -51,6 +52,11 @@ final GoRouter appRouter = GoRouter(
       path: AppRoutes.incidentSelection,
       name: 'incidentSelection',
       builder: (context, state) => const IncidentSelectionPage(),
+    ),
+    GoRoute(
+      path: AppRoutes.questions,
+      name: 'questions',
+      builder: (context, state) => const ScreeningQuestionsPage(),
     ),
     GoRoute(
       path: AppRoutes.pathway,

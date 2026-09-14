@@ -9,6 +9,7 @@ abstract final class AppRoutes {
   static const String home = '/';
   static const String screening = '/screening';
   static const String incidentSelection = '/screening/incident';
+  static const String questions = '/screening/questions';
   static const String pathway = '/pathway';
   static const String support = '/support';
   static const String settings = '/settings';
