@@ -101,7 +101,7 @@ abstract class AppLocalizations {
   /// Neutral app title shown in app bar and store listing
   ///
   /// In en, this message translates to:
-  /// **'My Wellbeing'**
+  /// **'GBV Screening Tool'**
   String get appTitle;
 
   /// Title on the language selection screen
@@ -212,10 +212,46 @@ abstract class AppLocalizations {
   /// **'Accessibility'**
   String get accessibilitySettings;
 
+  /// No description provided for @audioSettingsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Audio Settings'**
+  String get audioSettingsTitle;
+
+  /// No description provided for @autoPlayAudio.
+  ///
+  /// In en, this message translates to:
+  /// **'Audio narration auto-play'**
+  String get autoPlayAudio;
+
+  /// No description provided for @autoPlayAudioSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Auto-read each question aloud automatically'**
+  String get autoPlayAudioSubtitle;
+
+  /// No description provided for @screenReaderMode.
+  ///
+  /// In en, this message translates to:
+  /// **'Screen reader optimization'**
+  String get screenReaderMode;
+
+  /// No description provided for @screenReaderModeSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Enhanced compatibility with screen readers'**
+  String get screenReaderModeSubtitle;
+
+  /// No description provided for @visionAndReadingTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Vision & Reading'**
+  String get visionAndReadingTitle;
+
   /// No description provided for @textSize.
   ///
   /// In en, this message translates to:
-  /// **'Text Size'**
+  /// **'Text size'**
   String get textSize;
 
   /// No description provided for @textSizeSmall.
@@ -236,11 +272,65 @@ abstract class AppLocalizations {
   /// **'Large'**
   String get textSizeLarge;
 
+  /// No description provided for @textSizePreview.
+  ///
+  /// In en, this message translates to:
+  /// **'Preview: This is how the text will appear in the app.'**
+  String get textSizePreview;
+
   /// No description provided for @highContrast.
   ///
   /// In en, this message translates to:
-  /// **'High Contrast'**
+  /// **'High contrast mode'**
   String get highContrast;
+
+  /// No description provided for @highContrastSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Increase contrast for better visibility'**
+  String get highContrastSubtitle;
+
+  /// No description provided for @dyslexiaMode.
+  ///
+  /// In en, this message translates to:
+  /// **'Dyslexia-friendly font'**
+  String get dyslexiaMode;
+
+  /// No description provided for @dyslexiaFontSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Use a font designed for easier reading'**
+  String get dyslexiaFontSubtitle;
+
+  /// No description provided for @motorAndInteractionsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Motor & Interactions'**
+  String get motorAndInteractionsTitle;
+
+  /// No description provided for @largeTouchTargets.
+  ///
+  /// In en, this message translates to:
+  /// **'Large touch targets'**
+  String get largeTouchTargets;
+
+  /// No description provided for @largeTouchTargetsSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Provide larger, easier-to-tap buttons'**
+  String get largeTouchTargetsSubtitle;
+
+  /// No description provided for @hapticFeedback.
+  ///
+  /// In en, this message translates to:
+  /// **'Haptic feedback'**
+  String get hapticFeedback;
+
+  /// No description provided for @hapticFeedbackSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Feel subtle vibrations on interactions'**
+  String get hapticFeedbackSubtitle;
 
   /// No description provided for @reduceAnimations.
   ///
@@ -248,53 +338,71 @@ abstract class AppLocalizations {
   /// **'Reduce Animations'**
   String get reduceAnimations;
 
-  /// No description provided for @largeTouchTargets.
+  /// No description provided for @cognitiveSupportTitle.
   ///
   /// In en, this message translates to:
-  /// **'Large Touch Targets'**
-  String get largeTouchTargets;
+  /// **'Cognitive Support'**
+  String get cognitiveSupportTitle;
 
-  /// No description provided for @hapticFeedback.
+  /// No description provided for @lowLiteracyMode.
   ///
   /// In en, this message translates to:
-  /// **'Haptic Feedback'**
-  String get hapticFeedback;
+  /// **'Low literacy mode'**
+  String get lowLiteracyMode;
 
-  /// No description provided for @screenReaderMode.
+  /// No description provided for @lowLiteracyModeSubtitle.
   ///
   /// In en, this message translates to:
-  /// **'Screen Reader Mode'**
-  String get screenReaderMode;
+  /// **'Simpler wording with more visual cues'**
+  String get lowLiteracyModeSubtitle;
 
   /// No description provided for @adhdMode.
   ///
   /// In en, this message translates to:
-  /// **'Focus Mode'**
+  /// **'ADHD-friendly mode'**
   String get adhdMode;
 
-  /// No description provided for @dyslexiaMode.
+  /// No description provided for @adhdModeSubtitle.
   ///
   /// In en, this message translates to:
-  /// **'Dyslexia-Friendly Text'**
-  String get dyslexiaMode;
+  /// **'Reduced visual clutter and distractions'**
+  String get adhdModeSubtitle;
+
+  /// No description provided for @languageSectionTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Language'**
+  String get languageSectionTitle;
+
+  /// No description provided for @appLanguage.
+  ///
+  /// In en, this message translates to:
+  /// **'App language'**
+  String get appLanguage;
+
+  /// No description provided for @selectAppLanguage.
+  ///
+  /// In en, this message translates to:
+  /// **'Select App Language'**
+  String get selectAppLanguage;
+
+  /// No description provided for @englishSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'English (US)'**
+  String get englishSubtitle;
+
+  /// No description provided for @nepaliSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Nepali'**
+  String get nepaliSubtitle;
 
   /// No description provided for @visionImpairedMode.
   ///
   /// In en, this message translates to:
   /// **'Enhanced Visibility'**
   String get visionImpairedMode;
-
-  /// No description provided for @lowLiteracyMode.
-  ///
-  /// In en, this message translates to:
-  /// **'Simple Mode'**
-  String get lowLiteracyMode;
-
-  /// No description provided for @autoPlayAudio.
-  ///
-  /// In en, this message translates to:
-  /// **'Auto-Play Audio'**
-  String get autoPlayAudio;
 
   /// Title for the support/help directory
   ///

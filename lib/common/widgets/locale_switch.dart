@@ -71,7 +71,7 @@ class _LocaleSegment extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: onTap,
+      onTap: onTap.withMediumImpate(),
       borderRadius: borderRadius,
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 180),

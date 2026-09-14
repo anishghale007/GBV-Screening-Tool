@@ -101,19 +101,22 @@ class AppButton extends StatelessWidget {
         ),
     };
 
+    final effectiveOnPressed =
+        isLoading ? null : onPressed.withMediumImpate();
+
     final buttonWidget = switch (variant) {
       AppButtonVariant.filled => ElevatedButton(
-          onPressed: isLoading ? null : onPressed,
+          onPressed: effectiveOnPressed,
           style: buttonStyle,
           child: child,
         ),
       AppButtonVariant.outlined => OutlinedButton(
-          onPressed: isLoading ? null : onPressed,
+          onPressed: effectiveOnPressed,
           style: buttonStyle,
           child: child,
         ),
       AppButtonVariant.text => TextButton(
-          onPressed: isLoading ? null : onPressed,
+          onPressed: effectiveOnPressed,
           style: buttonStyle,
           child: child,
         ),

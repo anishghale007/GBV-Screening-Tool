@@ -1,101 +1,126 @@
 import 'package:flutter/material.dart';
 import 'package:gbv/core/theme/app_colors.dart';
+import 'package:gbv/core/theme/app_font_sizes.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-/// Text style presets for the GBV Screening Tool using the Inter font.
+/// Text style presets for the GBV Screening Tool.
 ///
-/// Provides three size tiers (small, medium, large) to support
-/// the text-size accessibility setting (FR-ACC-05).
+/// Backed by [AppFontSizes] for consistent heading, body, and label sizing,
+/// with support for standard Inter typography and dyslexia-friendly rendering.
 abstract final class AppTextStyles {
-  // ── Scale factors for text size options ──────────────────────────────
-  static const double smallScale = 0.85;
-  static const double mediumScale = 1;
-  static const double largeScale = 1.25;
-
   // ── Base styles using Google Fonts (Inter) ──────────────────────────
   static TextStyle get headlineLarge => GoogleFonts.inter(
-    fontSize: 26,
+    fontSize: AppFontSizes.headlineLarge,
     fontWeight: FontWeight.w700,
     color: AppColors.textPrimary,
     height: 1.3,
   );
 
   static TextStyle get headlineMedium => GoogleFonts.inter(
-    fontSize: 22,
+    fontSize: AppFontSizes.headlineMedium,
     fontWeight: FontWeight.w700,
     color: AppColors.textPrimary,
     height: 1.3,
   );
 
   static TextStyle get headlineSmall => GoogleFonts.inter(
-    fontSize: 18,
+    fontSize: AppFontSizes.headlineSmall,
+    fontWeight: FontWeight.w600,
+    color: AppColors.textPrimary,
+    height: 1.4,
+  );
+
+  static TextStyle get titleLarge => GoogleFonts.inter(
+    fontSize: AppFontSizes.titleLarge,
     fontWeight: FontWeight.w600,
     color: AppColors.textPrimary,
     height: 1.4,
   );
 
   static TextStyle get bodyLarge => GoogleFonts.inter(
-    fontSize: 16,
+    fontSize: AppFontSizes.bodyLarge,
     fontWeight: FontWeight.w400,
     color: AppColors.textSecondary,
     height: 1.5,
   );
 
   static TextStyle get bodyMedium => GoogleFonts.inter(
-    fontSize: 14,
+    fontSize: AppFontSizes.bodyMedium,
     fontWeight: FontWeight.w400,
     color: AppColors.textSecondary,
     height: 1.5,
   );
 
   static TextStyle get bodySmall => GoogleFonts.inter(
-    fontSize: 12,
+    fontSize: AppFontSizes.bodySmall,
     fontWeight: FontWeight.w400,
     color: AppColors.textSecondary,
     height: 1.5,
   );
 
   static TextStyle get labelLarge => GoogleFonts.inter(
-    fontSize: 16,
+    fontSize: AppFontSizes.labelLarge,
     fontWeight: FontWeight.w600,
     color: AppColors.textPrimary,
     height: 1.4,
   );
 
   static TextStyle get labelMedium => GoogleFonts.inter(
-    fontSize: 14,
+    fontSize: AppFontSizes.labelMedium,
     fontWeight: FontWeight.w500,
     color: AppColors.textPrimary,
     height: 1.4,
   );
 
   static TextStyle get caption => GoogleFonts.inter(
-    fontSize: 12,
+    fontSize: AppFontSizes.caption,
     fontWeight: FontWeight.w400,
     color: AppColors.textSecondary,
     height: 1.4,
   );
 
   static TextStyle get button => GoogleFonts.inter(
-    fontSize: 16,
+    fontSize: AppFontSizes.button,
     fontWeight: FontWeight.w600,
     color: AppColors.textOnPrimary,
     letterSpacing: 0.3,
     height: 1.4,
   );
 
-  // ── Dyslexia-friendly variants ──────────────────────────────────────
-  static TextStyle _dyslexiaBase(double fontSize) => TextStyle(
-    fontFamily: 'OpenDyslexic',
+  // ── Dyslexia-friendly styles ────────────────────────────────────────
+  static TextStyle _dyslexiaBase(double fontSize) => GoogleFonts.lexend(
     fontSize: fontSize,
-    letterSpacing: 1.2,
-    wordSpacing: 3,
-    height: 1.8,
+    letterSpacing: 1.1,
+    wordSpacing: 2,
+    height: 1.6,
   );
 
-  static TextStyle get dyslexiaBody => _dyslexiaBase(16);
+  static TextStyle get dyslexiaBody => _dyslexiaBase(AppFontSizes.bodyLarge);
   static TextStyle get dyslexiaHeadline =>
-      _dyslexiaBase(22).copyWith(fontWeight: FontWeight.w700);
+      _dyslexiaBase(AppFontSizes.headlineMedium)
+          .copyWith(fontWeight: FontWeight.w700);
   static TextStyle get dyslexiaLabel =>
-      _dyslexiaBase(14).copyWith(fontWeight: FontWeight.w600);
+      _dyslexiaBase(AppFontSizes.labelMedium)
+          .copyWith(fontWeight: FontWeight.w600);
+
+  /// Generates a TextTheme configured for either standard or dyslexia mode.
+  static TextTheme createTextTheme({bool isDyslexia = false}) {
+    if (isDyslexia) {
+      return GoogleFonts.lexendTextTheme().copyWith(
+        headlineLarge: dyslexiaHeadline.copyWith(
+          fontSize: AppFontSizes.headlineLarge,
+        ),
+        headlineMedium: dyslexiaHeadline,
+        headlineSmall: dyslexiaHeadline.copyWith(
+          fontSize: AppFontSizes.headlineSmall,
+        ),
+        bodyLarge: dyslexiaBody,
+        bodyMedium: dyslexiaBody.copyWith(fontSize: AppFontSizes.bodyMedium),
+        bodySmall: dyslexiaBody.copyWith(fontSize: AppFontSizes.bodySmall),
+        labelLarge: dyslexiaLabel.copyWith(fontSize: AppFontSizes.labelLarge),
+        labelMedium: dyslexiaLabel,
+      );
+    }
+    return GoogleFonts.interTextTheme();
+  }
 }

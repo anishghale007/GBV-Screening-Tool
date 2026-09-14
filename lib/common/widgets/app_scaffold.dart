@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gbv/core/core.dart';
 
 /// Base scaffold providing consistent layout, background colors, padding,
@@ -29,10 +30,7 @@ class AppScaffold extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Widget content = Padding(
-      padding: padding,
-      child: body,
-    );
+    Widget content = Padding(padding: padding, child: body);
 
     if (useSafeArea) {
       content = SafeArea(child: content);
@@ -51,7 +49,10 @@ class AppScaffold extends StatelessWidget {
       appBar: appBar,
       body: content,
       bottomNavigationBar: bottomNavigationBar,
-      floatingActionButton: floatingActionButton,
+      floatingActionButton: Padding(
+        padding: EdgeInsets.only(bottom: 60.h),
+        child: floatingActionButton,
+      ),
       resizeToAvoidBottomInset: resizeToAvoidBottomInset,
     );
   }

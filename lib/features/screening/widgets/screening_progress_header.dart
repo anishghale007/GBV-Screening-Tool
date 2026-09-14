@@ -15,10 +15,12 @@ class ScreeningProgressHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final progressFactor = totalQuestions > 0
+    final progressFactor = totalQuestions > 0 && currentIndex > 0
         ? (currentIndex + 1) / totalQuestions
         : 0.0;
-    final progressPercent = (progressFactor * 100).round().clamp(0, 100);
+    final progressPercent = currentIndex == 0
+        ? 0
+        : (progressFactor * 100).round().clamp(0, 100);
 
     return Padding(
       padding: const EdgeInsets.symmetric(

@@ -57,16 +57,15 @@ class AppDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      shape: RoundedRectangleBorder(
-        borderRadius: AppSpacing.borderRadiusLg,
-      ),
+      shape: RoundedRectangleBorder(borderRadius: AppSpacing.borderRadiusLg),
       title: Text(
         title,
         style: AppTextStyles.headlineSmall.copyWith(
           color: context.colorScheme.onSurface,
         ),
       ),
-      content: content ??
+      content:
+          content ??
           (message != null
               ? Text(
                   message!,

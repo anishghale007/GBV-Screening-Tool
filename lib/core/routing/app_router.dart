@@ -7,6 +7,7 @@ import 'package:gbv/features/screening/view/incident_selection_page.dart';
 import 'package:gbv/features/screening/view/screening_questions_page.dart';
 import 'package:gbv/features/splash/view/splash_page.dart';
 import 'package:go_router/go_router.dart';
+import 'package:no_screenshot/secure_navigator_observer.dart';
 
 /// Central GoRouter configuration.
 ///
@@ -17,6 +18,14 @@ import 'package:go_router/go_router.dart';
 final GoRouter appRouter = GoRouter(
   initialLocation: AppRoutes.splash,
   debugLogDiagnostics: true,
+  observers: [
+    SecureNavigatorObserver(
+      policies: {
+        for (final route in AppRoutes.routes) route: const SecureRouteConfig(),
+      },
+      defaultConfig: const SecureRouteConfig(),
+    ),
+  ],
   routes: [
     GoRoute(
       path: AppRoutes.splash,

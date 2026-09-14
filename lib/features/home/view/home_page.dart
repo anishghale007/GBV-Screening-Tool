@@ -19,12 +19,10 @@ class HomePage extends StatelessWidget {
             fontWeight: FontWeight.w700,
           ),
         ),
-        actions: [
-          const LocaleSwitch(),
-          IconButton(
-            icon: const Icon(Icons.accessibility_new_rounded),
-            tooltip: context.l10n.accessibilitySettings,
-            onPressed: () => AccessibilityBottomSheet.show(context),
+        actions: const [
+          Padding(
+            padding: EdgeInsets.only(right: AppSpacing.sm),
+            child: LocaleSwitch(),
           ),
         ],
       ),

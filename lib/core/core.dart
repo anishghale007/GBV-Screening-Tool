@@ -5,6 +5,8 @@
 /// can use a single import: `import 'package:gbv/core/core.dart';`
 library;
 
+export 'package:gbv/l10n/l10n.dart';
+
 export 'accessibility/accessibility_settings.dart';
 export 'audio/audio_service.dart';
 export 'connectivity/connectivity_dio_interceptor.dart';
@@ -18,14 +20,17 @@ export 'error/failures.dart';
 export 'localization/locale_cubit.dart';
 export 'routing/app_router.dart';
 export 'routing/app_routes.dart';
+export 'services/haptic_helper.dart';
 export 'services/stt_helper.dart';
 export 'services/tts_helper.dart';
 export 'storage/encrypted_storage_service.dart';
 export 'storage/secure_storage_service.dart';
 export 'theme/app_colors.dart';
+export 'theme/app_font_sizes.dart';
 export 'theme/app_spacing.dart';
 export 'theme/app_text_styles.dart';
 export 'theme/app_theme.dart';
 export 'utils/context_extensions.dart';
 export 'utils/string_extensions.dart';
 export 'utils/text_validator.dart';
+export 'utils/voidcallback_extension.dart';

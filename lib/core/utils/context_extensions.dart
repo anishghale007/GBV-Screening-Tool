@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:gbv/l10n/l10n.dart';
 
 /// Extension methods on [BuildContext] for ergonomic access to theme,
 /// localization, media queries, and color schemes.
 extension BuildContextX on BuildContext {
-  /// App localizations shortcut (`context.l10n`).
-  AppLocalizations get l10n => AppLocalizations.of(this);
-
   /// Current [ThemeData].
   ThemeData get theme => Theme.of(this);
 

@@ -8,6 +8,7 @@ import 'package:gbv/core/services/stt_helper.dart';
 import 'package:gbv/core/services/tts_helper.dart';
 import 'package:gbv/core/storage/encrypted_storage_service.dart';
 import 'package:gbv/core/storage/secure_storage_service.dart';
+import 'package:gbv/features/accessibility/bloc/accessibility_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -56,11 +57,13 @@ Future<void> initDependencies() async {
     ..registerSingleton<SharedPreferences>(sharedPreferences)
     ..registerLazySingleton<LocaleCubit>(
       () => LocaleCubit(sl<SharedPreferences>()),
+    )
+    ..registerLazySingleton<AccessibilityBloc>(
+      () => AccessibilityBloc(sl<SharedPreferences>()),
     );
 
   // Initialize connectivity status check
   await sl<ConnectivityService>().init();
 
   // ── Feature-level dependencies ──────────────────────────────────────
-  // Register BLoCs, repositories, and use cases here as features are built.
 }

@@ -9,7 +9,7 @@ class AppLocalizationsNe extends AppLocalizations {
   AppLocalizationsNe([String locale = 'ne']) : super(locale);
 
   @override
-  String get appTitle => 'मेरो स्वास्थ्य';
+  String get appTitle => 'GBV Screening Tool';
 
   @override
   String get languageSelectionTitle => 'भाषा छान्नुहोस्';
@@ -68,6 +68,24 @@ class AppLocalizationsNe extends AppLocalizations {
   String get accessibilitySettings => 'पहुँचयोग्यता';
 
   @override
+  String get audioSettingsTitle => 'अडियो सेटिङहरू';
+
+  @override
+  String get autoPlayAudio => 'अडियो स्वतः बजाउने';
+
+  @override
+  String get autoPlayAudioSubtitle => 'प्रत्येक प्रश्न स्वतः पढेर सुनाउने';
+
+  @override
+  String get screenReaderMode => 'स्क्रिन रिडर अनुकूलन';
+
+  @override
+  String get screenReaderModeSubtitle => 'स्क्रिन रिडरका लागि उपयुक्त बनावट';
+
+  @override
+  String get visionAndReadingTitle => 'दृष्टि र पठन';
+
+  @override
   String get textSize => 'अक्षरको आकार';
 
   @override
@@ -80,34 +98,71 @@ class AppLocalizationsNe extends AppLocalizations {
   String get textSizeLarge => 'ठूलो';
 
   @override
-  String get highContrast => 'उच्च कन्ट्रास्ट';
+  String get textSizePreview => 'पूर्वावलोकन: एपमा अक्षर यस्तो देखिनेछ।';
 
   @override
-  String get reduceAnimations => 'एनिमेसन घटाउनुहोस्';
+  String get highContrast => 'उच्च कन्ट्रास्ट मोड';
 
   @override
-  String get largeTouchTargets => 'ठूला बटनहरू';
-
-  @override
-  String get hapticFeedback => 'स्पर्श प्रतिक्रिया';
-
-  @override
-  String get screenReaderMode => 'स्क्रिन रिडर मोड';
-
-  @override
-  String get adhdMode => 'फोकस मोड';
+  String get highContrastSubtitle => 'स्पष्ट देखिन कन्ट्रास्ट बढाउनुहोस्';
 
   @override
   String get dyslexiaMode => 'पढ्न सजिलो अक्षर';
 
   @override
-  String get visionImpairedMode => 'बढी देखिने मोड';
+  String get dyslexiaFontSubtitle => 'सजिलै पढ्नका लागि डिजाइन गरिएको फन्ट';
+
+  @override
+  String get motorAndInteractionsTitle => 'स्पर्श र अन्तरक्रिया';
+
+  @override
+  String get largeTouchTargets => 'ठूला टच बटनहरू';
+
+  @override
+  String get largeTouchTargetsSubtitle => 'थिच्न सजिलो हुने गरी ठूला बटनहरू';
+
+  @override
+  String get hapticFeedback => 'कम्पन प्रतिक्रिया';
+
+  @override
+  String get hapticFeedbackSubtitle =>
+      'अन्तरक्रिया गर्दा हल्का कम्पन महसुस गर्नुहोस्';
+
+  @override
+  String get reduceAnimations => 'एनिमेसन घटाउनुहोस्';
+
+  @override
+  String get cognitiveSupportTitle => 'संज्ञानात्मक सहायता';
 
   @override
   String get lowLiteracyMode => 'सरल मोड';
 
   @override
-  String get autoPlayAudio => 'स्वत: अडियो बजाउनुहोस्';
+  String get lowLiteracyModeSubtitle => 'सरल शब्द र बढी दृश्य संकेतहरू';
+
+  @override
+  String get adhdMode => 'ADHD-मैत्री मोड';
+
+  @override
+  String get adhdModeSubtitle => 'अनावश्यक ध्यान भङ्ग कम गर्ने';
+
+  @override
+  String get languageSectionTitle => 'भाषा';
+
+  @override
+  String get appLanguage => 'एपको भाषा';
+
+  @override
+  String get selectAppLanguage => 'एपको भाषा छान्नुहोस्';
+
+  @override
+  String get englishSubtitle => 'अंग्रेजी (US)';
+
+  @override
+  String get nepaliSubtitle => 'नेपाली';
+
+  @override
+  String get visionImpairedMode => 'बढी देखिने मोड';
 
   @override
   String get supportResources => 'सहायता स्रोतहरू';

@@ -33,7 +33,7 @@ class ScreeningBottomNavigation extends StatelessWidget {
             child: SizedBox(
               height: 48,
               child: OutlinedButton(
-                onPressed: onPrevious,
+                onPressed: onPrevious.withMediumImpate(),
                 style: OutlinedButton.styleFrom(
                   backgroundColor: const Color(0xFFF9F7F5),
                   side: const BorderSide(color: Color(0xFFE5DDD5), width: 1.2),

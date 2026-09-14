@@ -148,6 +148,7 @@ class _ScreeningQuestionsPageState extends State<ScreeningQuestionsPage> {
           Expanded(
             child: PageView.builder(
               controller: _pageController,
+              physics: const NeverScrollableScrollPhysics(),
               onPageChanged: (index) {
                 setState(() => _currentIndex = index);
                 _tts.stop();

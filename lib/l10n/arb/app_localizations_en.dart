@@ -9,7 +9,7 @@ class AppLocalizationsEn extends AppLocalizations {
   AppLocalizationsEn([String locale = 'en']) : super(locale);
 
   @override
-  String get appTitle => 'My Wellbeing';
+  String get appTitle => 'GBV Screening Tool';
 
   @override
   String get languageSelectionTitle => 'Choose Language';
@@ -68,7 +68,27 @@ class AppLocalizationsEn extends AppLocalizations {
   String get accessibilitySettings => 'Accessibility';
 
   @override
-  String get textSize => 'Text Size';
+  String get audioSettingsTitle => 'Audio Settings';
+
+  @override
+  String get autoPlayAudio => 'Audio narration auto-play';
+
+  @override
+  String get autoPlayAudioSubtitle =>
+      'Auto-read each question aloud automatically';
+
+  @override
+  String get screenReaderMode => 'Screen reader optimization';
+
+  @override
+  String get screenReaderModeSubtitle =>
+      'Enhanced compatibility with screen readers';
+
+  @override
+  String get visionAndReadingTitle => 'Vision & Reading';
+
+  @override
+  String get textSize => 'Text size';
 
   @override
   String get textSizeSmall => 'Small';
@@ -80,34 +100,72 @@ class AppLocalizationsEn extends AppLocalizations {
   String get textSizeLarge => 'Large';
 
   @override
-  String get highContrast => 'High Contrast';
+  String get textSizePreview =>
+      'Preview: This is how the text will appear in the app.';
+
+  @override
+  String get highContrast => 'High contrast mode';
+
+  @override
+  String get highContrastSubtitle => 'Increase contrast for better visibility';
+
+  @override
+  String get dyslexiaMode => 'Dyslexia-friendly font';
+
+  @override
+  String get dyslexiaFontSubtitle => 'Use a font designed for easier reading';
+
+  @override
+  String get motorAndInteractionsTitle => 'Motor & Interactions';
+
+  @override
+  String get largeTouchTargets => 'Large touch targets';
+
+  @override
+  String get largeTouchTargetsSubtitle =>
+      'Provide larger, easier-to-tap buttons';
+
+  @override
+  String get hapticFeedback => 'Haptic feedback';
+
+  @override
+  String get hapticFeedbackSubtitle => 'Feel subtle vibrations on interactions';
 
   @override
   String get reduceAnimations => 'Reduce Animations';
 
   @override
-  String get largeTouchTargets => 'Large Touch Targets';
+  String get cognitiveSupportTitle => 'Cognitive Support';
 
   @override
-  String get hapticFeedback => 'Haptic Feedback';
+  String get lowLiteracyMode => 'Low literacy mode';
 
   @override
-  String get screenReaderMode => 'Screen Reader Mode';
+  String get lowLiteracyModeSubtitle => 'Simpler wording with more visual cues';
 
   @override
-  String get adhdMode => 'Focus Mode';
+  String get adhdMode => 'ADHD-friendly mode';
 
   @override
-  String get dyslexiaMode => 'Dyslexia-Friendly Text';
+  String get adhdModeSubtitle => 'Reduced visual clutter and distractions';
+
+  @override
+  String get languageSectionTitle => 'Language';
+
+  @override
+  String get appLanguage => 'App language';
+
+  @override
+  String get selectAppLanguage => 'Select App Language';
+
+  @override
+  String get englishSubtitle => 'English (US)';
+
+  @override
+  String get nepaliSubtitle => 'Nepali';
 
   @override
   String get visionImpairedMode => 'Enhanced Visibility';
-
-  @override
-  String get lowLiteracyMode => 'Simple Mode';
-
-  @override
-  String get autoPlayAudio => 'Auto-Play Audio';
 
   @override
   String get supportResources => 'Support Resources';

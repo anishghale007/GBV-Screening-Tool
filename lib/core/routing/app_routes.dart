@@ -15,4 +15,20 @@ abstract final class AppRoutes {
   static const String settings = '/settings';
   static const String accessibility = '/accessibility';
   static const String quickExit = '/quick-exit';
+
+  static List<String> get routes => [
+    splash,
+    onboarding,
+    pinSetup,
+    pinLock,
+    home,
+    screening,
+    incidentSelection,
+    questions,
+    pathway,
+    support,
+    settings,
+    accessibility,
+    quickExit,
+  ];
 }
