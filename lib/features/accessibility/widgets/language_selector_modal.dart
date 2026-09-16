@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gbv/core/localization/locale_cubit.dart';
-import 'package:gbv/core/services/haptic_helper.dart';
 import 'package:gbv/core/theme/app_colors.dart';
 import 'package:gbv/core/theme/app_spacing.dart';
 import 'package:gbv/core/theme/app_text_styles.dart';
-import 'package:gbv/features/accessibility/bloc/accessibility_bloc.dart';
 import 'package:gbv/l10n/l10n.dart';
 
 /// Modal bottom sheet allowing the user to select the active application
@@ -28,11 +26,6 @@ class LanguageSelectorModal extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = context.l10n;
     final isNepali = context.watch<LocaleCubit>().isNepali;
-    final isHaptic = context
-        .watch<AccessibilityBloc>()
-        .state
-        .settings
-        .isHapticFeedbackEnabled;
 
     return SafeArea(
       child: Padding(
@@ -67,7 +60,6 @@ class LanguageSelectorModal extends StatelessWidget {
               subtitle: l10n.englishSubtitle,
               isSelected: !isNepali,
               onTap: () {
-                HapticHelper.selectionClick(isEnabled: isHaptic);
                 context.read<LocaleCubit>().setEnglish();
                 Navigator.of(context).pop();
               },
@@ -78,7 +70,6 @@ class LanguageSelectorModal extends StatelessWidget {
               subtitle: l10n.nepaliSubtitle,
               isSelected: isNepali,
               onTap: () {
-                HapticHelper.selectionClick(isEnabled: isHaptic);
                 context.read<LocaleCubit>().setNepali();
                 Navigator.of(context).pop();
               },

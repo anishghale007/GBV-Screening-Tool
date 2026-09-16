@@ -36,7 +36,13 @@ class AppLocalizationsNe extends AppLocalizations {
   String get replayButton => 'फेरि सुन्नुहोस्';
 
   @override
-  String get nextButton => 'अर्को';
+  String get nextButton => 'अर्को चरण';
+
+  @override
+  String get nextStepButton => 'अर्को चरण';
+
+  @override
+  String get submitButton => 'बुझाउनुहोस्';
 
   @override
   String get previousButton => 'अघिल्लो';

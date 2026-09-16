@@ -36,7 +36,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get replayButton => 'Replay';
 
   @override
-  String get nextButton => 'Next';
+  String get nextButton => 'Next Step';
+
+  @override
+  String get nextStepButton => 'Next Step';
+
+  @override
+  String get submitButton => 'Submit';
 
   @override
   String get previousButton => 'Previous';

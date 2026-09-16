@@ -1,223 +1,91 @@
+import 'package:gbv/core/enums/incident_category.dart';
+import 'package:gbv/features/screening/data/questions/t01_stalking_questions.dart';
+import 'package:gbv/features/screening/data/questions/t02_cyberbullying_questions.dart';
+import 'package:gbv/features/screening/data/questions/t03_slander_questions.dart';
+import 'package:gbv/features/screening/data/questions/t04_leaked_images_questions.dart';
+import 'package:gbv/features/screening/data/questions/t05_sharing_details_questions.dart';
+import 'package:gbv/features/screening/data/questions/t06_fake_accounts_questions.dart';
+import 'package:gbv/features/screening/data/questions/t07_threats_questions.dart';
+import 'package:gbv/features/screening/data/questions/t08_offline_escalation_questions.dart';
+import 'package:gbv/features/screening/data/questions/t09_sexual_harassment_questions.dart';
+import 'package:gbv/features/screening/data/questions/t10_political_intimidation_questions.dart';
 import 'package:gbv/features/screening/models/screening_question.dart';
 
-/// Default 4-level frequency response options used across screening questions.
-const List<ScreeningOption> defaultFrequencyOptions = [
-  ScreeningOption(
-    id: 'yes_often',
-    labelEn: 'Yes, often',
-    labelNe: 'हो, धेरैजसो',
-  ),
-  ScreeningOption(
-    id: 'yes_sometimes',
-    labelEn: 'Yes, sometimes',
-    labelNe: 'हो, कहिलेकाहीं',
-  ),
-  ScreeningOption(
-    id: 'rarely',
-    labelEn: 'Rarely',
-    labelNe: 'कमै मात्र',
-  ),
-  ScreeningOption(
-    id: 'no_never',
-    labelEn: 'No, never',
-    labelNe: 'होइन, कहिल्यै होइन',
-  ),
+// Re-export all question files for single-import convenience
+export 'questions/shared_options.dart';
+export 'questions/t01_stalking_questions.dart';
+export 'questions/t02_cyberbullying_questions.dart';
+export 'questions/t03_slander_questions.dart';
+export 'questions/t04_leaked_images_questions.dart';
+export 'questions/t05_sharing_details_questions.dart';
+export 'questions/t06_fake_accounts_questions.dart';
+export 'questions/t07_threats_questions.dart';
+export 'questions/t08_offline_escalation_questions.dart';
+export 'questions/t09_sexual_harassment_questions.dart';
+export 'questions/t10_political_intimidation_questions.dart';
+
+// =============================================================================
+// REGISTRY & LOOKUP TABLES
+// =============================================================================
+
+/// Map of each incident category to its Gateway question.
+const Map<IncidentCategory, ScreeningQuestion> gatewayQuestionsMap = {
+  IncidentCategory.stalking: gatewayStalking,
+  IncidentCategory.cyberbullying: gatewayCyberbullying,
+  IncidentCategory.slander: gatewaySlander,
+  IncidentCategory.leakedImages: gatewayLeakedImages,
+  IncidentCategory.sharingDetails: gatewaySharingDetails,
+  IncidentCategory.fakeAccounts: gatewayFakeAccounts,
+  IncidentCategory.threats: gatewayThreats,
+  IncidentCategory.offlineEscalation: gatewayOfflineEscalation,
+  IncidentCategory.sexualHarassment: gatewaySexualHarassment,
+  IncidentCategory.politicalIntimidation: gatewayPoliticalIntimidation,
+};
+
+/// Map of each incident category to its Follow-up question.
+const Map<IncidentCategory, ScreeningQuestion> followUpQuestionsMap = {
+  IncidentCategory.stalking: followUpStalking,
+  IncidentCategory.cyberbullying: followUpCyberbullying,
+  IncidentCategory.slander: followUpSlander,
+  IncidentCategory.leakedImages: followUpLeakedImages,
+  IncidentCategory.sharingDetails: followUpSharingDetails,
+  IncidentCategory.fakeAccounts: followUpFakeAccounts,
+  IncidentCategory.threats: followUpThreats,
+  IncidentCategory.offlineEscalation: followUpOfflineEscalation,
+  IncidentCategory.sexualHarassment: followUpSexualHarassment,
+  IncidentCategory.politicalIntimidation: followUpPoliticalIntimidation,
+};
+
+/// Generic default questions shown when zero incident categories are selected
+/// (Screen 2 "Not sure" / empty).
+/// Uses Q02 (Cyberbullying Gateway), Q03 (Slander Gateway), and Q05 (Sharing
+/// Details Gateway) as safe defaults.
+const List<ScreeningQuestion> defaultGenericQuestions = [
+  gatewayCyberbullying, // Q02
+  gatewaySlander, // Q03
+  gatewaySharingDetails, // Q05
 ];
 
-/// Dynamic list of screening questions.
-///
-/// New questions or custom options can be easily added or modified here.
+/// All available sample screening questions list.
 const List<ScreeningQuestion> defaultScreeningQuestions = [
-  ScreeningQuestion(
-    id: 1,
-    textEn:
-        'In the last few months, has someone sent you unwanted, repetitive, '
-        'or threatening messages online?',
-    textNe:
-        'पछिल्ला केही महिनाहरूमा, के कसैले तपाईंलाई अनलाइनमा नचाहिँदो, '
-        'बारम्बार वा धम्कीपूर्ण सन्देशहरू पठाएको छ?',
-    options: defaultFrequencyOptions,
-  ),
-  ScreeningQuestion(
-    id: 2,
-    textEn:
-        'Has anyone shared or threatened to share your private photos, '
-        'videos, or personal conversations without your consent?',
-    textNe:
-        'के कसैले तपाईंको सहमति बिना तपाईंको निजी तस्बिर, भिडियो '
-        'वा व्यक्तिगत कुराकानीहरू सार्वजनिक गरेको वा गर्ने धम्की दिएको छ?',
-    options: defaultFrequencyOptions,
-  ),
-  ScreeningQuestion(
-    id: 3,
-    textEn:
-        'Has someone created fake accounts or profiles impersonating you '
-        'or damaging your reputation?',
-    textNe:
-        'के कसैले तपाईंको नाममा नक्कली खाता बनाएर तपाईंको पहिचानको '
-        'दुरुपयोग गरेको वा प्रतिष्ठामा आँच पुर्याएको छ?',
-    options: defaultFrequencyOptions,
-  ),
-  ScreeningQuestion(
-    id: 4,
-    textEn:
-        'In the last few months, has someone followed or shown up where '
-        'you were without you inviting them?',
-    textNe:
-        'पछिल्ला केही महिनाहरूमा, के कसैले तपाईंलाई नबोलाइकन तपाईं भएको '
-        'ठाउँमा पछ्याएको वा देखा परेको छ?',
-    options: defaultFrequencyOptions,
-  ),
-  ScreeningQuestion(
-    id: 5,
-    textEn:
-        'Has someone posted your personal contact details, location, '
-        'or home address online to intimidate you?',
-    textNe:
-        'के कसैले तपाईंलाई डराउन वा धम्क्याउन तपाईंको सम्पर्क विवरण, '
-        'ठेगाना वा स्थान अनलाइनमा पोस्ट गरेको छ?',
-    options: defaultFrequencyOptions,
-  ),
-  ScreeningQuestion(
-    id: 6,
-    textEn:
-        'Has someone made unwanted sexual advances, comments, or sent '
-        'inappropriate images to you?',
-    textNe:
-        'के कसैले तपाईंसँग अवाञ्छित यौनजन्य प्रस्ताव, टिप्पणी वा '
-        'अनुपयुक्त तस्बिरहरू पठाएको छ?',
-    options: defaultFrequencyOptions,
-  ),
-  ScreeningQuestion(
-    id: 7,
-    textEn:
-        'Have you experienced coordinated online harassment, trolling, '
-        'or hate speech targeting you?',
-    textNe:
-        'के तपाईंले योजनाबद्ध अनलाइन दुर्व्यवहार, ट्रोलिङ वा घृणास्पद '
-        'अभिव्यक्तिको सामना गर्नुभएको छ?',
-    options: defaultFrequencyOptions,
-  ),
-  ScreeningQuestion(
-    id: 8,
-    textEn:
-        'Has someone monitored or hacked your device, social media, '
-        'or communication accounts?',
-    textNe:
-        'के कसैले तपाईंको फोन, सामाजिक सञ्जाल वा सन्देश खाताहरू '
-        'ह्याक वा निगरानी गरेको छ?',
-    options: defaultFrequencyOptions,
-  ),
-  ScreeningQuestion(
-    id: 9,
-    textEn:
-        'Has online harassment or threats extended into your physical '
-        'workspace, community, or home?',
-    textNe:
-        'के अनलाइनमा आएका धम्की वा दुर्व्यवहार तपाईंको कार्यस्थल, '
-        'समाज वा घरसम्म आइपुगेको छ?',
-    options: defaultFrequencyOptions,
-  ),
-  ScreeningQuestion(
-    id: 10,
-    textEn:
-        'Have you felt unsafe, anxious, or isolated because of things '
-        'happening to you online or offline?',
-    textNe:
-        'के अनलाइन वा अफलाइन भइरहेका घटनाहरूका कारण तपाईंले असुरक्षित, '
-        'चिन्तित वा एक्लो महसुस गर्नुभएको छ?',
-    options: defaultFrequencyOptions,
-  ),
-  ScreeningQuestion(
-    id: 11,
-    textEn:
-        'Has someone pressurized or blackmailed you financially or '
-        'emotionally using digital means?',
-    textNe:
-        'के कसैले डिजिटल माध्यम प्रयोग गरेर तपाईंलाई आर्थिक वा '
-        'भावनात्मक रूपमा ब्ल्याकमेल गरेको छ?',
-    options: defaultFrequencyOptions,
-  ),
-  ScreeningQuestion(
-    id: 12,
-    textEn:
-        'Have you had to stop using social media, change your phone '
-        'number, or change routines due to threats?',
-    textNe:
-        'के धम्कीका कारण तपाईंले सामाजिक सञ्जाल छोड्नु परेको, फोन नम्बर '
-        'फेर्नु परेको वा दिनचर्या बदल्नु परेको छ?',
-    options: defaultFrequencyOptions,
-  ),
-  ScreeningQuestion(
-    id: 13,
-    textEn:
-        'Has anyone in authority or power used digital communications '
-        'to silence or threaten you?',
-    textNe:
-        'के कुनै प्रभावशाली वा अधिकार प्राप्त व्यक्तिले डिजिटल माध्यमबाट '
-        'तपाईंको आवाज दबाउने वा धम्क्याउने प्रयास गरेको छ?',
-    options: defaultFrequencyOptions,
-  ),
-  ScreeningQuestion(
-    id: 14,
-    textEn:
-        'Do you know who the person or group causing these online/offline '
-        'incidents is?',
-    textNe:
-        'के तपाईंलाई यी अनलाइन वा अफलाइन घटनाहरू गराउने व्यक्ति वा '
-        'समूह को हो भन्ने थाहा छ?',
-    options: [
-      ScreeningOption(
-        id: 'known_person',
-        labelEn: 'Yes, I know them',
-        labelNe: 'हो, म चिन्छु',
-      ),
-      ScreeningOption(
-        id: 'suspected',
-        labelEn: 'I have suspicion',
-        labelNe: 'शंका छ',
-      ),
-      ScreeningOption(
-        id: 'anonymous',
-        labelEn: 'Completely anonymous',
-        labelNe: 'अपरिचित वा अज्ञात',
-      ),
-      ScreeningOption(
-        id: 'multiple',
-        labelEn: 'Multiple individuals',
-        labelNe: 'धेरै व्यक्तिहरू',
-      ),
-    ],
-  ),
-  ScreeningQuestion(
-    id: 15,
-    textEn:
-        'Would you like information on immediate legal, psychological, '
-        'or digital safety support services?',
-    textNe:
-        'के तपाईं तत्काल कानुनी, मनोसामाजिक वा डिजिटल सुरक्षा सहायता '
-        'सम्बन्धी जानकारी चाहनुहुन्छ?',
-    options: [
-      ScreeningOption(
-        id: 'immediate_help',
-        labelEn: 'Yes, immediately',
-        labelNe: 'हो, तुरुन्तै चाहिन्छ',
-      ),
-      ScreeningOption(
-        id: 'want_info',
-        labelEn: 'Yes, for future reference',
-        labelNe: 'हो, जानकारीका लागि',
-      ),
-      ScreeningOption(
-        id: 'maybe_later',
-        labelEn: 'Maybe later',
-        labelNe: 'पछि सोच्नेछु',
-      ),
-      ScreeningOption(
-        id: 'no_need',
-        labelEn: 'Not right now',
-        labelNe: 'अहिले आवश्यक छैन',
-      ),
-    ],
-  ),
+  gatewayStalking,
+  followUpStalking,
+  gatewayCyberbullying,
+  followUpCyberbullying,
+  gatewaySlander,
+  followUpSlander,
+  gatewayLeakedImages,
+  followUpLeakedImages,
+  gatewaySharingDetails,
+  followUpSharingDetails,
+  gatewayFakeAccounts,
+  followUpFakeAccounts,
+  gatewayThreats,
+  followUpThreats,
+  gatewayOfflineEscalation,
+  followUpOfflineEscalation,
+  gatewaySexualHarassment,
+  followUpSexualHarassment,
+  gatewayPoliticalIntimidation,
+  followUpPoliticalIntimidation,
 ];

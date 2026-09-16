@@ -2,11 +2,12 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gbv/common/common.dart';
 import 'package:gbv/core/core.dart';
-import 'package:gbv/core/enums/incident_category.dart';
 import 'package:gbv/features/accessibility/view/accessibility_page.dart';
+import 'package:gbv/features/screening/bloc/screening_cubit.dart';
+import 'package:gbv/features/screening/data/incident_types.dart';
+import 'package:gbv/features/screening/widgets/incident_category_tile.dart';
 import 'package:gbv/injection_container.dart';
 import 'package:go_router/go_router.dart';
 
@@ -83,75 +84,16 @@ class _IncidentSelectionPageState extends State<IncidentSelectionPage> {
   }
 
   void _onContinue() {
+    context.read<ScreeningCubit>().setSelectedCategories(
+          _selected.toList(),
+          isNotSure: _isNotSureSelected,
+        );
     context.push(AppRoutes.questions);
   }
 
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
-
-    final categories = <_CategoryItemData>[
-      _CategoryItemData(
-        category: IncidentCategory.stalking,
-        iconPath: AssetConstants.userSearchIcon,
-        title: l10n.categoryStalking,
-        description: l10n.categoryStalkingDesc,
-      ),
-      _CategoryItemData(
-        category: IncidentCategory.cyberbullying,
-        iconPath: AssetConstants.messageWarningIcon,
-        title: l10n.categoryCyberbullying,
-        description: l10n.categoryCyberbullyingDesc,
-      ),
-      _CategoryItemData(
-        category: IncidentCategory.slander,
-        iconPath: AssetConstants.megaphoneOffIcon,
-        title: l10n.categorySlander,
-        description: l10n.categorySlanderDesc,
-      ),
-      _CategoryItemData(
-        category: IncidentCategory.leakedImages,
-        iconPath: AssetConstants.imageDownloadIcon,
-        title: l10n.categoryLeakedImages,
-        description: l10n.categoryLeakedImagesDesc,
-      ),
-      _CategoryItemData(
-        category: IncidentCategory.sharingDetails,
-        iconPath: AssetConstants.userLockIcon,
-        title: l10n.categorySharingDetails,
-        description: l10n.categorySharingDetailsDesc,
-      ),
-      _CategoryItemData(
-        category: IncidentCategory.fakeAccounts,
-        iconPath: AssetConstants.crossIcon,
-        title: l10n.categoryFakeAccounts,
-        description: l10n.categoryFakeAccountsDesc,
-      ),
-      _CategoryItemData(
-        category: IncidentCategory.threats,
-        iconPath: AssetConstants.alertIcon,
-        title: l10n.categoryThreats,
-        description: l10n.categoryThreatsDesc,
-      ),
-      _CategoryItemData(
-        category: IncidentCategory.offlineEscalation,
-        iconPath: AssetConstants.buildingIcon,
-        title: l10n.categoryOfflineEscalation,
-        description: l10n.categoryOfflineEscalationDesc,
-      ),
-      _CategoryItemData(
-        category: IncidentCategory.sexualHarassment,
-        iconPath: AssetConstants.heartCrackIcon,
-        title: l10n.categorySexualHarassment,
-        description: l10n.categorySexualHarassmentDesc,
-      ),
-      _CategoryItemData(
-        category: IncidentCategory.politicalIntimidation,
-        iconPath: AssetConstants.flagIcon,
-        title: l10n.categoryPoliticalIntimidation,
-        description: l10n.categoryPoliticalIntimidationDesc,
-      ),
-    ];
 
     return AppScaffold(
       appBar: AppBar(
@@ -194,14 +136,14 @@ class _IncidentSelectionPageState extends State<IncidentSelectionPage> {
                   const SizedBox(height: AppSpacing.lg),
 
                   // Category Cards
-                  ...categories.map((data) {
+                  ...getIncidentTypes(l10n).map((data) {
                     final isSelected = _selected.contains(data.category);
                     final speechKey = '${data.title}. ${data.description}';
                     final isPlaying = _activeSpeechText == speechKey;
 
                     return Padding(
                       padding: const EdgeInsets.only(bottom: AppSpacing.sm + 2),
-                      child: _IncidentCategoryTile(
+                      child: IncidentCategoryTile(
                         iconPath: data.iconPath,
                         title: data.title,
                         description: data.description,
@@ -249,204 +191,6 @@ class _IncidentSelectionPageState extends State<IncidentSelectionPage> {
 // Supporting Data & Widgets
 // ────────────────────────────────────────────────────────────────────────────
 
-class _CategoryItemData {
-  const _CategoryItemData({
-    required this.category,
-    required this.iconPath,
-    required this.title,
-    required this.description,
-  });
-
-  final IncidentCategory category;
-  final String iconPath;
-  final String title;
-  final String description;
-}
-
-/// Selectable Incident Category Tile.
-class _IncidentCategoryTile extends StatelessWidget {
-  const _IncidentCategoryTile({
-    required this.iconPath,
-    required this.title,
-    required this.description,
-    required this.isSelected,
-    required this.isPlaying,
-    required this.onTap,
-    required this.onAudioTap,
-  });
-
-  final String iconPath;
-  final String title;
-  final String description;
-  final bool isSelected;
-  final bool isPlaying;
-  final VoidCallback onTap;
-  final VoidCallback onAudioTap;
-
-  @override
-  Widget build(BuildContext context) {
-    final borderColor = isSelected ? AppColors.primary : AppColors.border;
-    final borderWidth = isSelected ? 2.0 : 1.2;
-
-    return Material(
-      color: AppColors.surface,
-      borderRadius: AppSpacing.borderRadiusMd,
-      child: InkWell(
-        onTap: onTap,
-        borderRadius: AppSpacing.borderRadiusMd,
-        child: AnimatedContainer(
-          duration: const Duration(milliseconds: 200),
-          curve: Curves.easeInOut,
-          padding: const EdgeInsets.symmetric(
-            horizontal: AppSpacing.md,
-            vertical: 12,
-          ),
-          decoration: BoxDecoration(
-            borderRadius: AppSpacing.borderRadiusMd,
-            border: Border.all(color: borderColor, width: borderWidth),
-          ),
-          child: Row(
-            children: [
-              // Icon Circle
-              Container(
-                width: 38,
-                height: 38,
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  color: isSelected
-                      ? AppColors.primary.withValues(alpha: 0.12)
-                      : AppColors.surfaceVariant,
-                  shape: BoxShape.circle,
-                ),
-                child: SvgPicture.asset(
-                  iconPath,
-                  width: 20,
-                  height: 20,
-                  colorFilter: const ColorFilter.mode(
-                    AppColors.primary,
-                    BlendMode.srcIn,
-                  ),
-                ),
-              ),
-              const SizedBox(width: AppSpacing.md),
-
-              // Title and Description
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text(
-                      title,
-                      style: AppTextStyles.labelLarge.copyWith(
-                        fontWeight: FontWeight.w700,
-                        color: AppColors.textPrimary,
-                      ),
-                    ),
-                    const SizedBox(height: 2),
-                    Text(
-                      description,
-                      style: AppTextStyles.bodySmall.copyWith(
-                        color: AppColors.textSecondary,
-                        height: 1.25,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(width: AppSpacing.sm),
-
-              // Audio narration button
-              _AudioIconButton(onTap: onAudioTap, isPlaying: isPlaying),
-              const SizedBox(width: AppSpacing.sm),
-
-              // Custom Rounded Checkbox
-              _CustomCheckbox(isSelected: isSelected),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-/// Custom Rounded Checkbox matching the design reference.
-class _CustomCheckbox extends StatelessWidget {
-  const _CustomCheckbox({required this.isSelected});
-
-  final bool isSelected;
-
-  @override
-  Widget build(BuildContext context) {
-    return AnimatedContainer(
-      duration: const Duration(milliseconds: 180),
-      width: 22,
-      height: 22,
-      decoration: BoxDecoration(
-        color: isSelected ? AppColors.primary : Colors.transparent,
-        borderRadius: BorderRadius.circular(6),
-        border: Border.all(
-          color: isSelected ? AppColors.primary : AppColors.border,
-          width: 1.5,
-        ),
-      ),
-      child: isSelected
-          ? const Center(
-              child: Icon(
-                Icons.check_rounded,
-                size: 16,
-                color: AppColors.textOnPrimary,
-              ),
-            )
-          : null,
-    );
-  }
-}
-
-/// Audio narration button.
-class _AudioIconButton extends StatelessWidget {
-  const _AudioIconButton({required this.onTap, this.isPlaying = false});
-
-  final VoidCallback onTap;
-  final bool isPlaying;
-
-  @override
-  Widget build(BuildContext context) {
-    final backgroundColor = isPlaying
-        ? AppColors.primary
-        : AppColors.surfaceVariant;
-    final iconColor = isPlaying
-        ? AppColors.textOnPrimary
-        : AppColors.textSecondary;
-    final borderColor = isPlaying
-        ? AppColors.primary
-        : AppColors.borderSelected;
-
-    return GestureDetector(
-      onTap: onTap,
-      behavior: HitTestBehavior.opaque,
-      child: AnimatedContainer(
-        duration: const Duration(milliseconds: 150),
-        width: 36,
-        height: 36,
-        decoration: BoxDecoration(
-          color: backgroundColor,
-          shape: BoxShape.circle,
-          border: Border.all(color: borderColor),
-        ),
-        child: Center(
-          child: SvgPicture.asset(
-            AssetConstants.audioLinesIcon,
-            height: 18,
-            width: 18,
-            colorFilter: ColorFilter.mode(iconColor, BlendMode.srcIn),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
 /// "I'm not sure / skip selection" option tile.
 class _NotSureTile extends StatelessWidget {
   const _NotSureTile({
@@ -465,7 +209,7 @@ class _NotSureTile extends StatelessWidget {
       color: AppColors.surface,
       borderRadius: AppSpacing.borderRadiusMd,
       child: InkWell(
-        onTap: onTap,
+        onTap: onTap.withMediumImpate(),
         borderRadius: AppSpacing.borderRadiusMd,
         child: Container(
           padding: const EdgeInsets.symmetric(

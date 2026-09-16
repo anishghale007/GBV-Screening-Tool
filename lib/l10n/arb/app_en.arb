@@ -21,7 +21,15 @@
         "description": "Button label to play audio narration"
     },
     "replayButton": "Replay",
-    "nextButton": "Next",
+    "nextButton": "Next Step",
+    "nextStepButton": "Next Step",
+    "@nextStepButton": {
+        "description": "Button label to proceed to next screening question step"
+    },
+    "submitButton": "Submit",
+    "@submitButton": {
+        "description": "Button label to submit completed screening questionnaire"
+    },
     "previousButton": "Previous",
     "preferNotToSay": "Prefer not to say",
     "@preferNotToSay": {

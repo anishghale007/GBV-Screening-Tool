@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gbv/core/theme/app_colors.dart';
+import 'package:gbv/core/utils/voidcallback_extension.dart';
 
 class TextSizeSegment extends StatelessWidget {
   const TextSizeSegment({
@@ -17,7 +18,7 @@ class TextSizeSegment extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: GestureDetector(
-        onTap: onTap,
+        onTap: onTap.withMediumImpact(),
         behavior: HitTestBehavior.opaque,
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 150),

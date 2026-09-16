@@ -6,6 +6,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gbv/common/common.dart';
 import 'package:gbv/core/core.dart';
 import 'package:gbv/features/accessibility/view/accessibility_page.dart';
+import 'package:gbv/features/screening/bloc/screening_cubit.dart';
+import 'package:gbv/features/screening/bloc/screening_state.dart';
 import 'package:gbv/features/screening/data/screening_questions_data.dart';
 import 'package:gbv/features/screening/models/screening_question.dart';
 import 'package:gbv/features/screening/widgets/screening_bottom_navigation.dart';
@@ -16,8 +18,8 @@ import 'package:go_router/go_router.dart';
 
 /// Interactive screening questionnaire flow using PageView.builder.
 ///
-/// Features dynamic progress calculations, customizable question datasets,
-/// audio TTS narration, single-choice selection, and pinned header/bottom bars.
+/// Driven by [ScreeningCubit] to dynamically inject follow-up questions,
+/// enforce the 15-question cap, adapt wording by gender, and score responses.
 class ScreeningQuestionsPage extends StatefulWidget {
   const ScreeningQuestionsPage({
     this.questions = defaultScreeningQuestions,
@@ -36,7 +38,6 @@ class _ScreeningQuestionsPageState extends State<ScreeningQuestionsPage> {
   StreamSubscription<TtsState>? _ttsSubscription;
 
   int _currentIndex = 0;
-  final Map<int, String> _selectedAnswers = {};
   String? _activeSpeechText;
 
   @override
@@ -58,18 +59,6 @@ class _ScreeningQuestionsPageState extends State<ScreeningQuestionsPage> {
     super.dispose();
   }
 
-  void _selectOption(int questionId, String optionId) {
-    setState(() {
-      _selectedAnswers[questionId] = optionId;
-    });
-  }
-
-  void _skipQuestion(int questionId) {
-    setState(() {
-      _selectedAnswers[questionId] = 'prefer_not_to_say';
-    });
-  }
-
   Future<void> _playAudio(String text) async {
     if (_activeSpeechText == text && _tts.isPlaying) {
       await _tts.stop();
@@ -85,14 +74,14 @@ class _ScreeningQuestionsPageState extends State<ScreeningQuestionsPage> {
     await _tts.speak(text, languageCode: ttsLanguage);
   }
 
-  void _onNext() {
-    if (_currentIndex < widget.questions.length - 1) {
+  void _onNext(int totalQuestions) {
+    if (_currentIndex < totalQuestions - 1) {
       _pageController.nextPage(
         duration: const Duration(milliseconds: 280),
         curve: Curves.easeInOut,
       );
     } else {
-      // Completed all questions — navigate to pathway results
+      context.read<ScreeningCubit>().completeScreening();
       context.push(AppRoutes.pathway);
     }
   }
@@ -112,141 +101,170 @@ class _ScreeningQuestionsPageState extends State<ScreeningQuestionsPage> {
   Widget build(BuildContext context) {
     final l10n = context.l10n;
     final languageCode = context.watch<LocaleCubit>().state.languageCode;
-    final total = widget.questions.length;
-    final currentQuestion = widget.questions[_currentIndex];
-    final selectedOptionId = _selectedAnswers[currentQuestion.id];
-    final isOptionSelected = selectedOptionId != null;
 
-    return AppScaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios_new_rounded, size: 20),
-          onPressed: _onPrevious,
-        ),
-        title: Text(l10n.screeningTitle, style: AppTextStyles.headlineSmall),
-        actions: const [
-          Padding(
-            padding: EdgeInsets.only(right: AppSpacing.sm),
-            child: LocaleSwitch(),
+    return BlocBuilder<ScreeningCubit, ScreeningState>(
+      builder: (context, screeningState) {
+        final activeList = screeningState.activeQuestions.isNotEmpty
+            ? screeningState.activeQuestions
+            : widget.questions;
+        final total = activeList.length;
+        final safeIndex = _currentIndex.clamp(0, total > 0 ? total - 1 : 0);
+        final currentQuestion = total > 0 ? activeList[safeIndex] : null;
+        final selectedAnswer = currentQuestion != null
+            ? screeningState.answers[currentQuestion.id]
+            : null;
+        final isOptionSelected = selectedAnswer != null;
+
+        return AppScaffold(
+          appBar: AppBar(
+            leading: IconButton(
+              icon: const Icon(Icons.arrow_back_ios_new_rounded, size: 20),
+              onPressed: _onPrevious,
+            ),
+            title: Text(
+              l10n.screeningTitle,
+              style: AppTextStyles.headlineSmall,
+            ),
+            actions: const [
+              Padding(
+                padding: EdgeInsets.only(right: AppSpacing.sm),
+                child: LocaleSwitch(),
+              ),
+            ],
           ),
-        ],
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => AccessibilityBottomSheet.show(context),
-        tooltip: l10n.accessibilitySettings,
-        child: const Icon(Icons.accessible_forward_rounded),
-      ),
-      body: Column(
-        children: [
-          // Pinned Header with Progress Bar & Question Counter
-          ScreeningProgressHeader(
-            currentIndex: _currentIndex,
-            totalQuestions: total,
+          floatingActionButton: FloatingActionButton(
+            onPressed: () => AccessibilityBottomSheet.show(context),
+            tooltip: l10n.accessibilitySettings,
+            child: const Icon(Icons.accessible_forward_rounded),
           ),
+          body: Column(
+            children: [
+              // Pinned Header with Progress Bar & Question Counter
+              ScreeningProgressHeader(
+                currentIndex: safeIndex,
+                totalQuestions: total,
+              ),
 
-          // Scrollable and Animated PageView for Question & Options
-          Expanded(
-            child: PageView.builder(
-              controller: _pageController,
-              physics: const NeverScrollableScrollPhysics(),
-              onPageChanged: (index) {
-                setState(() => _currentIndex = index);
-                _tts.stop();
-              },
-              itemCount: total,
-              itemBuilder: (context, index) {
-                final question = widget.questions[index];
-                final questionText = question.text(languageCode);
-                final currentAnswer = _selectedAnswers[question.id];
-                final isPlayingQuestionAudio =
-                    _activeSpeechText == questionText;
+              // Scrollable and Animated PageView for Question & Options
+              Expanded(
+                child: PageView.builder(
+                  controller: _pageController,
+                  physics: const NeverScrollableScrollPhysics(),
+                  onPageChanged: (index) {
+                    setState(() => _currentIndex = index);
+                    context.read<ScreeningCubit>().setCurrentIndex(index);
+                    _tts.stop();
+                  },
+                  itemCount: total,
+                  itemBuilder: (context, index) {
+                    final question = activeList[index];
+                    final questionText = question.text(
+                      languageCode,
+                      screeningState.gender,
+                    );
+                    final currentAnswer =
+                        screeningState.answers[question.id];
+                    final isPlayingQuestionAudio =
+                        _activeSpeechText == questionText;
 
-                return SingleChildScrollView(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: AppSpacing.sm,
-                    vertical: AppSpacing.md,
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      // Question text & TTS Audio Button
-                      Row(
+                    return SingleChildScrollView(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: AppSpacing.sm,
+                        vertical: AppSpacing.md,
+                      ),
+                      child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Expanded(
-                            child: Text(
-                              questionText,
-                              style: AppTextStyles.headlineSmall.copyWith(
-                                fontWeight: FontWeight.w700,
-                                height: 1.3,
-                                color: AppColors.textPrimary,
-                                fontSize: 18,
+                          // Question text & TTS Audio Button
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Expanded(
+                                child: Text(
+                                  questionText,
+                                  style: AppTextStyles.headlineSmall.copyWith(
+                                    fontWeight: FontWeight.w700,
+                                    height: 1.3,
+                                    color: AppColors.textPrimary,
+                                    fontSize: 18,
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(width: AppSpacing.md),
+                              _QuestionAudioButton(
+                                isPlaying: isPlayingQuestionAudio,
+                                onTap: () => _playAudio(questionText),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: AppSpacing.xl),
+
+                          // List of Options (Single choice per question
+                          // with points)
+                          ...question.options.map((option) {
+                            final isSelected = currentAnswer == option.id;
+                            final optionLabel = option.label(languageCode);
+
+                            return Padding(
+                              padding: const EdgeInsets.only(
+                                bottom: AppSpacing.sm + 2,
+                              ),
+                              child: ScreeningOptionTile(
+                                label: optionLabel,
+                                isSelected: isSelected,
+                                onTap: () {
+                                  context
+                                      .read<ScreeningCubit>()
+                                      .answerQuestion(question, option);
+                                },
+                              ),
+                            );
+                          }),
+
+                          const SizedBox(height: AppSpacing.md),
+
+                          // "Prefer not to say" button
+                          Center(
+                            child: TextButton(
+                              onPressed: () {
+                                context
+                                    .read<ScreeningCubit>()
+                                    .skipQuestion(question);
+                              },
+                              child: Text(
+                                l10n.preferNotToSay,
+                                style: AppTextStyles.bodyMedium.copyWith(
+                                  color: currentAnswer == 'prefer_not_to_say'
+                                      ? AppColors.primary
+                                      : AppColors.textSecondary,
+                                  decoration: TextDecoration.underline,
+                                  fontWeight:
+                                      currentAnswer == 'prefer_not_to_say'
+                                          ? FontWeight.w700
+                                          : FontWeight.w500,
+                                ),
                               ),
                             ),
                           ),
-                          const SizedBox(width: AppSpacing.md),
-                          _QuestionAudioButton(
-                            isPlaying: isPlayingQuestionAudio,
-                            onTap: () => _playAudio(questionText),
-                          ),
+                          const SizedBox(height: AppSpacing.lg),
                         ],
                       ),
-                      const SizedBox(height: AppSpacing.xl),
+                    );
+                  },
+                ),
+              ),
 
-                      // List of Options (Single choice per question)
-                      ...question.options.map((option) {
-                        final isSelected = currentAnswer == option.id;
-                        final optionLabel = option.label(languageCode);
-
-                        return Padding(
-                          padding: const EdgeInsets.only(
-                            bottom: AppSpacing.sm + 2,
-                          ),
-                          child: ScreeningOptionTile(
-                            label: optionLabel,
-                            isSelected: isSelected,
-                            onTap: () => _selectOption(question.id, option.id),
-                          ),
-                        );
-                      }),
-
-                      const SizedBox(height: AppSpacing.md),
-
-                      // "Prefer not to say" button
-                      Center(
-                        child: TextButton(
-                          onPressed: () => _skipQuestion(question.id),
-                          child: Text(
-                            l10n.preferNotToSay,
-                            style: AppTextStyles.bodyMedium.copyWith(
-                              color: currentAnswer == 'prefer_not_to_say'
-                                  ? AppColors.primary
-                                  : AppColors.textSecondary,
-                              decoration: TextDecoration.underline,
-                              fontWeight: currentAnswer == 'prefer_not_to_say'
-                                  ? FontWeight.w700
-                                  : FontWeight.w500,
-                            ),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(height: AppSpacing.lg),
-                    ],
-                  ),
-                );
-              },
-            ),
+              // Pinned Bottom Navigation Action Bar
+              ScreeningBottomNavigation(
+                onPrevious: safeIndex > 0 ? _onPrevious : null,
+                onNext: () => _onNext(total),
+                isNextEnabled: isOptionSelected,
+                isLastQuestion: safeIndex == total - 1,
+              ),
+            ],
           ),
-
-          // Pinned Bottom Navigation Action Bar
-          ScreeningBottomNavigation(
-            onPrevious: _currentIndex > 0 ? _onPrevious : null,
-            onNext: _onNext,
-            isNextEnabled: isOptionSelected,
-            isLastQuestion: _currentIndex == total - 1,
-          ),
-        ],
-      ),
+        );
+      },
     );
   }
 }

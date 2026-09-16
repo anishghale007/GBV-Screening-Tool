@@ -7,19 +7,22 @@ import 'package:gbv/core/theme/app_spacing.dart';
 import 'package:gbv/core/theme/app_text_styles.dart';
 import 'package:gbv/core/utils/voidcallback_extension.dart';
 
-class GenderOptionTile extends StatelessWidget {
-  const GenderOptionTile({
+/// Selectable Incident Category Tile.
+class IncidentCategoryTile extends StatelessWidget {
+  const IncidentCategoryTile({
     required this.iconPath,
-    required this.label,
+    required this.title,
+    required this.description,
     required this.isSelected,
+    required this.isPlaying,
     required this.onTap,
     required this.onAudioTap,
-    this.isPlaying = false,
     super.key,
   });
 
   final String iconPath;
-  final String label;
+  final String title;
+  final String description;
   final bool isSelected;
   final bool isPlaying;
   final VoidCallback onTap;
@@ -28,21 +31,20 @@ class GenderOptionTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final borderColor = isSelected ? AppColors.primary : AppColors.border;
-    const backgroundColor = AppColors.surface;
     final borderWidth = isSelected ? 2.0 : 1.2;
 
     return Material(
-      color: backgroundColor,
+      color: AppColors.surface,
       borderRadius: AppSpacing.borderRadiusMd,
       child: InkWell(
         onTap: onTap.withMediumImpact(),
         borderRadius: AppSpacing.borderRadiusMd,
-        child: AnimatedContainer(
-          duration: const Duration(milliseconds: 200),
-          curve: Curves.easeInOut,
+        child: Container(
+          // duration: const Duration(milliseconds: 200),
+          // curve: Curves.easeInOut,
           padding: const EdgeInsets.symmetric(
             horizontal: AppSpacing.md,
-            vertical: 14,
+            vertical: 12,
           ),
           decoration: BoxDecoration(
             borderRadius: AppSpacing.borderRadiusMd,
@@ -50,10 +52,10 @@ class GenderOptionTile extends StatelessWidget {
           ),
           child: Row(
             children: [
-              // Gender icon
+              // Icon Circle
               Container(
-                width: 36,
-                height: 36,
+                width: 38.w,
+                height: 38.h,
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
                   color: isSelected
@@ -63,8 +65,8 @@ class GenderOptionTile extends StatelessWidget {
                 ),
                 child: SvgPicture.asset(
                   iconPath,
-                  width: 20.w,
-                  height: 20.h,
+                  width: 20,
+                  height: 20,
                   colorFilter: const ColorFilter.mode(
                     AppColors.primary,
                     BlendMode.srcIn,
@@ -73,25 +75,38 @@ class GenderOptionTile extends StatelessWidget {
               ),
               const SizedBox(width: AppSpacing.md),
 
-              // Label
+              // Title and Description
               Expanded(
-                child: Text(
-                  label,
-                  style: AppTextStyles.labelLarge.copyWith(
-                    color: isSelected
-                        ? AppColors.primary
-                        : AppColors.textPrimary,
-                    fontWeight: isSelected ? FontWeight.w700 : FontWeight.w600,
-                  ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      title,
+                      style: AppTextStyles.labelLarge.copyWith(
+                        fontWeight: FontWeight.w700,
+                        color: AppColors.textPrimary,
+                      ),
+                    ),
+                    const SizedBox(height: 2),
+                    Text(
+                      description,
+                      style: AppTextStyles.bodySmall.copyWith(
+                        color: AppColors.textSecondary,
+                        height: 1.25,
+                      ),
+                    ),
+                  ],
                 ),
               ),
+              const SizedBox(width: AppSpacing.sm),
 
-              // Audio / TTS button
-              _AudioIconButton(
-                onTap: onAudioTap,
-                isSelected: isSelected,
-                isPlaying: isPlaying,
-              ),
+              // Audio narration button
+              _AudioIconButton(onTap: onAudioTap, isPlaying: isPlaying),
+              const SizedBox(width: AppSpacing.sm),
+
+              // Custom Rounded Checkbox
+              _CustomCheckbox(isSelected: isSelected),
             ],
           ),
         ),
@@ -100,29 +115,53 @@ class GenderOptionTile extends StatelessWidget {
   }
 }
 
-/// Small tappable audio icon on the right side of each option tile.
+/// Custom Rounded Checkbox matching the design reference.
+class _CustomCheckbox extends StatelessWidget {
+  const _CustomCheckbox({required this.isSelected});
+
+  final bool isSelected;
+
+  @override
+  Widget build(BuildContext context) {
+    return AnimatedContainer(
+      duration: const Duration(milliseconds: 180),
+      width: 22.w,
+      height: 22.h,
+      decoration: BoxDecoration(
+        color: isSelected ? AppColors.primary : Colors.transparent,
+        borderRadius: BorderRadius.circular(6),
+        border: Border.all(
+          color: isSelected ? AppColors.primary : AppColors.border,
+          width: 1.5,
+        ),
+      ),
+      child: isSelected
+          ? const Center(
+              child: Icon(
+                Icons.check_rounded,
+                size: 16,
+                color: AppColors.textOnPrimary,
+              ),
+            )
+          : null,
+    );
+  }
+}
+
+/// Audio narration button.
 class _AudioIconButton extends StatelessWidget {
-  const _AudioIconButton({
-    required this.onTap,
-    required this.isSelected,
-    this.isPlaying = false,
-  });
+  const _AudioIconButton({required this.onTap, this.isPlaying = false});
 
   final VoidCallback onTap;
-  final bool isSelected;
   final bool isPlaying;
 
   @override
   Widget build(BuildContext context) {
     final backgroundColor = isPlaying
         ? AppColors.primary
-        : isSelected
-        ? AppColors.primary.withValues(alpha: 0.12)
         : AppColors.surfaceVariant;
     final iconColor = isPlaying
         ? AppColors.textOnPrimary
-        : isSelected
-        ? AppColors.primary
         : AppColors.textSecondary;
     final borderColor = isPlaying
         ? AppColors.primary
@@ -133,8 +172,8 @@ class _AudioIconButton extends StatelessWidget {
       behavior: HitTestBehavior.opaque,
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 150),
-        width: 36,
-        height: 36,
+        width: 36.w,
+        height: 36.h,
         decoration: BoxDecoration(
           color: backgroundColor,
           shape: BoxShape.circle,

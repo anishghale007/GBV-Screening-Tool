@@ -33,7 +33,7 @@ class ScreeningBottomNavigation extends StatelessWidget {
             child: SizedBox(
               height: 48,
               child: OutlinedButton(
-                onPressed: onPrevious.withMediumImpate(),
+                onPressed: onPrevious.withMediumImpact(),
                 style: OutlinedButton.styleFrom(
                   backgroundColor: const Color(0xFFF9F7F5),
                   side: const BorderSide(color: Color(0xFFE5DDD5), width: 1.2),
@@ -73,7 +73,7 @@ class ScreeningBottomNavigation extends StatelessWidget {
                 ),
                 child: Text(
                   isLastQuestion
-                      ? context.l10n.completionTitle
+                      ? context.l10n.submitButton
                       : context.l10n.nextButton,
                   style: AppTextStyles.labelLarge.copyWith(
                     color: AppColors.textOnPrimary,

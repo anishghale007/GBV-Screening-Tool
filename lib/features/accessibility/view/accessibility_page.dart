@@ -35,7 +35,6 @@ class AccessibilityBottomSheet extends StatelessWidget {
     return BlocBuilder<AccessibilityBloc, AccessibilityState>(
       builder: (context, state) {
         final settings = state.settings;
-        final isHaptic = settings.isHapticFeedbackEnabled;
 
         return Container(
           constraints: BoxConstraints(
@@ -127,10 +126,9 @@ class AccessibilityBottomSheet extends StatelessWidget {
                         TextSizePreviewCard(
                           selectedOption: settings.textSize,
                           onChanged: (option) {
-                            HapticHelper.selectionClick(isEnabled: isHaptic);
-                            context
-                                .read<AccessibilityBloc>()
-                                .add(UpdateTextSize(option));
+                            context.read<AccessibilityBloc>().add(
+                              UpdateTextSize(option),
+                            );
                           },
                         ),
                         const SizedBox(height: AppSpacing.sm),
@@ -140,10 +138,9 @@ class AccessibilityBottomSheet extends StatelessWidget {
                           subtitle: l10n.highContrastSubtitle,
                           value: settings.isHighContrastEnabled,
                           onChanged: (val) {
-                            HapticHelper.lightImpact(isEnabled: isHaptic);
-                            context
-                                .read<AccessibilityBloc>()
-                                .add(ToggleHighContrast(isEnabled: val));
+                            context.read<AccessibilityBloc>().add(
+                              ToggleHighContrast(isEnabled: val),
+                            );
                           },
                         ),
                         AccessibilityToggleRow(
@@ -151,10 +148,9 @@ class AccessibilityBottomSheet extends StatelessWidget {
                           subtitle: l10n.dyslexiaFontSubtitle,
                           value: settings.isDyslexiaModeEnabled,
                           onChanged: (val) {
-                            HapticHelper.lightImpact(isEnabled: isHaptic);
-                            context
-                                .read<AccessibilityBloc>()
-                                .add(ToggleDyslexiaFont(isEnabled: val));
+                            context.read<AccessibilityBloc>().add(
+                              ToggleDyslexiaFont(isEnabled: val),
+                            );
                           },
                         ),
 
@@ -170,10 +166,9 @@ class AccessibilityBottomSheet extends StatelessWidget {
                           subtitle: l10n.largeTouchTargetsSubtitle,
                           value: settings.isLargeTouchTargetsEnabled,
                           onChanged: (val) {
-                            HapticHelper.lightImpact(isEnabled: isHaptic);
-                            context
-                                .read<AccessibilityBloc>()
-                                .add(ToggleLargeTouchTargets(isEnabled: val));
+                            context.read<AccessibilityBloc>().add(
+                              ToggleLargeTouchTargets(isEnabled: val),
+                            );
                           },
                         ),
                         AccessibilityToggleRow(
@@ -181,10 +176,9 @@ class AccessibilityBottomSheet extends StatelessWidget {
                           subtitle: l10n.hapticFeedbackSubtitle,
                           value: settings.isHapticFeedbackEnabled,
                           onChanged: (val) {
-                            HapticHelper.lightImpact(isEnabled: val);
-                            context
-                                .read<AccessibilityBloc>()
-                                .add(ToggleHapticFeedback(isEnabled: val));
+                            context.read<AccessibilityBloc>().add(
+                              ToggleHapticFeedback(isEnabled: val),
+                            );
                           },
                         ),
 
@@ -221,7 +215,6 @@ class AccessibilityBottomSheet extends StatelessWidget {
                           title: l10n.appLanguage,
                           currentLanguage: currentLanguageName,
                           onTap: () {
-                            HapticHelper.selectionClick(isEnabled: isHaptic);
                             LanguageSelectorModal.show(context);
                           },
                         ),

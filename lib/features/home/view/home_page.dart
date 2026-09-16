@@ -120,6 +120,7 @@ class HomePage extends StatelessWidget {
                       text: 'View Resources',
                       variant: AppButtonVariant.outlined,
                       icon: const Icon(Icons.phone_in_talk_rounded),
+                      foregroundColor: Colors.black,
                       onPressed: () => context.push(AppRoutes.support),
                     ),
                   ],

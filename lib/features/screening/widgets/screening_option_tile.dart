@@ -23,7 +23,7 @@ class ScreeningOptionTile extends StatelessWidget {
       color: AppColors.surface,
       borderRadius: BorderRadius.circular(12),
       child: InkWell(
-        onTap: onTap,
+        onTap: onTap.withMediumImpact(),
         borderRadius: BorderRadius.circular(12),
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 180),
@@ -34,10 +34,7 @@ class ScreeningOptionTile extends StatelessWidget {
           decoration: BoxDecoration(
             color: AppColors.surface,
             borderRadius: BorderRadius.circular(12),
-            border: Border.all(
-              color: borderColor,
-              width: borderWidth,
-            ),
+            border: Border.all(color: borderColor, width: borderWidth),
           ),
           child: Row(
             children: [

@@ -9,6 +9,7 @@ import 'package:gbv/core/services/tts_helper.dart';
 import 'package:gbv/core/storage/encrypted_storage_service.dart';
 import 'package:gbv/core/storage/secure_storage_service.dart';
 import 'package:gbv/features/accessibility/bloc/accessibility_bloc.dart';
+import 'package:gbv/features/screening/bloc/screening_cubit.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -66,4 +67,5 @@ Future<void> initDependencies() async {
   await sl<ConnectivityService>().init();
 
   // ── Feature-level dependencies ──────────────────────────────────────
+  sl.registerLazySingleton<ScreeningCubit>(ScreeningCubit.new);
 }

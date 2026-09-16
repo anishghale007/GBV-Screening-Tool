@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gbv/core/core.dart';
 import 'package:gbv/features/accessibility/bloc/accessibility_bloc.dart';
+import 'package:gbv/features/screening/bloc/screening_cubit.dart';
 import 'package:gbv/injection_container.dart';
 
 class App extends StatelessWidget {
@@ -14,6 +15,7 @@ class App extends StatelessWidget {
       providers: [
         BlocProvider.value(value: sl<LocaleCubit>()),
         BlocProvider.value(value: sl<AccessibilityBloc>()),
+        BlocProvider.value(value: sl<ScreeningCubit>()),
       ],
       child: BlocBuilder<LocaleCubit, Locale>(
         builder: (context, locale) {

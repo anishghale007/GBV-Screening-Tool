@@ -155,8 +155,20 @@ abstract class AppLocalizations {
   /// No description provided for @nextButton.
   ///
   /// In en, this message translates to:
-  /// **'Next'**
+  /// **'Next Step'**
   String get nextButton;
+
+  /// Button label to proceed to next screening question step
+  ///
+  /// In en, this message translates to:
+  /// **'Next Step'**
+  String get nextStepButton;
+
+  /// Button label to submit completed screening questionnaire
+  ///
+  /// In en, this message translates to:
+  /// **'Submit'**
+  String get submitButton;
 
   /// No description provided for @previousButton.
   ///

@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gbv/common/common.dart';
 import 'package:gbv/core/core.dart';
-import 'package:gbv/core/enums/gender_option.dart';
 import 'package:gbv/features/accessibility/view/accessibility_page.dart';
+import 'package:gbv/features/screening/bloc/screening_cubit.dart';
 import 'package:gbv/features/screening/widgets/gender_option_tile.dart';
 import 'package:gbv/features/screening/widgets/privacy_banner.dart';
 import 'package:gbv/injection_container.dart';
@@ -172,6 +172,9 @@ class _GenderSelectionPageState extends State<GenderSelectionPage> {
   }
 
   void _onContinue() {
+    if (_selected != null) {
+      context.read<ScreeningCubit>().setGender(_selected!);
+    }
     context.push(AppRoutes.incidentSelection);
   }
 }
