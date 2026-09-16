@@ -296,4 +296,86 @@ class AppLocalizationsNe extends AppLocalizations {
 
   @override
   String get notSureSkipSelection => 'म निश्चित छैन / छनोट छोड्नुहोस्';
+
+  @override
+  String get assessmentSummary => 'मूल्याङ्कन सारांश';
+
+  @override
+  String get assessmentSummaryDefaultDesc =>
+      'तपाईंको सुरक्षा र मनको शान्ति अत्यन्त महत्त्वपूर्ण छ। तपाईंका उत्तरहरूका आधारमा, मौखिक/भावनात्मक दबाब र वित्तीय नियन्त्रणका उच्च संकेतहरू देखिएका छन्।';
+
+  @override
+  String get talkToCounselor => 'परामर्शदातासँग कुरा गर्नुहोस्';
+
+  @override
+  String get talkToCounselorDesc =>
+      'एक तालिमप्राप्त परामर्शदाता गोप्य रूपमा तपाईंको कुरा सुन्न र मद्दत गर्न उपलब्ध हुनुहुन्छ।';
+
+  @override
+  String get callHelpline1145 => 'हेल्पलाइन ११४५ मा फोन गर्नुहोस्';
+
+  @override
+  String get knowYourDigitalRights => 'आफ्नो डिजिटल अधिकार जान्नुहोस्';
+
+  @override
+  String get knowYourDigitalRightsDesc =>
+      'नेपालमा गोपनीयता र अनलाइन सुरक्षा सम्बन्धी कानुनहरू बुझ्नुहोस्।';
+
+  @override
+  String get learnMore => 'थप जान्नुहोस्';
+
+  @override
+  String get safetyPlanningTips => 'सुरक्षा योजनाका सुझावहरू';
+
+  @override
+  String get safetyPlanningTipsDesc =>
+      'तपाईंको समग्र सुरक्षा बढाउन व्यावहारिक र सुरक्षित कदमहरू।';
+
+  @override
+  String get viewTips => 'सुझावहरू हेर्नुहोस्';
+
+  @override
+  String get riskLow => 'न्यून';
+
+  @override
+  String get riskModerate => 'मध्यम';
+
+  @override
+  String get riskHigh => 'उच्च जोखिम';
+
+  @override
+  String get riskSevere => 'गम्भीर / तत्काल';
+
+  @override
+  String get riskLowMeaning =>
+      'तपाईंको सुरक्षा र मनको शान्ति अत्यन्त महत्त्वपूर्ण छ। तपाईंका उत्तरका आधारमा हाल कुनै तत्काल जोखिम देखिएको छैन।';
+
+  @override
+  String get riskModerateMeaning =>
+      'तपाईंको सुरक्षा र मनको शान्ति अत्यन्त महत्त्वपूर्ण छ। तपाईंका उत्तरका आधारमा केही मध्यम स्तरका जोखिमका संकेतहरू देखिएका छन्।';
+
+  @override
+  String get riskHighMeaning =>
+      'तपाईंको सुरक्षा र मनको शान्ति अत्यन्त महत्त्वपूर्ण छ। तपाईंका उत्तरहरूका आधारमा, मौखिक/भावनात्मक दबाब र नियन्त्रणका उच्च संकेतहरू देखिएका छन्।';
+
+  @override
+  String get riskSevereMeaning =>
+      'तपाईंको सुरक्षा र मनको शान्ति अत्यन्त महत्त्वपूर्ण छ। तपाईंका उत्तरहरूका आधारमा, गम्भीर र तत्काल सुरक्षा सहयोग आवश्यक पर्ने संकेतहरू देखिएका छन्।';
+
+  @override
+  String get digitalRightsModalTitle => 'नेपालमा डिजिटल अधिकार';
+
+  @override
+  String get digitalRightsModalContent =>
+      'नेपाली कानुन (विद्युतीय कारोबार ऐन र गोपनीयताको हक सम्बन्धी ऐन) अन्तर्गत तपाईं अनलाइन दुर्व्यवहार, गाली बेइज्जती, तस्बिर चुहावट र साइबर अपराधबाट सुरक्षित रहने कानुनी अधिकार राख्नुहुन्छ। घटनाहरूको उजुरी नेपाल प्रहरी साइबर ब्युरो (११४५ / ०१-४४१२७९७) मा गोप्य रूपमा गर्न सकिन्छ।';
+
+  @override
+  String get safetyTipsModalTitle => 'सुरक्षा योजनाका सुझावहरू';
+
+  @override
+  String get safetyTipsModalContent =>
+      '• आफ्ना खाताहरूमा Two-Factor Authentication (2FA) सक्रिय गर्नुहोस्।\n• धम्कीपूर्ण सन्देशहरूको समयसहित स्क्रिनसट सुरक्षित राख्नुहोस्।\n• आपतकालीन सम्पर्क र हेल्पलाइन नम्बरहरू सुरक्षित राख्नुहोस्।\n• विश्वासिला व्यक्तिहरूसँग गोप्य सुरक्षा संकेत तय गर्नुहोस्।\n• आवश्यक पर्दा तुरुन्त बाहिरिन \'Quick Exit\' प्रयोग गर्नुहोस्।';
+
+  @override
+  String get close => 'बन्द गर्नुहोस्';
 }

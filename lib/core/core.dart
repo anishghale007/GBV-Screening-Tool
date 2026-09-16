@@ -18,6 +18,7 @@ export 'enums/app_enums.dart';
 export 'enums/gender_option.dart';
 export 'enums/incident_category.dart';
 export 'enums/question_level.dart';
+export 'enums/risk_range.dart';
 export 'error/exceptions.dart';
 export 'error/failures.dart';
 export 'localization/locale_cubit.dart';

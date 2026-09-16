@@ -643,6 +643,150 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'I\'m not sure / skip selection'**
   String get notSureSkipSelection;
+
+  /// Heading for the screening assessment summary card
+  ///
+  /// In en, this message translates to:
+  /// **'Assessment Summary'**
+  String get assessmentSummary;
+
+  /// No description provided for @assessmentSummaryDefaultDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Your safety and peace of mind are critical. Based on your answers, there are indicators of high verbal/emotional pressure and financial control.'**
+  String get assessmentSummaryDefaultDesc;
+
+  /// No description provided for @talkToCounselor.
+  ///
+  /// In en, this message translates to:
+  /// **'Talk to a Counselor'**
+  String get talkToCounselor;
+
+  /// No description provided for @talkToCounselorDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'A trained counselor is available to listen and help you confidentially.'**
+  String get talkToCounselorDesc;
+
+  /// No description provided for @callHelpline1145.
+  ///
+  /// In en, this message translates to:
+  /// **'Call Helpline 1145'**
+  String get callHelpline1145;
+
+  /// No description provided for @knowYourDigitalRights.
+  ///
+  /// In en, this message translates to:
+  /// **'Know Your Digital Rights'**
+  String get knowYourDigitalRights;
+
+  /// No description provided for @knowYourDigitalRightsDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Understand privacy and online safety laws in Nepal.'**
+  String get knowYourDigitalRightsDesc;
+
+  /// No description provided for @learnMore.
+  ///
+  /// In en, this message translates to:
+  /// **'Learn More'**
+  String get learnMore;
+
+  /// No description provided for @safetyPlanningTips.
+  ///
+  /// In en, this message translates to:
+  /// **'Safety Planning Tips'**
+  String get safetyPlanningTips;
+
+  /// No description provided for @safetyPlanningTipsDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Practical, secure steps to increase your overall safety.'**
+  String get safetyPlanningTipsDesc;
+
+  /// No description provided for @viewTips.
+  ///
+  /// In en, this message translates to:
+  /// **'View Tips'**
+  String get viewTips;
+
+  /// No description provided for @riskLow.
+  ///
+  /// In en, this message translates to:
+  /// **'Low'**
+  String get riskLow;
+
+  /// No description provided for @riskModerate.
+  ///
+  /// In en, this message translates to:
+  /// **'Moderate'**
+  String get riskModerate;
+
+  /// No description provided for @riskHigh.
+  ///
+  /// In en, this message translates to:
+  /// **'High concern'**
+  String get riskHigh;
+
+  /// No description provided for @riskSevere.
+  ///
+  /// In en, this message translates to:
+  /// **'Severe/Urgent'**
+  String get riskSevere;
+
+  /// No description provided for @riskLowMeaning.
+  ///
+  /// In en, this message translates to:
+  /// **'Your safety and peace of mind are critical. Based on your answers, there are low indicators of risk at this time.'**
+  String get riskLowMeaning;
+
+  /// No description provided for @riskModerateMeaning.
+  ///
+  /// In en, this message translates to:
+  /// **'Your safety and peace of mind are critical. Based on your answers, there are indicators of moderate concern that may require attention.'**
+  String get riskModerateMeaning;
+
+  /// No description provided for @riskHighMeaning.
+  ///
+  /// In en, this message translates to:
+  /// **'Your safety and peace of mind are critical. Based on your answers, there are indicators of high verbal/emotional pressure and financial control.'**
+  String get riskHighMeaning;
+
+  /// No description provided for @riskSevereMeaning.
+  ///
+  /// In en, this message translates to:
+  /// **'Your safety and peace of mind are critical. Based on your answers, there are indicators of severe risk, direct threat, or urgent escalation.'**
+  String get riskSevereMeaning;
+
+  /// No description provided for @digitalRightsModalTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Digital Rights in Nepal'**
+  String get digitalRightsModalTitle;
+
+  /// No description provided for @digitalRightsModalContent.
+  ///
+  /// In en, this message translates to:
+  /// **'Under Nepalese law (including the Electronic Transactions Act and Privacy Act), you are protected against online harassment, defamation, leaked media, and cyberstalking. Incidents can be reported directly to the Nepal Police Cyber Bureau (1145 / 01-4412797).'**
+  String get digitalRightsModalContent;
+
+  /// No description provided for @safetyTipsModalTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Safety Planning Tips'**
+  String get safetyTipsModalTitle;
+
+  /// No description provided for @safetyTipsModalContent.
+  ///
+  /// In en, this message translates to:
+  /// **'• Secure your accounts with Two-Factor Authentication (2FA).\n• Screenshot and document threatening messages with timestamps.\n• Keep emergency contacts and helpline numbers saved.\n• Establish a private check-in code with trusted persons.\n• Use Quick Exit anytime you need immediate discretion.'**
+  String get safetyTipsModalContent;
+
+  /// No description provided for @close.
+  ///
+  /// In en, this message translates to:
+  /// **'Close'**
+  String get close;
 }
 
 class _AppLocalizationsDelegate

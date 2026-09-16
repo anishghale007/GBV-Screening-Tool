@@ -146,5 +146,32 @@
     "categorySexualHarassmentDesc": "Unwelcome sexual comments or actions online",
     "categoryPoliticalIntimidation": "Political intimidation",
     "categoryPoliticalIntimidationDesc": "Targeted systemic pressure or civic silencing",
-    "notSureSkipSelection": "I'm not sure / skip selection"
+    "notSureSkipSelection": "I'm not sure / skip selection",
+    "assessmentSummary": "Assessment Summary",
+    "@assessmentSummary": {
+        "description": "Heading for the screening assessment summary card"
+    },
+    "assessmentSummaryDefaultDesc": "Your safety and peace of mind are critical. Based on your answers, there are indicators of high verbal/emotional pressure and financial control.",
+    "talkToCounselor": "Talk to a Counselor",
+    "talkToCounselorDesc": "A trained counselor is available to listen and help you confidentially.",
+    "callHelpline1145": "Call Helpline 1145",
+    "knowYourDigitalRights": "Know Your Digital Rights",
+    "knowYourDigitalRightsDesc": "Understand privacy and online safety laws in Nepal.",
+    "learnMore": "Learn More",
+    "safetyPlanningTips": "Safety Planning Tips",
+    "safetyPlanningTipsDesc": "Practical, secure steps to increase your overall safety.",
+    "viewTips": "View Tips",
+    "riskLow": "Low",
+    "riskModerate": "Moderate",
+    "riskHigh": "High concern",
+    "riskSevere": "Severe/Urgent",
+    "riskLowMeaning": "Your safety and peace of mind are critical. Based on your answers, there are low indicators of risk at this time.",
+    "riskModerateMeaning": "Your safety and peace of mind are critical. Based on your answers, there are indicators of moderate concern that may require attention.",
+    "riskHighMeaning": "Your safety and peace of mind are critical. Based on your answers, there are indicators of high verbal/emotional pressure and financial control.",
+    "riskSevereMeaning": "Your safety and peace of mind are critical. Based on your answers, there are indicators of severe risk, direct threat, or urgent escalation.",
+    "digitalRightsModalTitle": "Digital Rights in Nepal",
+    "digitalRightsModalContent": "Under Nepalese law (including the Electronic Transactions Act and Privacy Act), you are protected against online harassment, defamation, leaked media, and cyberstalking. Incidents can be reported directly to the Nepal Police Cyber Bureau (1145 / 01-4412797).",
+    "safetyTipsModalTitle": "Safety Planning Tips",
+    "safetyTipsModalContent": "• Secure your accounts with Two-Factor Authentication (2FA).\n• Screenshot and document threatening messages with timestamps.\n• Keep emergency contacts and helpline numbers saved.\n• Establish a private check-in code with trusted persons.\n• Use Quick Exit anytime you need immediate discretion.",
+    "close": "Close"
 }

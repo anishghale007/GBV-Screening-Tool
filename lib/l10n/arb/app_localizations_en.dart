@@ -299,4 +299,86 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get notSureSkipSelection => 'I\'m not sure / skip selection';
+
+  @override
+  String get assessmentSummary => 'Assessment Summary';
+
+  @override
+  String get assessmentSummaryDefaultDesc =>
+      'Your safety and peace of mind are critical. Based on your answers, there are indicators of high verbal/emotional pressure and financial control.';
+
+  @override
+  String get talkToCounselor => 'Talk to a Counselor';
+
+  @override
+  String get talkToCounselorDesc =>
+      'A trained counselor is available to listen and help you confidentially.';
+
+  @override
+  String get callHelpline1145 => 'Call Helpline 1145';
+
+  @override
+  String get knowYourDigitalRights => 'Know Your Digital Rights';
+
+  @override
+  String get knowYourDigitalRightsDesc =>
+      'Understand privacy and online safety laws in Nepal.';
+
+  @override
+  String get learnMore => 'Learn More';
+
+  @override
+  String get safetyPlanningTips => 'Safety Planning Tips';
+
+  @override
+  String get safetyPlanningTipsDesc =>
+      'Practical, secure steps to increase your overall safety.';
+
+  @override
+  String get viewTips => 'View Tips';
+
+  @override
+  String get riskLow => 'Low';
+
+  @override
+  String get riskModerate => 'Moderate';
+
+  @override
+  String get riskHigh => 'High concern';
+
+  @override
+  String get riskSevere => 'Severe/Urgent';
+
+  @override
+  String get riskLowMeaning =>
+      'Your safety and peace of mind are critical. Based on your answers, there are low indicators of risk at this time.';
+
+  @override
+  String get riskModerateMeaning =>
+      'Your safety and peace of mind are critical. Based on your answers, there are indicators of moderate concern that may require attention.';
+
+  @override
+  String get riskHighMeaning =>
+      'Your safety and peace of mind are critical. Based on your answers, there are indicators of high verbal/emotional pressure and financial control.';
+
+  @override
+  String get riskSevereMeaning =>
+      'Your safety and peace of mind are critical. Based on your answers, there are indicators of severe risk, direct threat, or urgent escalation.';
+
+  @override
+  String get digitalRightsModalTitle => 'Digital Rights in Nepal';
+
+  @override
+  String get digitalRightsModalContent =>
+      'Under Nepalese law (including the Electronic Transactions Act and Privacy Act), you are protected against online harassment, defamation, leaked media, and cyberstalking. Incidents can be reported directly to the Nepal Police Cyber Bureau (1145 / 01-4412797).';
+
+  @override
+  String get safetyTipsModalTitle => 'Safety Planning Tips';
+
+  @override
+  String get safetyTipsModalContent =>
+      '• Secure your accounts with Two-Factor Authentication (2FA).\n• Screenshot and document threatening messages with timestamps.\n• Keep emergency contacts and helpline numbers saved.\n• Establish a private check-in code with trusted persons.\n• Use Quick Exit anytime you need immediate discretion.';
+
+  @override
+  String get close => 'Close';
 }

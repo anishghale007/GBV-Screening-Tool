@@ -23,6 +23,8 @@ abstract final class AssetConstants {
   static const String globeIcon = '$iconsBase/globe_icon.svg';
   static const String handIcon = '$iconsBase/hand_icon.svg';
   static const String volumenIcon = '$iconsBase/volume_icon.svg';
+  static const String phoneIcon = '$iconsBase/phone_icon.svg';
+  static const String bookIcon = '$iconsBase/book_icon.svg';
 
   /// Helper to get any icon path by name.
   static String icon(String name) => '$iconsBase/$name.svg';

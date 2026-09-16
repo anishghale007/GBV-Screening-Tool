@@ -174,7 +174,7 @@ class _GenderSelectionPageState extends State<GenderSelectionPage> {
   void _onContinue() {
     if (_selected != null) {
       context.read<ScreeningCubit>().setGender(_selected!);
+      context.replace(AppRoutes.incidentSelection);
     }
-    context.push(AppRoutes.incidentSelection);
   }
 }

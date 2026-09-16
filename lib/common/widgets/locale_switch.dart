@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gbv/core/core.dart';
 
 /// A connected, segmented toggle switch for English ("EN") and Nepali ("ने").
@@ -17,7 +18,7 @@ class LocaleSwitch extends StatelessWidget {
         final cubit = context.read<LocaleCubit>();
 
         return Container(
-          height: 32,
+          height: 32.h,
           decoration: BoxDecoration(
             color: const Color(0xFFE2EBEB),
             borderRadius: BorderRadius.circular(8),

@@ -85,10 +85,10 @@ class _IncidentSelectionPageState extends State<IncidentSelectionPage> {
 
   void _onContinue() {
     context.read<ScreeningCubit>().setSelectedCategories(
-          _selected.toList(),
-          isNotSure: _isNotSureSelected,
-        );
-    context.push(AppRoutes.questions);
+      _selected.toList(),
+      isNotSure: _isNotSureSelected,
+    );
+    context.replace(AppRoutes.questions);
   }
 
   @override

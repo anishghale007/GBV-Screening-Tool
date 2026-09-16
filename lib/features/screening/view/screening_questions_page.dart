@@ -82,7 +82,7 @@ class _ScreeningQuestionsPageState extends State<ScreeningQuestionsPage> {
       );
     } else {
       context.read<ScreeningCubit>().completeScreening();
-      context.push(AppRoutes.pathway);
+      context.replace(AppRoutes.pathway);
     }
   }
 
@@ -162,8 +162,7 @@ class _ScreeningQuestionsPageState extends State<ScreeningQuestionsPage> {
                       languageCode,
                       screeningState.gender,
                     );
-                    final currentAnswer =
-                        screeningState.answers[question.id];
+                    final currentAnswer = screeningState.answers[question.id];
                     final isPlayingQuestionAudio =
                         _activeSpeechText == questionText;
 
@@ -213,9 +212,10 @@ class _ScreeningQuestionsPageState extends State<ScreeningQuestionsPage> {
                                 label: optionLabel,
                                 isSelected: isSelected,
                                 onTap: () {
-                                  context
-                                      .read<ScreeningCubit>()
-                                      .answerQuestion(question, option);
+                                  context.read<ScreeningCubit>().answerQuestion(
+                                    question,
+                                    option,
+                                  );
                                 },
                               ),
                             );
@@ -227,9 +227,9 @@ class _ScreeningQuestionsPageState extends State<ScreeningQuestionsPage> {
                           Center(
                             child: TextButton(
                               onPressed: () {
-                                context
-                                    .read<ScreeningCubit>()
-                                    .skipQuestion(question);
+                                context.read<ScreeningCubit>().skipQuestion(
+                                  question,
+                                );
                               },
                               child: Text(
                                 l10n.preferNotToSay,
@@ -240,8 +240,8 @@ class _ScreeningQuestionsPageState extends State<ScreeningQuestionsPage> {
                                   decoration: TextDecoration.underline,
                                   fontWeight:
                                       currentAnswer == 'prefer_not_to_say'
-                                          ? FontWeight.w700
-                                          : FontWeight.w500,
+                                      ? FontWeight.w700
+                                      : FontWeight.w500,
                                 ),
                               ),
                             ),

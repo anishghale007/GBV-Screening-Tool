@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:gbv/core/enums/gender_option.dart';
 import 'package:gbv/core/enums/incident_category.dart';
+import 'package:gbv/core/enums/risk_range.dart';
 import 'package:gbv/features/screening/models/screening_question.dart';
 
 /// State representation for the dynamic screening assessment flow.
@@ -43,6 +44,22 @@ class ScreeningState extends Equatable {
 
   /// Number of total active questions.
   int get totalQuestions => activeQuestions.length;
+
+  /// Maximum possible points obtainable for the currently active questions
+  /// (3 points max per question).
+  int get maxPossibleScore =>
+      (activeQuestions.isNotEmpty ? activeQuestions.length : 1) * 3;
+
+  /// Percentage score normalized to 0..100.
+  double get scorePercentage =>
+      maxPossibleScore > 0 ? (totalScore / maxPossibleScore) * 100.0 : 0.0;
+
+  /// Integer percentage rounded and clamped to 0..100.
+  int get scorePercentageInt => scorePercentage.round().clamp(0, 100);
+
+  /// Matching [RiskRange] computed from the total score and active questions.
+  RiskRange get riskRange =>
+      RiskRange.fromScoreAndMax(totalScore, maxPossibleScore);
 
   /// Whether current question is answered.
   bool get isCurrentQuestionAnswered {
