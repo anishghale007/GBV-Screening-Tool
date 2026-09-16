@@ -28,7 +28,7 @@ dependencies:
   # UI & Layout
   flutter_screenutil: ^5.9.3
   flutter_svg: ^2.3.0
-  google_fonts: ^6.2.1
+  google_fonts: ^8.2.1
 
   # Navigation
   go_router: ^14.8.1
