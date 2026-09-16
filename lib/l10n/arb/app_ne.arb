@@ -136,5 +136,6 @@
     "wellbeingScreeningDesc": "तपाईंको अवस्था बुझ्न र सुरक्षित विकल्पहरू सुझाउन मद्दत गर्ने १५ प्रश्नहरूको द्रुत अडियो स्क्रिनिङ।",
     "startScreeningButton": "स्क्रिनिङ सुरु गर्नुहोस्",
     "supportResourcesDesc": "सधैं उपलब्ध आपतकालीन नम्बरहरू, हेल्पलाइनहरू र स्थानीय परामर्शदाताहरू।",
-    "viewResourcesButton": "स्रोतहरू हेर्नुहोस्"
+    "viewResourcesButton": "स्रोतहरू हेर्नुहोस्",
+    "progressLabel": "प्रगति: {percent}%"
 }

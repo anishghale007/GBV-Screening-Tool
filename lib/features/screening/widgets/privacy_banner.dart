@@ -20,12 +20,10 @@ class PrivacyBanner extends StatelessWidget {
         vertical: AppSpacing.sm + 4,
       ),
       decoration: BoxDecoration(
-        color: colorScheme.surfaceContainerHighest,
+        // color: colorScheme.surfaceContainerHighest,
+        color: Colors.white,
         borderRadius: AppSpacing.borderRadiusMd,
-        border: Border.all(
-          color: colorScheme.outline,
-          width: 1.2,
-        ),
+        border: Border.all(color: colorScheme.outline, width: 1.2),
       ),
       child: Row(
         children: [
@@ -33,10 +31,7 @@ class PrivacyBanner extends StatelessWidget {
             AssetConstants.safeIcon,
             width: 18.w,
             height: 18.h,
-            colorFilter: ColorFilter.mode(
-              colorScheme.primary,
-              BlendMode.srcIn,
-            ),
+            colorFilter: ColorFilter.mode(colorScheme.primary, BlendMode.srcIn),
           ),
           const SizedBox(width: AppSpacing.sm),
           Expanded(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gbv/core/core.dart';
 import 'package:gbv/features/accessibility/bloc/accessibility_bloc.dart';
 
@@ -30,10 +31,10 @@ class ScreeningOptionTile extends StatelessWidget {
 
     return Material(
       color: backgroundColor,
-      borderRadius: BorderRadius.circular(12),
+      borderRadius: AppSpacing.borderRadiusLg,
       child: InkWell(
         onTap: onTap.withMediumImpact(),
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: AppSpacing.borderRadiusLg,
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 180),
           padding: const EdgeInsets.symmetric(
@@ -42,7 +43,7 @@ class ScreeningOptionTile extends StatelessWidget {
           ),
           decoration: BoxDecoration(
             color: backgroundColor,
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: AppSpacing.borderRadiusLg,
             border: Border.all(color: borderColor, width: borderWidth),
           ),
           child: Row(
@@ -52,10 +53,8 @@ class ScreeningOptionTile extends StatelessWidget {
                   label,
                   style: AppTextStyles.bodyLarge.copyWith(
                     fontWeight: isSelected ? FontWeight.w700 : FontWeight.w600,
-                    color: isSelected
-                        ? colorScheme.primary
-                        : colorScheme.onSurface,
-                    fontSize: 15,
+                    color: colorScheme.onSurface,
+                    fontSize: 14.sp,
                   ),
                 ),
               ),
@@ -75,7 +74,7 @@ class ScreeningOptionTile extends StatelessWidget {
                     color: isSelected
                         ? colorScheme.primary
                         : colorScheme.outline,
-                    width: isSelected ? (isHighContrast ? 2.0 : 5.5) : 1.8,
+                    width: isSelected ? (isHighContrast ? 2.0 : 7) : 1.8,
                   ),
                 ),
                 child: isSelected && isHighContrast

@@ -422,4 +422,9 @@ class AppLocalizationsNe extends AppLocalizations {
 
   @override
   String get viewResourcesButton => 'स्रोतहरू हेर्नुहोस्';
+
+  @override
+  String progressLabel(int percent) {
+    return 'प्रगति: $percent%';
+  }
 }

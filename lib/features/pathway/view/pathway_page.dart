@@ -115,162 +115,161 @@ class _PathwayPageState extends State<PathwayPage>
           final riskDescription = _getRiskDescription(context, riskRange);
 
           return AppScaffold(
-          appBar: CommonAppBar(title: l10n.screeningTitle),
-          body: SingleChildScrollView(
-            padding: const EdgeInsets.symmetric(
-              // horizontal: AppSpacing.lg,
-              vertical: AppSpacing.md,
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                // 1. Assessment Summary Card
-                Container(
-                  decoration: BoxDecoration(
-                    color: AppColors.surface,
-                    borderRadius: BorderRadius.circular(16),
-                    border: Border.all(color: AppColors.border),
-                  ),
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: AppSpacing.lg,
-                    vertical: AppSpacing.lg,
-                  ),
-                  child: Column(
-                    children: [
-                      // Section Header
-                      Align(
-                        alignment: Alignment.centerLeft,
-                        child: Text(
-                          l10n.assessmentSummary,
-                          style: AppTextStyles.headlineSmall.copyWith(
-                            color: AppColors.primary,
-                            fontWeight: FontWeight.w700,
-                            fontSize: 18,
+            appBar: CommonAppBar(title: l10n.screeningTitle),
+            body: SingleChildScrollView(
+              padding: const EdgeInsets.symmetric(
+                // horizontal: AppSpacing.lg,
+                vertical: AppSpacing.md,
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  // 1. Assessment Summary Card
+                  Container(
+                    decoration: BoxDecoration(
+                      color: AppColors.surface,
+                      borderRadius: AppSpacing.borderRadiusLg,
+                      border: Border.all(color: AppColors.border),
+                    ),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: AppSpacing.lg,
+                      vertical: AppSpacing.lg,
+                    ),
+                    child: Column(
+                      children: [
+                        // Section Header
+                        Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            l10n.assessmentSummary,
+                            style: AppTextStyles.headlineSmall.copyWith(
+                              color: AppColors.primary,
+                              fontWeight: FontWeight.w700,
+                              fontSize: 16.sp,
+                            ),
                           ),
                         ),
-                      ),
-                      const SizedBox(height: AppSpacing.lg),
+                        const SizedBox(height: AppSpacing.lg),
 
-                      // Animated Circular Progress Gauge
-                      AnimatedBuilder(
-                        animation: _animation,
-                        builder: (context, _) {
-                          return AssessmentGauge(
-                            percentage: scorePercentage,
-                            riskRange: riskRange,
-                            animationProgress: _animation.value,
-                          );
-                        },
-                      ),
-                      const SizedBox(height: AppSpacing.md),
-
-                      // Risk Level Pill Badge
-                      Container(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 14,
-                          vertical: 5,
+                        // Animated Circular Progress Gauge
+                        AnimatedBuilder(
+                          animation: _animation,
+                          builder: (context, _) {
+                            return AssessmentGauge(
+                              percentage: scorePercentage,
+                              riskRange: riskRange,
+                              animationProgress: _animation.value,
+                            );
+                          },
                         ),
-                        decoration: BoxDecoration(
-                          color: riskRange.backgroundColor,
-                          borderRadius: BorderRadius.circular(20),
-                          border: Border.all(
-                            color: riskRange.borderColor,
-                            width: 1.2,
+                        const SizedBox(height: AppSpacing.md),
+
+                        // Risk Level Pill Badge
+                        Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 14,
+                            vertical: 5,
+                          ),
+                          decoration: BoxDecoration(
+                            color: riskRange.backgroundColor,
+                            borderRadius: BorderRadius.circular(20),
+                            border: Border.all(
+                              color: riskRange.borderColor,
+                              width: 1.2,
+                            ),
+                          ),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Container(
+                                width: 7,
+                                height: 7,
+                                decoration: BoxDecoration(
+                                  color: riskRange.color,
+                                  shape: BoxShape.circle,
+                                ),
+                              ),
+                              const SizedBox(width: 6),
+                              Text(
+                                riskBadgeLabel,
+                                style: TextStyle(
+                                  color: riskRange.color,
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 13,
+                                ),
+                              ),
+                            ],
                           ),
                         ),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Container(
-                              width: 7,
-                              height: 7,
-                              decoration: BoxDecoration(
-                                color: riskRange.color,
-                                shape: BoxShape.circle,
-                              ),
-                            ),
-                            const SizedBox(width: 6),
-                            Text(
-                              riskBadgeLabel,
-                              style: TextStyle(
-                                color: riskRange.color,
-                                fontWeight: FontWeight.w600,
-                                fontSize: 13,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      const SizedBox(height: AppSpacing.md),
+                        const SizedBox(height: AppSpacing.md),
 
-                      // Narrative Assessment Text
-                      Text(
-                        riskDescription,
-                        style: AppTextStyles.bodyMedium.copyWith(
-                          fontSize: 13.5,
-                          height: 1.45,
-                          color: const Color(0xFF1F2933),
+                        // Narrative Assessment Text
+                        Text(
+                          riskDescription,
+                          style: AppTextStyles.bodyMedium.copyWith(
+                            height: 1.3,
+                            color: const Color(0xFF1F2933),
+                          ),
+                          textAlign: TextAlign.left,
                         ),
-                        textAlign: TextAlign.left,
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(height: 20.h),
-
-                // 2. Talk to a Counselor Card
-                PathwayActionCard(
-                  icon: SvgPicture.asset(
-                    AssetConstants.phoneIcon,
-                    width: 18.w,
-                    height: 18.h,
-                    colorFilter: const ColorFilter.mode(
-                      AppColors.primary,
-                      BlendMode.srcIn,
+                      ],
                     ),
                   ),
-                  title: l10n.talkToCounselor,
-                  subtitle: l10n.talkToCounselorDesc,
-                  buttonText: l10n.callHelpline1145,
-                  isFilledButton: true,
-                  onPressed: _callHelpline,
-                ),
-                SizedBox(height: 12.h),
+                  SizedBox(height: 20.h),
 
-                // 3. Know Your Digital Rights Card
-                PathwayActionCard(
-                  icon: SvgPicture.asset(
-                    AssetConstants.bookIcon,
-                    width: 18.w,
-                    height: 18.h,
-                    colorFilter: const ColorFilter.mode(
-                      AppColors.primary,
-                      BlendMode.srcIn,
+                  // 2. Talk to a Counselor Card
+                  PathwayActionCard(
+                    icon: SvgPicture.asset(
+                      AssetConstants.phoneIcon,
+                      width: 18.w,
+                      height: 18.h,
+                      colorFilter: const ColorFilter.mode(
+                        AppColors.primary,
+                        BlendMode.srcIn,
+                      ),
                     ),
+                    title: l10n.talkToCounselor,
+                    subtitle: l10n.talkToCounselorDesc,
+                    buttonText: l10n.callHelpline1145,
+                    isFilledButton: true,
+                    onPressed: _callHelpline,
                   ),
-                  title: l10n.knowYourDigitalRights,
-                  subtitle: l10n.knowYourDigitalRightsDesc,
-                  buttonText: l10n.learnMore,
-                  onPressed: () => DigitalRightsModal.show(context),
-                ),
-                SizedBox(height: 12.h),
+                  SizedBox(height: 12.h),
 
-                // 4. Safety Planning Tips Card
-                PathwayActionCard(
-                  icon: const Icon(
-                    Icons.shield_outlined,
-                    color: AppColors.primary,
-                    size: 22,
+                  // 3. Know Your Digital Rights Card
+                  PathwayActionCard(
+                    icon: SvgPicture.asset(
+                      AssetConstants.bookIcon,
+                      width: 18.w,
+                      height: 18.h,
+                      colorFilter: const ColorFilter.mode(
+                        AppColors.primary,
+                        BlendMode.srcIn,
+                      ),
+                    ),
+                    title: l10n.knowYourDigitalRights,
+                    subtitle: l10n.knowYourDigitalRightsDesc,
+                    buttonText: l10n.learnMore,
+                    onPressed: () => DigitalRightsModal.show(context),
                   ),
-                  title: l10n.safetyPlanningTips,
-                  subtitle: l10n.safetyPlanningTipsDesc,
-                  buttonText: l10n.viewTips,
-                  onPressed: () => SafetyTipsModal.show(context),
-                ),
-                const SizedBox(height: AppSpacing.lg),
-              ],
+                  SizedBox(height: 12.h),
+
+                  // 4. Safety Planning Tips Card
+                  PathwayActionCard(
+                    icon: const Icon(
+                      Icons.shield_outlined,
+                      color: AppColors.primary,
+                      size: 22,
+                    ),
+                    title: l10n.safetyPlanningTips,
+                    subtitle: l10n.safetyPlanningTipsDesc,
+                    buttonText: l10n.viewTips,
+                    onPressed: () => SafetyTipsModal.show(context),
+                  ),
+                  const SizedBox(height: AppSpacing.lg),
+                ],
+              ),
             ),
-          ),
           );
         },
       ),

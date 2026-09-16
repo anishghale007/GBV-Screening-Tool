@@ -155,10 +155,14 @@ class _SupportDirectoryPageState extends State<SupportDirectoryPage> {
         style: TextStyle(fontSize: 14.5.sp, color: AppColors.textPrimary),
         decoration: InputDecoration(
           hintText: l10n.searchHelplinesPlaceholder,
-          hintStyle: TextStyle(color: const Color(0xFF9CA3AF), fontSize: 14.sp),
+          hintStyle: TextStyle(
+            color: const Color(0xFF667085),
+            fontSize: 14.sp,
+            letterSpacing: 0.2,
+          ),
           prefixIcon: Icon(
             Icons.search_rounded,
-            color: const Color(0xFF9CA3AF),
+            color: Colors.black,
             size: 22.sp,
           ),
           suffixIcon: _searchQuery.isNotEmpty

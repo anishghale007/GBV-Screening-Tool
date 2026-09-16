@@ -423,4 +423,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get viewResourcesButton => 'View Resources';
+
+  @override
+  String progressLabel(int percent) {
+    return 'Progress: $percent%';
+  }
 }

@@ -859,6 +859,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'View Resources'**
   String get viewResourcesButton;
+
+  /// Progress percentage indicator label
+  ///
+  /// In en, this message translates to:
+  /// **'Progress: {percent}%'**
+  String progressLabel(int percent);
 }
 
 class _AppLocalizationsDelegate

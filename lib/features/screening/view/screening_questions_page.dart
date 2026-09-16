@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gbv/common/common.dart';
 import 'package:gbv/core/core.dart';
 import 'package:gbv/features/screening/bloc/screening_cubit.dart';
@@ -172,9 +172,10 @@ class _ScreeningQuestionsPageState extends State<ScreeningQuestionsPage> {
                                 ),
                               ),
                               const SizedBox(width: AppSpacing.md),
-                              _QuestionAudioButton(
+                              AudioIconButton(
                                 isPlaying: isPlayingQuestionAudio,
                                 onTap: () => _playAudio(questionText),
+                                size: 38.w,
                               ),
                             ],
                           ),
@@ -216,6 +217,7 @@ class _ScreeningQuestionsPageState extends State<ScreeningQuestionsPage> {
                               child: Text(
                                 l10n.preferNotToSay,
                                 style: AppTextStyles.bodyMedium.copyWith(
+                                  fontSize: 13.sp,
                                   color: currentAnswer == 'prefer_not_to_say'
                                       ? Theme.of(context).colorScheme.primary
                                       : Theme.of(
@@ -249,45 +251,6 @@ class _ScreeningQuestionsPageState extends State<ScreeningQuestionsPage> {
           ),
         );
       },
-    );
-  }
-}
-
-/// Circular TTS audio narration button for question prompt.
-class _QuestionAudioButton extends StatelessWidget {
-  const _QuestionAudioButton({required this.isPlaying, required this.onTap});
-
-  final bool isPlaying;
-  final VoidCallback onTap;
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap.withMediumImpact(),
-      behavior: HitTestBehavior.opaque,
-      child: AnimatedContainer(
-        duration: const Duration(milliseconds: 150),
-        width: 38,
-        height: 38,
-        decoration: BoxDecoration(
-          color: isPlaying ? AppColors.primary : const Color(0xFFE6EFEF),
-          shape: BoxShape.circle,
-          border: Border.all(
-            color: isPlaying ? AppColors.primary : AppColors.borderSelected,
-          ),
-        ),
-        child: Center(
-          child: SvgPicture.asset(
-            AssetConstants.audioLinesIcon,
-            height: 18,
-            width: 18,
-            colorFilter: ColorFilter.mode(
-              isPlaying ? AppColors.textOnPrimary : AppColors.primary,
-              BlendMode.srcIn,
-            ),
-          ),
-        ),
-      ),
     );
   }
 }

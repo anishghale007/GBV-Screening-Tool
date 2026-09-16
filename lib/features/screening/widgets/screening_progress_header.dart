@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gbv/core/core.dart';
 
 /// Pinned header displaying the animated progress bar, percentage,
@@ -15,6 +16,7 @@ class ScreeningProgressHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     final progressFactor = totalQuestions > 0 && currentIndex > 0
         ? (currentIndex + 1) / totalQuestions
         : 0.0;
@@ -34,39 +36,28 @@ class ScreeningProgressHeader extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                'Progress: $progressPercent%',
+                l10n.progressLabel(progressPercent),
                 style: AppTextStyles.labelMedium.copyWith(
                   color: AppColors.primary,
-                  fontWeight: FontWeight.w700,
-                  fontSize: 13,
+                  fontWeight: FontWeight.w600,
+                  fontSize: 12.sp,
                 ),
               ),
-              RichText(
-                text: TextSpan(
-                  style: AppTextStyles.labelMedium.copyWith(
-                    color: AppColors.textSecondary,
-                    fontSize: 13,
-                  ),
-                  children: [
-                    const TextSpan(text: 'Question '),
-                    TextSpan(
-                      text: '${currentIndex + 1}',
-                      style: const TextStyle(
-                        fontWeight: FontWeight.w700,
-                        color: AppColors.textPrimary,
-                      ),
-                    ),
-                    TextSpan(text: ' of $totalQuestions'),
-                  ],
+              Text(
+                l10n.questionProgress(currentIndex + 1, totalQuestions),
+                style: AppTextStyles.labelMedium.copyWith(
+                  color: AppColors.textSecondary,
+                  fontSize: 12.sp,
+                  fontWeight: FontWeight.w600,
                 ),
               ),
             ],
           ),
-          const SizedBox(height: 8),
+          SizedBox(height: 8.h),
 
           // Rounded linear progress bar
           ClipRRect(
-            borderRadius: BorderRadius.circular(4),
+            borderRadius: BorderRadius.circular(4.r),
             child: SizedBox(
               height: 6,
               child: Stack(

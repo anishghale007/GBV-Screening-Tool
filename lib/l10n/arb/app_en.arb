@@ -214,5 +214,14 @@
     "viewResourcesButton": "View Resources",
     "@viewResourcesButton": {
         "description": "Button to navigate to support directory from home page"
+    },
+    "progressLabel": "Progress: {percent}%",
+    "@progressLabel": {
+        "description": "Progress percentage indicator label",
+        "placeholders": {
+            "percent": {
+                "type": "int"
+            }
+        }
     }
 }

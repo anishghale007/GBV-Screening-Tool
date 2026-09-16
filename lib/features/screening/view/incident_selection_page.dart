@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gbv/common/common.dart';
 import 'package:gbv/core/core.dart';
 import 'package:gbv/features/accessibility/bloc/accessibility_bloc.dart';
@@ -108,13 +109,19 @@ class _IncidentSelectionPageState extends State<IncidentSelectionPage> {
                   // Question heading
                   Text(
                     l10n.incidentSelectionTitle,
-                    style: AppTextStyles.headlineLarge.copyWith(height: 1.15),
+                    style: AppTextStyles.headlineLarge.copyWith(
+                      fontSize: 20.sp,
+                      height: 1.1,
+                    ),
                   ),
                   const SizedBox(height: AppSpacing.sm),
                   // Subtitle
                   Text(
                     l10n.incidentSelectionSubtitle,
-                    style: AppTextStyles.bodyMedium,
+                    style: AppTextStyles.bodyMedium.copyWith(
+                      fontSize: 13,
+                      height: 1.3,
+                    ),
                   ),
                   const SizedBox(height: AppSpacing.lg),
 

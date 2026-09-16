@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gbv/common/common.dart';
 import 'package:gbv/core/core.dart';
 import 'package:gbv/features/screening/bloc/screening_cubit.dart';
@@ -62,13 +63,19 @@ class _GenderSelectionPageState extends State<GenderSelectionPage> {
                   // Question heading
                   Text(
                     l10n.genderSelectionTitle,
-                    style: AppTextStyles.headlineLarge.copyWith(height: 1.1),
+                    style: AppTextStyles.headlineLarge.copyWith(
+                      fontSize: 20.sp,
+                      height: 1.1,
+                    ),
                   ),
                   const SizedBox(height: AppSpacing.sm),
                   // Subtitle / privacy note
                   Text(
                     l10n.genderSelectionSubtitle,
-                    style: AppTextStyles.bodyMedium,
+                    style: AppTextStyles.bodyMedium.copyWith(
+                      fontSize: 13,
+                      height: 1.3,
+                    ),
                   ),
                   const SizedBox(height: AppSpacing.xl),
 

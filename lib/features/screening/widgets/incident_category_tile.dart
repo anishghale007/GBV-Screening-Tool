@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:gbv/core/constants/asset_constants.dart';
+import 'package:gbv/common/common.dart';
 import 'package:gbv/core/theme/app_spacing.dart';
 import 'package:gbv/core/theme/app_text_styles.dart';
 import 'package:gbv/core/utils/voidcallback_extension.dart';
@@ -43,8 +43,8 @@ class IncidentCategoryTile extends StatelessWidget {
 
     final iconBgColor = isSelected
         ? (isHighContrast
-            ? colorScheme.primary
-            : colorScheme.primary.withValues(alpha: 0.12))
+              ? colorScheme.primary
+              : colorScheme.primary.withValues(alpha: 0.12))
         : colorScheme.surfaceContainerHighest;
     final iconColor = isSelected
         ? (isHighContrast ? colorScheme.onPrimary : colorScheme.primary)
@@ -52,18 +52,18 @@ class IncidentCategoryTile extends StatelessWidget {
 
     return Material(
       color: backgroundColor,
-      borderRadius: AppSpacing.borderRadiusMd,
+      borderRadius: AppSpacing.borderRadiusLg,
       child: InkWell(
         onTap: onTap.withMediumImpact(),
-        borderRadius: AppSpacing.borderRadiusMd,
+        borderRadius: AppSpacing.borderRadiusLg,
         child: Container(
           padding: const EdgeInsets.symmetric(
             horizontal: AppSpacing.md,
-            vertical: 12,
+            vertical: 20,
           ),
           decoration: BoxDecoration(
             color: backgroundColor,
-            borderRadius: AppSpacing.borderRadiusMd,
+            borderRadius: AppSpacing.borderRadiusLg,
             border: Border.all(color: borderColor, width: borderWidth),
           ),
           child: Row(
@@ -81,10 +81,7 @@ class IncidentCategoryTile extends StatelessWidget {
                   iconPath,
                   width: 20,
                   height: 20,
-                  colorFilter: ColorFilter.mode(
-                    iconColor,
-                    BlendMode.srcIn,
-                  ),
+                  colorFilter: ColorFilter.mode(iconColor, BlendMode.srcIn),
                 ),
               ),
               const SizedBox(width: AppSpacing.md),
@@ -99,9 +96,7 @@ class IncidentCategoryTile extends StatelessWidget {
                       title,
                       style: AppTextStyles.labelLarge.copyWith(
                         fontWeight: FontWeight.w700,
-                        color: isSelected
-                            ? colorScheme.primary
-                            : colorScheme.onSurface,
+                        color: colorScheme.onSurface,
                       ),
                     ),
                     const SizedBox(height: 2),
@@ -111,8 +106,7 @@ class IncidentCategoryTile extends StatelessWidget {
                         color: isSelected
                             ? colorScheme.onSurface
                             : colorScheme.onSurfaceVariant,
-                        fontWeight:
-                            isSelected ? FontWeight.w600 : FontWeight.w400,
+                        fontWeight: FontWeight.w400,
                         height: 1.25,
                       ),
                     ),
@@ -122,7 +116,7 @@ class IncidentCategoryTile extends StatelessWidget {
               const SizedBox(width: AppSpacing.sm),
 
               // Audio narration button
-              _AudioIconButton(
+              AudioIconButton(
                 onTap: onAudioTap,
                 isSelected: isSelected,
                 isPlaying: isPlaying,
@@ -177,67 +171,6 @@ class _CustomCheckbox extends StatelessWidget {
               ),
             )
           : null,
-    );
-  }
-}
-
-/// Audio narration button.
-class _AudioIconButton extends StatelessWidget {
-  const _AudioIconButton({
-    required this.onTap,
-    required this.isSelected,
-    this.isPlaying = false,
-  });
-
-  final VoidCallback onTap;
-  final bool isSelected;
-  final bool isPlaying;
-
-  @override
-  Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
-    final isHighContrast = context.select(
-      (AccessibilityBloc bloc) => bloc.state.settings.isHighContrastEnabled,
-    );
-    final backgroundColor = isPlaying
-        ? colorScheme.primary
-        : isSelected
-        ? (isHighContrast
-            ? colorScheme.surface
-            : colorScheme.primary.withValues(alpha: 0.12))
-        : colorScheme.surfaceContainerHighest;
-    final iconColor = isPlaying
-        ? colorScheme.onPrimary
-        : isSelected
-        ? colorScheme.primary
-        : colorScheme.onSurfaceVariant;
-    final borderColor = isPlaying
-        ? colorScheme.primary
-        : isSelected
-        ? colorScheme.primary
-        : colorScheme.outline;
-
-    return GestureDetector(
-      onTap: onTap.withMediumImpact(),
-      behavior: HitTestBehavior.opaque,
-      child: AnimatedContainer(
-        duration: const Duration(milliseconds: 150),
-        width: 36.w,
-        height: 36.h,
-        decoration: BoxDecoration(
-          color: backgroundColor,
-          shape: BoxShape.circle,
-          border: Border.all(color: borderColor),
-        ),
-        child: Center(
-          child: SvgPicture.asset(
-            AssetConstants.audioLinesIcon,
-            height: 18,
-            width: 18,
-            colorFilter: ColorFilter.mode(iconColor, BlendMode.srcIn),
-          ),
-        ),
-      ),
     );
   }
 }

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:gbv/core/constants/asset_constants.dart';
+import 'package:gbv/common/common.dart';
 import 'package:gbv/core/theme/app_spacing.dart';
 import 'package:gbv/core/theme/app_text_styles.dart';
 import 'package:gbv/core/utils/voidcallback_extension.dart';
@@ -40,8 +40,8 @@ class GenderOptionTile extends StatelessWidget {
 
     final iconBgColor = isSelected
         ? (isHighContrast
-            ? colorScheme.primary
-            : colorScheme.primary.withValues(alpha: 0.12))
+              ? colorScheme.primary
+              : colorScheme.primary.withValues(alpha: 0.12))
         : colorScheme.surfaceContainerHighest;
     final iconColor = isSelected
         ? (isHighContrast ? colorScheme.onPrimary : colorScheme.primary)
@@ -49,7 +49,7 @@ class GenderOptionTile extends StatelessWidget {
 
     return InkWell(
       onTap: onTap.withMediumImpact(),
-      borderRadius: AppSpacing.borderRadiusMd,
+      borderRadius: AppSpacing.borderRadiusLg,
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 200),
         curve: Curves.easeInOut,
@@ -59,7 +59,7 @@ class GenderOptionTile extends StatelessWidget {
         ),
         decoration: BoxDecoration(
           color: backgroundColor,
-          borderRadius: AppSpacing.borderRadiusMd,
+          borderRadius: AppSpacing.borderRadiusLg,
           border: Border.all(color: borderColor, width: borderWidth),
         ),
         child: Row(
@@ -77,10 +77,7 @@ class GenderOptionTile extends StatelessWidget {
                 iconPath,
                 width: 20.w,
                 height: 20.h,
-                colorFilter: ColorFilter.mode(
-                  iconColor,
-                  BlendMode.srcIn,
-                ),
+                colorFilter: ColorFilter.mode(iconColor, BlendMode.srcIn),
               ),
             ),
             const SizedBox(width: AppSpacing.md),
@@ -90,74 +87,20 @@ class GenderOptionTile extends StatelessWidget {
               child: Text(
                 label,
                 style: AppTextStyles.labelLarge.copyWith(
-                  color: isSelected
-                      ? colorScheme.primary
-                      : colorScheme.onSurface,
+                  color: colorScheme.onSurface,
+                  fontSize: 14.sp,
                   fontWeight: isSelected ? FontWeight.w700 : FontWeight.w600,
                 ),
               ),
             ),
 
             // Audio / TTS button
-            _AudioIconButton(
+            AudioIconButton(
               onTap: onAudioTap,
               isSelected: isSelected,
               isPlaying: isPlaying,
             ),
           ],
-        ),
-      ),
-    );
-  }
-}
-
-/// Small tappable audio icon on the right side of each option tile.
-class _AudioIconButton extends StatelessWidget {
-  const _AudioIconButton({
-    required this.onTap,
-    required this.isSelected,
-    this.isPlaying = false,
-  });
-
-  final VoidCallback onTap;
-  final bool isSelected;
-  final bool isPlaying;
-
-  @override
-  Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
-    final backgroundColor = isPlaying
-        ? colorScheme.primary
-        : isSelected
-        ? colorScheme.primary.withValues(alpha: 0.12)
-        : colorScheme.surfaceContainerHighest;
-    final iconColor = isPlaying
-        ? colorScheme.onPrimary
-        : isSelected
-        ? colorScheme.primary
-        : colorScheme.onSurfaceVariant;
-    final borderColor = isPlaying
-        ? colorScheme.primary
-        : colorScheme.outline;
-
-    return GestureDetector(
-      onTap: onTap.withMediumImpact(),
-      behavior: HitTestBehavior.opaque,
-      child: Container(
-        width: 36,
-        height: 36,
-        decoration: BoxDecoration(
-          color: backgroundColor,
-          shape: BoxShape.circle,
-          border: Border.all(color: borderColor),
-        ),
-        child: Center(
-          child: SvgPicture.asset(
-            AssetConstants.audioLinesIcon,
-            height: 18,
-            width: 18,
-            colorFilter: ColorFilter.mode(iconColor, BlendMode.srcIn),
-          ),
         ),
       ),
     );

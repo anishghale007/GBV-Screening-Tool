@@ -7,11 +7,12 @@ import 'package:gbv/core/core.dart';
 class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
   const CommonAppBar({
     required this.title,
-    this.onBackPressed,
     this.showBackButton = true,
     this.showLocaleSwitch = true,
     this.centerTitle = false,
+    this.onBackPressed,
     this.titleStyle,
+    this.actions,
     super.key,
   });
 
@@ -21,6 +22,7 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
   final bool showLocaleSwitch;
   final bool centerTitle;
   final TextStyle? titleStyle;
+  final List<Widget>? actions;
 
   @override
   Widget build(BuildContext context) {
@@ -46,17 +48,16 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
     );
 
     return AppBar(
-      title: Text(
-        title,
-        style: titleStyle ?? defaultStyle,
-      ),
+      scrolledUnderElevation: 0,
+      title: Text(title, style: titleStyle ?? defaultStyle),
       centerTitle: centerTitle,
       leading: leadingWidget,
       actions: [
+        ...(actions ?? []),
         if (showLocaleSwitch)
-          const Padding(
-            padding: EdgeInsets.only(right: 8),
-            child: LocaleSwitch(),
+          Padding(
+            padding: EdgeInsets.only(right: 14.w),
+            child: const LocaleSwitch(),
           ),
       ],
     );

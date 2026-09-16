@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gbv/core/core.dart';
 
 /// Pinned bottom navigation row for stepping through screening questions.
@@ -34,19 +35,19 @@ class ScreeningBottomNavigation extends StatelessWidget {
           // Previous button
           Expanded(
             child: SizedBox(
-              height: 48,
+              height: 48.h,
               child: OutlinedButton(
                 onPressed: onPrevious.withMediumImpact(),
                 style: OutlinedButton.styleFrom(
                   backgroundColor: colorScheme.surface,
                   side: BorderSide(color: colorScheme.outline, width: 1.2),
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
+                    borderRadius: BorderRadius.circular(12.r),
                   ),
                 ),
                 child: Text(
                   context.l10n.previousButton,
-                  style: AppTextStyles.labelLarge.copyWith(
+                  style: AppTextStyles.labelMedium.copyWith(
                     color: onPrevious != null
                         ? colorScheme.onSurface
                         : colorScheme.onSurface.withValues(alpha: 0.4),
@@ -61,7 +62,7 @@ class ScreeningBottomNavigation extends StatelessWidget {
           // Next Step button
           Expanded(
             child: SizedBox(
-              height: 48,
+              height: 48.h,
               child: ElevatedButton(
                 onPressed: isNextEnabled ? onNext : null,
                 style: ElevatedButton.styleFrom(
@@ -71,14 +72,14 @@ class ScreeningBottomNavigation extends StatelessWidget {
                   ),
                   elevation: 0,
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
+                    borderRadius: BorderRadius.circular(12.r),
                   ),
                 ),
                 child: Text(
                   isLastQuestion
                       ? context.l10n.submitButton
                       : context.l10n.nextButton,
-                  style: AppTextStyles.labelLarge.copyWith(
+                  style: AppTextStyles.labelMedium.copyWith(
                     color: colorScheme.onPrimary,
                     fontWeight: FontWeight.w700,
                   ),
