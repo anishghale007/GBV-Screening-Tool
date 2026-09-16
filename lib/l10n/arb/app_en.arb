@@ -173,5 +173,22 @@
     "digitalRightsModalContent": "Under Nepalese law (including the Electronic Transactions Act and Privacy Act), you are protected against online harassment, defamation, leaked media, and cyberstalking. Incidents can be reported directly to the Nepal Police Cyber Bureau (1145 / 01-4412797).",
     "safetyTipsModalTitle": "Safety Planning Tips",
     "safetyTipsModalContent": "• Secure your accounts with Two-Factor Authentication (2FA).\n• Screenshot and document threatening messages with timestamps.\n• Keep emergency contacts and helpline numbers saved.\n• Establish a private check-in code with trusted persons.\n• Use Quick Exit anytime you need immediate discretion.",
-    "close": "Close"
+    "close": "Close",
+    "supportDirectoryTitle": "Support Directory",
+    "@supportDirectoryTitle": {
+        "description": "AppBar title on the support directory page"
+    },
+    "searchHelplinesPlaceholder": "Search helplines & centers...",
+    "emergencyBannerText": "In immediate danger? Call Police (100) or Women's Helpline (1145).",
+    "verifiedResources": "Verified Resources",
+    "noResourcesFound": "No resources found matching your search.",
+    "callButtonLabel": "Call {number}",
+    "@callButtonLabel": {
+        "description": "Call button label with phone number parameter",
+        "placeholders": {
+            "number": {
+                "type": "String"
+            }
+        }
+    }
 }

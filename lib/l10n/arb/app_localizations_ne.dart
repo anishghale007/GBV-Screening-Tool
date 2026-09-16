@@ -378,4 +378,27 @@ class AppLocalizationsNe extends AppLocalizations {
 
   @override
   String get close => 'बन्द गर्नुहोस्';
+
+  @override
+  String get supportDirectoryTitle => 'सहायता निर्देशिका';
+
+  @override
+  String get searchHelplinesPlaceholder =>
+      'हेल्पलाइन र केन्द्रहरू खोज्नुहोस्...';
+
+  @override
+  String get emergencyBannerText =>
+      'तत्काल खतरामा हुनुहुन्छ? प्रहरी (१००) वा महिला हेल्पलाइन (११४५) मा फोन गर्नुहोस्।';
+
+  @override
+  String get verifiedResources => 'प्रमाणित स्रोतहरू';
+
+  @override
+  String get noResourcesFound =>
+      'तपाईंको खोजीसँग मेल खाने कुनै स्रोत फेला परेन।';
+
+  @override
+  String callButtonLabel(String number) {
+    return 'फोन गर्नुहोस् $number';
+  }
 }

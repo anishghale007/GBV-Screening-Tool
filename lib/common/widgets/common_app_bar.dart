@@ -3,38 +3,62 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gbv/common/widgets/locale_switch.dart';
 import 'package:gbv/core/core.dart';
 
+/// Reusable top AppBar with back button, page title, and locale switch toggle.
 class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
   const CommonAppBar({
     required this.title,
-    this.leading,
-    this.actions,
+    this.onBackPressed,
+    this.showBackButton = true,
+    this.showLocaleSwitch = true,
+    this.centerTitle = false,
+    this.titleStyle,
     super.key,
   });
 
   final String title;
-  final Widget? leading;
-  final List<Widget>? actions;
+  final VoidCallback? onBackPressed;
+  final bool showBackButton;
+  final bool showLocaleSwitch;
+  final bool centerTitle;
+  final TextStyle? titleStyle;
 
   @override
   Widget build(BuildContext context) {
+    Widget? leadingWidget;
+    if (showBackButton) {
+      leadingWidget = IconButton(
+        icon: const Icon(Icons.arrow_back_ios_new_rounded),
+        onPressed: () {
+          final navigator = Navigator.of(context);
+          if (onBackPressed != null) {
+            onBackPressed!();
+          } else if (navigator.canPop()) {
+            navigator.pop();
+          }
+        }.withMediumImpact(),
+      );
+    }
+
+    final defaultStyle = TextStyle(
+      fontSize: 18.sp,
+      fontWeight: FontWeight.w700,
+      color: AppColors.textPrimary,
+    );
+
     return AppBar(
-      title: Text(title, style: AppTextStyles.headlineSmall),
-      leading: Navigator.of(context).canPop()
-          ? IconButton(
-              icon: Icon(Icons.arrow_back_ios_new_rounded, size: 20.h),
-              onPressed: () {
-                Navigator.of(context).maybePop();
-              }.withMediumImpate(),
-            )
-          : leading,
-      actions:
-          actions ??
-          [
-            const Padding(
-              padding: EdgeInsets.only(right: AppSpacing.sm),
-              child: LocaleSwitch(),
-            ),
-          ],
+      title: Text(
+        title,
+        style: titleStyle ?? defaultStyle,
+      ),
+      centerTitle: centerTitle,
+      leading: leadingWidget,
+      actions: [
+        if (showLocaleSwitch)
+          const Padding(
+            padding: EdgeInsets.only(right: 8),
+            child: LocaleSwitch(),
+          ),
+      ],
     );
   }
 

@@ -40,8 +40,6 @@ class IncidentCategoryTile extends StatelessWidget {
         onTap: onTap.withMediumImpact(),
         borderRadius: AppSpacing.borderRadiusMd,
         child: Container(
-          // duration: const Duration(milliseconds: 200),
-          // curve: Curves.easeInOut,
           padding: const EdgeInsets.symmetric(
             horizontal: AppSpacing.md,
             vertical: 12,

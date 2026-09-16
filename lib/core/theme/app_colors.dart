@@ -22,7 +22,7 @@ abstract final class AppColors {
   static const Color fabForeground = Color(0xFFFFFFFF);
 
   // ── Background & surface ────────────────────────────────────────────
-  static const Color background = Color(0xFFFFFFFF);
+  static const Color background = Color(0xFFF8F9F7);
   static const Color surface = Color(0xFFFFFFFF);
   static const Color surfaceVariant = Color(0xFFF0F5F5);
 

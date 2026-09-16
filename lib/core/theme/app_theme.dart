@@ -150,6 +150,7 @@ abstract final class AppTheme {
           ? GoogleFonts.lexend().fontFamily
           : GoogleFonts.inter().fontFamily,
       textTheme: textTheme,
+      splashColor: Colors.transparent,
       colorScheme: const ColorScheme(
         brightness: Brightness.light,
         primary: AppColors.primary,
@@ -168,16 +169,14 @@ abstract final class AppTheme {
       ),
       scaffoldBackgroundColor: AppColors.background,
       appBarTheme: AppBarTheme(
-        backgroundColor: AppColors.surface,
+        backgroundColor: AppColors.background,
         foregroundColor: AppColors.textPrimary,
         elevation: 0,
         centerTitle: false,
         titleTextStyle: AppTextStyles.headlineSmall.copyWith(
           color: AppColors.textPrimary,
         ),
-        iconTheme: const IconThemeData(
-          color: AppColors.textPrimary,
-        ),
+        iconTheme: const IconThemeData(color: AppColors.textPrimary),
       ),
       floatingActionButtonTheme: const FloatingActionButtonThemeData(
         backgroundColor: AppColors.fabBackground,

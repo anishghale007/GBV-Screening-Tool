@@ -787,6 +787,42 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Close'**
   String get close;
+
+  /// AppBar title on the support directory page
+  ///
+  /// In en, this message translates to:
+  /// **'Support Directory'**
+  String get supportDirectoryTitle;
+
+  /// No description provided for @searchHelplinesPlaceholder.
+  ///
+  /// In en, this message translates to:
+  /// **'Search helplines & centers...'**
+  String get searchHelplinesPlaceholder;
+
+  /// No description provided for @emergencyBannerText.
+  ///
+  /// In en, this message translates to:
+  /// **'In immediate danger? Call Police (100) or Women\'s Helpline (1145).'**
+  String get emergencyBannerText;
+
+  /// No description provided for @verifiedResources.
+  ///
+  /// In en, this message translates to:
+  /// **'Verified Resources'**
+  String get verifiedResources;
+
+  /// No description provided for @noResourcesFound.
+  ///
+  /// In en, this message translates to:
+  /// **'No resources found matching your search.'**
+  String get noResourcesFound;
+
+  /// Call button label with phone number parameter
+  ///
+  /// In en, this message translates to:
+  /// **'Call {number}'**
+  String callButtonLabel(String number);
 }
 
 class _AppLocalizationsDelegate

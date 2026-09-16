@@ -381,4 +381,25 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get close => 'Close';
+
+  @override
+  String get supportDirectoryTitle => 'Support Directory';
+
+  @override
+  String get searchHelplinesPlaceholder => 'Search helplines & centers...';
+
+  @override
+  String get emergencyBannerText =>
+      'In immediate danger? Call Police (100) or Women\'s Helpline (1145).';
+
+  @override
+  String get verifiedResources => 'Verified Resources';
+
+  @override
+  String get noResourcesFound => 'No resources found matching your search.';
+
+  @override
+  String callButtonLabel(String number) {
+    return 'Call $number';
+  }
 }

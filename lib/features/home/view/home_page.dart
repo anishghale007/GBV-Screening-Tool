@@ -11,20 +11,13 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppScaffold(
-      appBar: AppBar(
-        title: Text(
-          context.l10n.appTitle,
-          style: AppTextStyles.headlineSmall.copyWith(
-            color: AppColors.primary,
-            fontWeight: FontWeight.w700,
-          ),
+      appBar: CommonAppBar(
+        title: context.l10n.appTitle,
+        showBackButton: false,
+        titleStyle: AppTextStyles.headlineSmall.copyWith(
+          color: AppColors.primary,
+          fontWeight: FontWeight.w700,
         ),
-        actions: const [
-          Padding(
-            padding: EdgeInsets.only(right: AppSpacing.sm),
-            child: LocaleSwitch(),
-          ),
-        ],
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => AccessibilityBottomSheet.show(context),
@@ -130,21 +123,21 @@ class HomePage extends StatelessWidget {
             const SizedBox(height: AppSpacing.md),
 
             // Quick Exit Safety Notice
-            Center(
-              child: TextButton.icon(
-                icon: const Icon(
-                  Icons.exit_to_app_rounded,
-                  color: AppColors.quickExit,
-                ),
-                label: Text(
-                  'Quick Exit (Open Calculator)',
-                  style: AppTextStyles.labelMedium.copyWith(
-                    color: AppColors.quickExit,
-                  ),
-                ),
-                onPressed: () => context.go(AppRoutes.quickExit),
-              ),
-            ),
+            // Center(
+            //   child: TextButton.icon(
+            //     icon: const Icon(
+            //       Icons.exit_to_app_rounded,
+            //       color: AppColors.quickExit,
+            //     ),
+            //     label: Text(
+            //       'Quick Exit (Open Calculator)',
+            //       style: AppTextStyles.labelMedium.copyWith(
+            //         color: AppColors.quickExit,
+            //       ),
+            //     ),
+            //     onPressed: () => context.go(AppRoutes.quickExit),
+            //   ),
+            // ),
           ],
         ),
       ),

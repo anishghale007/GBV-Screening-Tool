@@ -109,22 +109,7 @@ class _PathwayPageState extends State<PathwayPage>
         final riskDescription = _getRiskDescription(context, riskRange);
 
         return AppScaffold(
-          appBar: AppBar(
-            leading: IconButton(
-              icon: const Icon(Icons.arrow_back_ios_new_rounded, size: 20),
-              onPressed: () => Navigator.of(context).maybePop(),
-            ),
-            title: Text(
-              l10n.screeningTitle,
-              style: AppTextStyles.headlineSmall,
-            ),
-            actions: const [
-              Padding(
-                padding: EdgeInsets.only(right: AppSpacing.sm),
-                child: LocaleSwitch(),
-              ),
-            ],
-          ),
+          appBar: CommonAppBar(title: l10n.screeningTitle),
           floatingActionButton: FloatingActionButton(
             onPressed: () => AccessibilityBottomSheet.show(context),
             tooltip: l10n.accessibilitySettings,

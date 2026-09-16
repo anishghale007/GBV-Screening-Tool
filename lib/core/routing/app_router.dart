@@ -7,6 +7,7 @@ import 'package:gbv/features/screening/view/gender_selection_page.dart';
 import 'package:gbv/features/screening/view/incident_selection_page.dart';
 import 'package:gbv/features/screening/view/screening_questions_page.dart';
 import 'package:gbv/features/splash/view/splash_page.dart';
+import 'package:gbv/features/support/view/support_directory_page.dart';
 import 'package:go_router/go_router.dart';
 import 'package:no_screenshot/secure_navigator_observer.dart';
 
@@ -76,8 +77,7 @@ final GoRouter appRouter = GoRouter(
     GoRoute(
       path: AppRoutes.support,
       name: 'support',
-      builder: (context, state) =>
-          const _PlaceholderPage(title: 'Support Resources'),
+      builder: (context, state) => const SupportDirectoryPage(),
     ),
     GoRoute(
       path: AppRoutes.settings,

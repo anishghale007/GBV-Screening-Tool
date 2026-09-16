@@ -28,72 +28,65 @@ class GenderOptionTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final borderColor = isSelected ? AppColors.primary : AppColors.border;
-    const backgroundColor = AppColors.surface;
     final borderWidth = isSelected ? 2.0 : 1.2;
 
-    return Material(
-      color: backgroundColor,
+    return InkWell(
+      onTap: onTap.withMediumImpact(),
       borderRadius: AppSpacing.borderRadiusMd,
-      child: InkWell(
-        onTap: onTap.withMediumImpact(),
-        borderRadius: AppSpacing.borderRadiusMd,
-        child: AnimatedContainer(
-          duration: const Duration(milliseconds: 200),
-          curve: Curves.easeInOut,
-          padding: const EdgeInsets.symmetric(
-            horizontal: AppSpacing.md,
-            vertical: 14,
-          ),
-          decoration: BoxDecoration(
-            borderRadius: AppSpacing.borderRadiusMd,
-            border: Border.all(color: borderColor, width: borderWidth),
-          ),
-          child: Row(
-            children: [
-              // Gender icon
-              Container(
-                width: 36,
-                height: 36,
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  color: isSelected
-                      ? AppColors.primary.withValues(alpha: 0.12)
-                      : AppColors.surfaceVariant,
-                  shape: BoxShape.circle,
-                ),
-                child: SvgPicture.asset(
-                  iconPath,
-                  width: 20.w,
-                  height: 20.h,
-                  colorFilter: const ColorFilter.mode(
-                    AppColors.primary,
-                    BlendMode.srcIn,
-                  ),
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 200),
+        curve: Curves.easeInOut,
+        padding: const EdgeInsets.symmetric(
+          horizontal: AppSpacing.md,
+          vertical: 14,
+        ),
+        decoration: BoxDecoration(
+          borderRadius: AppSpacing.borderRadiusMd,
+          border: Border.all(color: borderColor, width: borderWidth),
+        ),
+        child: Row(
+          children: [
+            // Gender icon
+            Container(
+              width: 36,
+              height: 36,
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                color: isSelected
+                    ? AppColors.primary.withValues(alpha: 0.12)
+                    : AppColors.surfaceVariant,
+                shape: BoxShape.circle,
+              ),
+              child: SvgPicture.asset(
+                iconPath,
+                width: 20.w,
+                height: 20.h,
+                colorFilter: const ColorFilter.mode(
+                  AppColors.primary,
+                  BlendMode.srcIn,
                 ),
               ),
-              const SizedBox(width: AppSpacing.md),
+            ),
+            const SizedBox(width: AppSpacing.md),
 
-              // Label
-              Expanded(
-                child: Text(
-                  label,
-                  style: AppTextStyles.labelLarge.copyWith(
-                    color: isSelected
-                        ? AppColors.primary
-                        : AppColors.textPrimary,
-                    fontWeight: isSelected ? FontWeight.w700 : FontWeight.w600,
-                  ),
+            // Label
+            Expanded(
+              child: Text(
+                label,
+                style: AppTextStyles.labelLarge.copyWith(
+                  color: isSelected ? AppColors.primary : AppColors.textPrimary,
+                  fontWeight: isSelected ? FontWeight.w700 : FontWeight.w600,
                 ),
               ),
+            ),
 
-              // Audio / TTS button
-              _AudioIconButton(
-                onTap: onAudioTap,
-                isSelected: isSelected,
-                isPlaying: isPlaying,
-              ),
-            ],
-          ),
+            // Audio / TTS button
+            _AudioIconButton(
+              onTap: onAudioTap,
+              isSelected: isSelected,
+              isPlaying: isPlaying,
+            ),
+          ],
         ),
       ),
     );
@@ -131,8 +124,8 @@ class _AudioIconButton extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       behavior: HitTestBehavior.opaque,
-      child: AnimatedContainer(
-        duration: const Duration(milliseconds: 150),
+      child: Container(
+        // duration: const Duration(milliseconds: 150),
         width: 36,
         height: 36,
         decoration: BoxDecoration(

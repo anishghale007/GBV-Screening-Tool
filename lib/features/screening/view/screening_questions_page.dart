@@ -116,21 +116,9 @@ class _ScreeningQuestionsPageState extends State<ScreeningQuestionsPage> {
         final isOptionSelected = selectedAnswer != null;
 
         return AppScaffold(
-          appBar: AppBar(
-            leading: IconButton(
-              icon: const Icon(Icons.arrow_back_ios_new_rounded, size: 20),
-              onPressed: _onPrevious,
-            ),
-            title: Text(
-              l10n.screeningTitle,
-              style: AppTextStyles.headlineSmall,
-            ),
-            actions: const [
-              Padding(
-                padding: EdgeInsets.only(right: AppSpacing.sm),
-                child: LocaleSwitch(),
-              ),
-            ],
+          appBar: CommonAppBar(
+            title: l10n.screeningTitle,
+            onBackPressed: _onPrevious,
           ),
           floatingActionButton: FloatingActionButton(
             onPressed: () => AccessibilityBottomSheet.show(context),
