@@ -200,8 +200,11 @@ class AccessibilityBottomSheet extends StatelessWidget {
                           title: l10n.adhdMode,
                           subtitle: l10n.adhdModeSubtitle,
                           value: settings.isAdhdModeEnabled,
-                          isEnabled: false,
-                          onChanged: null,
+                          onChanged: (val) {
+                            context.read<AccessibilityBloc>().add(
+                              ToggleAdhdMode(isEnabled: val),
+                            );
+                          },
                         ),
 
                         const SectionDivider(),

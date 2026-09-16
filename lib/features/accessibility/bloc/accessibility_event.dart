@@ -64,6 +64,16 @@ final class ToggleHapticFeedback extends AccessibilityEvent {
   List<Object?> get props => [isEnabled];
 }
 
+/// Event to toggle ADHD-friendly reading guide mode.
+final class ToggleAdhdMode extends AccessibilityEvent {
+  const ToggleAdhdMode({required this.isEnabled});
+
+  final bool isEnabled;
+
+  @override
+  List<Object?> get props => [isEnabled];
+}
+
 /// Event to reset all accessibility settings to default.
 final class ResetAccessibilitySettings extends AccessibilityEvent {
   const ResetAccessibilitySettings();

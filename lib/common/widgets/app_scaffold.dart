@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:gbv/common/widgets/reading_guide.dart';
 import 'package:gbv/core/core.dart';
 import 'package:gbv/features/accessibility/view/accessibility_page.dart';
 
 /// Base scaffold providing consistent layout, background colors, padding,
-/// safe area handling, default accessibility FAB, and
+/// safe area handling, default accessibility FAB, reading guide overlay, and
 /// dismiss-keyboard-on-tap behavior.
 class AppScaffold extends StatelessWidget {
   const AppScaffold({
@@ -14,6 +15,7 @@ class AppScaffold extends StatelessWidget {
     this.bottomNavigationBar,
     this.floatingActionButton,
     this.showFloatingActionButton = true,
+    this.enableReadingGuide = true,
     this.padding = AppSpacing.screenPadding,
     this.useSafeArea = true,
     this.hideKeyboardOnTap = true,
@@ -26,6 +28,7 @@ class AppScaffold extends StatelessWidget {
   final Widget? bottomNavigationBar;
   final Widget? floatingActionButton;
   final bool showFloatingActionButton;
+  final bool enableReadingGuide;
   final EdgeInsetsGeometry padding;
   final bool useSafeArea;
   final bool hideKeyboardOnTap;
@@ -46,6 +49,10 @@ class AppScaffold extends StatelessWidget {
         behavior: HitTestBehavior.opaque,
         child: content,
       );
+    }
+
+    if (enableReadingGuide) {
+      content = ReadingGuide(child: content);
     }
 
     final effectiveFab = showFloatingActionButton

@@ -43,12 +43,10 @@ class _PathwayPageState extends State<PathwayPage>
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (!mounted) return;
-      final reduceAnimations = context
-          .read<AccessibilityBloc>()
-          .state
-          .settings
-          .isReduceAnimationsEnabled;
-      if (reduceAnimations) {
+      final settings = context.read<AccessibilityBloc>().state.settings;
+      final shouldDisableAnimation =
+          settings.isReduceAnimationsEnabled || settings.isAdhdModeEnabled;
+      if (shouldDisableAnimation) {
         _animationController.value = 1.0;
       } else {
         _animationController.forward();
@@ -99,15 +97,24 @@ class _PathwayPageState extends State<PathwayPage>
   Widget build(BuildContext context) {
     final l10n = context.l10n;
 
-    return BlocBuilder<ScreeningCubit, ScreeningState>(
-      builder: (context, state) {
-        // Calculate score percentage and risk range from screening answers
-        final scorePercentage = state.scorePercentage;
-        final riskRange = state.riskRange;
-        final riskBadgeLabel = _getRiskBadgeLabel(context, riskRange);
-        final riskDescription = _getRiskDescription(context, riskRange);
+    return BlocListener<AccessibilityBloc, AccessibilityState>(
+      listener: (context, accState) {
+        final shouldDisableAnimation =
+            accState.settings.isReduceAnimationsEnabled ||
+            accState.settings.isAdhdModeEnabled;
+        if (shouldDisableAnimation && _animationController.value != 1.0) {
+          _animationController.value = 1.0;
+        }
+      },
+      child: BlocBuilder<ScreeningCubit, ScreeningState>(
+        builder: (context, state) {
+          // Calculate score percentage and risk range from screening answers
+          final scorePercentage = state.scorePercentage;
+          final riskRange = state.riskRange;
+          final riskBadgeLabel = _getRiskBadgeLabel(context, riskRange);
+          final riskDescription = _getRiskDescription(context, riskRange);
 
-        return AppScaffold(
+          return AppScaffold(
           appBar: CommonAppBar(title: l10n.screeningTitle),
           body: SingleChildScrollView(
             padding: const EdgeInsets.symmetric(
@@ -264,8 +271,9 @@ class _PathwayPageState extends State<PathwayPage>
               ],
             ),
           ),
-        );
-      },
+          );
+        },
+      ),
     );
   }
 }

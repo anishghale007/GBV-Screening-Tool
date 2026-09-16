@@ -8,3 +8,4 @@ export 'widgets/app_scaffold.dart';
 export 'widgets/app_text_field.dart';
 export 'widgets/common_app_bar.dart';
 export 'widgets/locale_switch.dart';
+export 'widgets/reading_guide.dart';

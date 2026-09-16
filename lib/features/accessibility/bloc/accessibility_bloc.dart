@@ -19,6 +19,7 @@ class AccessibilityBloc extends Bloc<AccessibilityEvent, AccessibilityState> {
     on<ToggleDyslexiaFont>(_onToggleDyslexiaFont);
     on<ToggleLargeTouchTargets>(_onToggleLargeTouchTargets);
     on<ToggleHapticFeedback>(_onToggleHapticFeedback);
+    on<ToggleAdhdMode>(_onToggleAdhdMode);
     on<ResetAccessibilitySettings>(_onResetSettings);
   }
 
@@ -104,6 +105,17 @@ class AccessibilityBloc extends Bloc<AccessibilityEvent, AccessibilityState> {
   ) async {
     final updated = state.settings.copyWith(
       isHapticFeedbackEnabled: event.isEnabled,
+    );
+    emit(state.copyWith(settings: updated));
+    await _saveSettings(updated);
+  }
+
+  Future<void> _onToggleAdhdMode(
+    ToggleAdhdMode event,
+    Emitter<AccessibilityState> emit,
+  ) async {
+    final updated = state.settings.copyWith(
+      isAdhdModeEnabled: event.isEnabled,
     );
     emit(state.copyWith(settings: updated));
     await _saveSettings(updated);
