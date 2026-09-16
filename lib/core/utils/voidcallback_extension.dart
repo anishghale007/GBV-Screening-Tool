@@ -50,3 +50,16 @@ extension ValueChangedHapticFeedbackExtension<T> on ValueChanged<T> {
     };
   }
 }
+
+extension NullableValueChangedHapticFeedbackExtension<T> on ValueChanged<T>? {
+  ValueChanged<T>? withMediumImpate() => withMediumImpact();
+
+  ValueChanged<T>? withMediumImpact() {
+    final callback = this;
+    if (callback == null) return null;
+    return (value) {
+      _vibrateMedium();
+      callback(value);
+    };
+  }
+}

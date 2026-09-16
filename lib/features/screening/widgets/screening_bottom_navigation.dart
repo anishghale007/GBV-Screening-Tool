@@ -18,6 +18,9 @@ class ScreeningBottomNavigation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+
     return Container(
       padding: const EdgeInsets.only(
         left: AppSpacing.sm,
@@ -25,7 +28,7 @@ class ScreeningBottomNavigation extends StatelessWidget {
         top: AppSpacing.sm,
         bottom: AppSpacing.md,
       ),
-      color: AppColors.background,
+      color: theme.scaffoldBackgroundColor,
       child: Row(
         children: [
           // Previous button
@@ -35,8 +38,8 @@ class ScreeningBottomNavigation extends StatelessWidget {
               child: OutlinedButton(
                 onPressed: onPrevious.withMediumImpact(),
                 style: OutlinedButton.styleFrom(
-                  backgroundColor: const Color(0xFFF9F7F5),
-                  side: const BorderSide(color: Color(0xFFE5DDD5), width: 1.2),
+                  backgroundColor: colorScheme.surface,
+                  side: BorderSide(color: colorScheme.outline, width: 1.2),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12),
                   ),
@@ -45,8 +48,8 @@ class ScreeningBottomNavigation extends StatelessWidget {
                   context.l10n.previousButton,
                   style: AppTextStyles.labelLarge.copyWith(
                     color: onPrevious != null
-                        ? const Color(0xFF5D6B70)
-                        : AppColors.textSecondary.withValues(alpha: 0.5),
+                        ? colorScheme.onSurface
+                        : colorScheme.onSurface.withValues(alpha: 0.4),
                     fontWeight: FontWeight.w600,
                   ),
                 ),
@@ -62,8 +65,8 @@ class ScreeningBottomNavigation extends StatelessWidget {
               child: ElevatedButton(
                 onPressed: isNextEnabled ? onNext : null,
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColors.primary,
-                  disabledBackgroundColor: AppColors.primary.withValues(
+                  backgroundColor: colorScheme.primary,
+                  disabledBackgroundColor: colorScheme.primary.withValues(
                     alpha: 0.45,
                   ),
                   elevation: 0,
@@ -76,7 +79,7 @@ class ScreeningBottomNavigation extends StatelessWidget {
                       ? context.l10n.submitButton
                       : context.l10n.nextButton,
                   style: AppTextStyles.labelLarge.copyWith(
-                    color: AppColors.textOnPrimary,
+                    color: colorScheme.onPrimary,
                     fontWeight: FontWeight.w700,
                   ),
                 ),

@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gbv/core/localization/locale_cubit.dart';
-import 'package:gbv/core/theme/app_colors.dart';
-import 'package:gbv/core/theme/app_spacing.dart';
-import 'package:gbv/core/theme/app_text_styles.dart';
-import 'package:gbv/l10n/l10n.dart';
+import 'package:gbv/core/core.dart';
 
 /// Modal bottom sheet allowing the user to select the active application
 /// language.
@@ -101,7 +97,7 @@ class _LanguageOptionTile extends StatelessWidget {
       color: isSelected ? AppColors.primaryContainer : AppColors.surface,
       borderRadius: BorderRadius.circular(10),
       child: InkWell(
-        onTap: onTap,
+        onTap: onTap.withMediumImpact(),
         borderRadius: BorderRadius.circular(10),
         child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),

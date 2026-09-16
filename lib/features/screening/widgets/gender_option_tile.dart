@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gbv/core/constants/asset_constants.dart';
-import 'package:gbv/core/theme/app_colors.dart';
 import 'package:gbv/core/theme/app_spacing.dart';
 import 'package:gbv/core/theme/app_text_styles.dart';
 import 'package:gbv/core/utils/voidcallback_extension.dart';
+import 'package:gbv/features/accessibility/bloc/accessibility_bloc.dart';
 
 class GenderOptionTile extends StatelessWidget {
   const GenderOptionTile({
@@ -27,8 +28,24 @@ class GenderOptionTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final borderColor = isSelected ? AppColors.primary : AppColors.border;
+    final colorScheme = Theme.of(context).colorScheme;
+    final isHighContrast = context.select(
+      (AccessibilityBloc bloc) => bloc.state.settings.isHighContrastEnabled,
+    );
+    final backgroundColor = (isSelected && isHighContrast)
+        ? colorScheme.primaryContainer
+        : colorScheme.surface;
+    final borderColor = isSelected ? colorScheme.primary : colorScheme.outline;
     final borderWidth = isSelected ? 2.0 : 1.2;
+
+    final iconBgColor = isSelected
+        ? (isHighContrast
+            ? colorScheme.primary
+            : colorScheme.primary.withValues(alpha: 0.12))
+        : colorScheme.surfaceContainerHighest;
+    final iconColor = isSelected
+        ? (isHighContrast ? colorScheme.onPrimary : colorScheme.primary)
+        : colorScheme.primary;
 
     return InkWell(
       onTap: onTap.withMediumImpact(),
@@ -41,6 +58,7 @@ class GenderOptionTile extends StatelessWidget {
           vertical: 14,
         ),
         decoration: BoxDecoration(
+          color: backgroundColor,
           borderRadius: AppSpacing.borderRadiusMd,
           border: Border.all(color: borderColor, width: borderWidth),
         ),
@@ -52,17 +70,15 @@ class GenderOptionTile extends StatelessWidget {
               height: 36,
               alignment: Alignment.center,
               decoration: BoxDecoration(
-                color: isSelected
-                    ? AppColors.primary.withValues(alpha: 0.12)
-                    : AppColors.surfaceVariant,
+                color: iconBgColor,
                 shape: BoxShape.circle,
               ),
               child: SvgPicture.asset(
                 iconPath,
                 width: 20.w,
                 height: 20.h,
-                colorFilter: const ColorFilter.mode(
-                  AppColors.primary,
+                colorFilter: ColorFilter.mode(
+                  iconColor,
                   BlendMode.srcIn,
                 ),
               ),
@@ -74,7 +90,9 @@ class GenderOptionTile extends StatelessWidget {
               child: Text(
                 label,
                 style: AppTextStyles.labelLarge.copyWith(
-                  color: isSelected ? AppColors.primary : AppColors.textPrimary,
+                  color: isSelected
+                      ? colorScheme.primary
+                      : colorScheme.onSurface,
                   fontWeight: isSelected ? FontWeight.w700 : FontWeight.w600,
                 ),
               ),
@@ -107,25 +125,25 @@ class _AudioIconButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
     final backgroundColor = isPlaying
-        ? AppColors.primary
+        ? colorScheme.primary
         : isSelected
-        ? AppColors.primary.withValues(alpha: 0.12)
-        : AppColors.surfaceVariant;
+        ? colorScheme.primary.withValues(alpha: 0.12)
+        : colorScheme.surfaceContainerHighest;
     final iconColor = isPlaying
-        ? AppColors.textOnPrimary
+        ? colorScheme.onPrimary
         : isSelected
-        ? AppColors.primary
-        : AppColors.textSecondary;
+        ? colorScheme.primary
+        : colorScheme.onSurfaceVariant;
     final borderColor = isPlaying
-        ? AppColors.primary
-        : AppColors.borderSelected;
+        ? colorScheme.primary
+        : colorScheme.outline;
 
     return GestureDetector(
-      onTap: onTap,
+      onTap: onTap.withMediumImpact(),
       behavior: HitTestBehavior.opaque,
       child: Container(
-        // duration: const Duration(milliseconds: 150),
         width: 36,
         height: 36,
         decoration: BoxDecoration(

@@ -823,6 +823,42 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Call {number}'**
   String callButtonLabel(String number);
+
+  /// Privacy assurance banner on the home page
+  ///
+  /// In en, this message translates to:
+  /// **'100% On-device & Encrypted. No personal data leaves this phone.'**
+  String get homePrivacyBanner;
+
+  /// Title of the wellbeing screening card on home page
+  ///
+  /// In en, this message translates to:
+  /// **'Wellbeing Screening'**
+  String get wellbeingScreeningTitle;
+
+  /// Description of the wellbeing screening card on home page
+  ///
+  /// In en, this message translates to:
+  /// **'A quick, 15-question guided audio check to help understand your situation and suggest safe options.'**
+  String get wellbeingScreeningDesc;
+
+  /// Button to begin the wellbeing screening
+  ///
+  /// In en, this message translates to:
+  /// **'Start Screening'**
+  String get startScreeningButton;
+
+  /// Description of the support resources card on home page
+  ///
+  /// In en, this message translates to:
+  /// **'Always-accessible emergency numbers, helplines, and local counselors.'**
+  String get supportResourcesDesc;
+
+  /// Button to navigate to support directory from home page
+  ///
+  /// In en, this message translates to:
+  /// **'View Resources'**
+  String get viewResourcesButton;
 }
 
 class _AppLocalizationsDelegate

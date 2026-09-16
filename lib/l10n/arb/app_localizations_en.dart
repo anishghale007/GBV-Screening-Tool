@@ -402,4 +402,25 @@ class AppLocalizationsEn extends AppLocalizations {
   String callButtonLabel(String number) {
     return 'Call $number';
   }
+
+  @override
+  String get homePrivacyBanner =>
+      '100% On-device & Encrypted. No personal data leaves this phone.';
+
+  @override
+  String get wellbeingScreeningTitle => 'Wellbeing Screening';
+
+  @override
+  String get wellbeingScreeningDesc =>
+      'A quick, 15-question guided audio check to help understand your situation and suggest safe options.';
+
+  @override
+  String get startScreeningButton => 'Start Screening';
+
+  @override
+  String get supportResourcesDesc =>
+      'Always-accessible emergency numbers, helplines, and local counselors.';
+
+  @override
+  String get viewResourcesButton => 'View Resources';
 }

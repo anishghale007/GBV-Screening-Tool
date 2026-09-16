@@ -18,7 +18,7 @@ abstract final class AppTheme {
     isLargeTouchTargets: false,
   );
 
-  /// High-contrast theme for vision-impaired mode (FR-ACC-06).
+  /// High-contrast theme for vision-impaired mode (WCAG AAA compliant).
   static ThemeData get highContrastTheme => _createTheme(
     isHighContrast: true,
     isDyslexia: false,
@@ -39,7 +39,10 @@ abstract final class AppTheme {
     required bool isDyslexia,
     required bool isLargeTouchTargets,
   }) {
-    final textTheme = AppTextStyles.createTextTheme(isDyslexia: isDyslexia);
+    final textTheme = AppTextStyles.createTextTheme(
+      isDyslexia: isDyslexia,
+      isHighContrast: isHighContrast,
+    );
     final minTouchTarget = isLargeTouchTargets
         ? AppSpacing.largeTouchTarget
         : AppSpacing.minTouchTarget;
@@ -48,55 +51,59 @@ abstract final class AppTheme {
     if (isHighContrast) {
       return ThemeData(
         useMaterial3: true,
-        brightness: Brightness.dark,
+        brightness: Brightness.light,
         fontFamily: isDyslexia
             ? GoogleFonts.lexend().fontFamily
             : GoogleFonts.inter().fontFamily,
         textTheme: textTheme,
         scaffoldBackgroundColor: AppColors.hcBackground,
         colorScheme: const ColorScheme(
-          brightness: Brightness.dark,
+          brightness: Brightness.light,
           primary: AppColors.hcPrimary,
-          onPrimary: AppColors.hcBackground,
-          primaryContainer: AppColors.hcSurface,
-          onPrimaryContainer: AppColors.hcTextPrimary,
-          secondary: AppColors.hcPrimary,
-          onSecondary: AppColors.hcBackground,
-          error: AppColors.error,
-          onError: AppColors.hcTextPrimary,
+          onPrimary: AppColors.textOnPrimary,
+          primaryContainer: AppColors.hcPrimaryContainer,
+          onPrimaryContainer: AppColors.hcOnPrimaryContainer,
+          secondary: AppColors.hcPrimaryDark,
+          onSecondary: AppColors.textOnPrimary,
+          error: AppColors.hcError,
+          onError: AppColors.textOnPrimary,
           surface: AppColors.hcSurface,
           onSurface: AppColors.hcTextPrimary,
-          surfaceContainerHighest: AppColors.hcSurface,
+          surfaceContainerHighest: AppColors.surfaceVariant,
           onSurfaceVariant: AppColors.hcTextPrimary,
           outline: AppColors.hcBorder,
         ),
         appBarTheme: AppBarTheme(
-          backgroundColor: AppColors.hcSurface,
+          backgroundColor: AppColors.hcBackground,
           foregroundColor: AppColors.hcTextPrimary,
           elevation: 0,
           centerTitle: false,
           titleTextStyle: AppTextStyles.headlineSmall.copyWith(
             color: AppColors.hcTextPrimary,
+            fontWeight: FontWeight.w700,
           ),
           iconTheme: const IconThemeData(color: AppColors.hcTextPrimary),
         ),
         floatingActionButtonTheme: const FloatingActionButtonThemeData(
           backgroundColor: AppColors.hcPrimary,
-          foregroundColor: AppColors.hcBackground,
-          elevation: 2,
-          shape: CircleBorder(),
+          foregroundColor: AppColors.textOnPrimary,
+          elevation: 3,
+          shape: CircleBorder(side: BorderSide(width: 2)),
         ),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
             backgroundColor: AppColors.hcPrimary,
-            foregroundColor: AppColors.hcBackground,
+            foregroundColor: AppColors.textOnPrimary,
             minimumSize: Size(double.infinity, buttonHeight),
             padding: AppSpacing.paddingHorizontalLg,
             elevation: 0,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(14),
+              side: const BorderSide(width: 1.5),
             ),
-            textStyle: AppTextStyles.button,
+            textStyle: AppTextStyles.button.copyWith(
+              fontWeight: FontWeight.w700,
+            ),
           ),
         ),
         outlinedButtonTheme: OutlinedButtonThemeData(
@@ -107,9 +114,10 @@ abstract final class AppTheme {
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(14),
             ),
-            side: const BorderSide(color: AppColors.hcPrimary, width: 2),
+            side: const BorderSide(width: 2),
             textStyle: AppTextStyles.button.copyWith(
               color: AppColors.hcPrimary,
+              fontWeight: FontWeight.w700,
             ),
           ),
         ),
@@ -119,26 +127,52 @@ abstract final class AppTheme {
             minimumSize: Size(minTouchTarget, minTouchTarget),
             textStyle: AppTextStyles.labelLarge.copyWith(
               color: AppColors.hcPrimary,
+              fontWeight: FontWeight.w700,
             ),
           ),
         ),
         iconButtonTheme: IconButtonThemeData(
           style: IconButton.styleFrom(
             minimumSize: Size(minTouchTarget, minTouchTarget),
+            foregroundColor: AppColors.hcTextPrimary,
           ),
         ),
         cardTheme: CardThemeData(
           color: AppColors.hcSurface,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16),
-            side: const BorderSide(color: AppColors.hcBorder, width: 2),
+            side: const BorderSide(width: 2),
           ),
           margin: const EdgeInsets.symmetric(vertical: AppSpacing.sm),
+        ),
+        inputDecorationTheme: InputDecorationTheme(
+          filled: true,
+          fillColor: AppColors.hcSurface,
+          contentPadding: AppSpacing.paddingMd,
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(14),
+            borderSide: const BorderSide(width: 2),
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(14),
+            borderSide: const BorderSide(width: 2),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(14),
+            borderSide: const BorderSide(
+              color: AppColors.hcBorderSelected,
+              width: 2.5,
+            ),
+          ),
+          errorBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(14),
+            borderSide: const BorderSide(color: AppColors.hcError, width: 2),
+          ),
         ),
         dividerTheme: const DividerThemeData(
           color: AppColors.hcBorder,
           space: AppSpacing.lg,
-          thickness: 1.5,
+          thickness: 2,
         ),
       );
     }

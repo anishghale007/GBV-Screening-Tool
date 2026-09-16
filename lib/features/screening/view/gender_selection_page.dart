@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gbv/common/common.dart';
 import 'package:gbv/core/core.dart';
-import 'package:gbv/features/accessibility/view/accessibility_page.dart';
 import 'package:gbv/features/screening/bloc/screening_cubit.dart';
 import 'package:gbv/features/screening/widgets/gender_option_tile.dart';
 import 'package:gbv/features/screening/widgets/privacy_banner.dart';
@@ -51,11 +50,6 @@ class _GenderSelectionPageState extends State<GenderSelectionPage> {
 
     return AppScaffold(
       appBar: CommonAppBar(title: l10n.screeningTitle),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => AccessibilityBottomSheet.show(context),
-        tooltip: l10n.accessibilitySettings,
-        child: const Icon(Icons.accessible_forward_rounded),
-      ),
       body: Column(
         children: [
           // Scrollable content area

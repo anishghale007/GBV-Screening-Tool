@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gbv/common/widgets/app_button.dart';
-import 'package:gbv/core/theme/app_colors.dart';
 import 'package:gbv/core/theme/app_spacing.dart';
 import 'package:gbv/core/theme/app_text_styles.dart';
 
@@ -25,11 +25,13 @@ class PathwayActionCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+
     return Container(
       decoration: BoxDecoration(
-        color: AppColors.surface,
+        color: colorScheme.surface,
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: AppColors.border),
+        border: Border.all(color: colorScheme.outline),
       ),
       padding: const EdgeInsets.all(AppSpacing.md),
       child: Column(
@@ -42,8 +44,8 @@ class PathwayActionCard extends StatelessWidget {
               Container(
                 width: 44,
                 height: 44,
-                decoration: const BoxDecoration(
-                  color: Color(0xFFE2F1F1),
+                decoration: BoxDecoration(
+                  color: colorScheme.primary.withValues(alpha: 0.12),
                   shape: BoxShape.circle,
                 ),
                 alignment: Alignment.center,
@@ -60,7 +62,7 @@ class PathwayActionCard extends StatelessWidget {
                       style: AppTextStyles.headlineSmall.copyWith(
                         fontSize: 15,
                         fontWeight: FontWeight.w700,
-                        color: AppColors.textPrimary,
+                        color: colorScheme.onSurface,
                         height: 1.25,
                       ),
                     ),
@@ -69,7 +71,7 @@ class PathwayActionCard extends StatelessWidget {
                       subtitle,
                       style: AppTextStyles.bodyMedium.copyWith(
                         fontSize: 13,
-                        color: AppColors.textSecondary,
+                        color: colorScheme.onSurfaceVariant,
                         height: 1.35,
                       ),
                     ),
@@ -83,15 +85,18 @@ class PathwayActionCard extends StatelessWidget {
           AppButton(
             text: buttonText,
             onPressed: onPressed,
-            height: 44,
+            height: 40.h,
+            fontSize: 12.sp,
             variant: isFilledButton
                 ? AppButtonVariant.filled
                 : AppButtonVariant.outlined,
-            backgroundColor:
-                isFilledButton ? AppColors.primary : AppColors.border,
+            backgroundColor: isFilledButton
+                ? colorScheme.primary
+                : Colors.transparent,
             foregroundColor: isFilledButton
-                ? AppColors.textOnPrimary
+                ? colorScheme.onPrimary
                 : const Color(0xFF475569),
+            borderColor: colorScheme.outline,
           ),
         ],
       ),

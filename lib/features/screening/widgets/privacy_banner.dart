@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gbv/core/constants/asset_constants.dart';
-import 'package:gbv/core/theme/app_colors.dart';
 import 'package:gbv/core/theme/app_spacing.dart';
 import 'package:gbv/core/theme/app_text_styles.dart';
 import 'package:gbv/l10n/l10n.dart';
@@ -13,14 +12,20 @@ class PrivacyBanner extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+
     return Container(
       padding: const EdgeInsets.symmetric(
         horizontal: AppSpacing.md,
         vertical: AppSpacing.sm + 4,
       ),
       decoration: BoxDecoration(
-        color: AppColors.surfaceVariant,
+        color: colorScheme.surfaceContainerHighest,
         borderRadius: AppSpacing.borderRadiusMd,
+        border: Border.all(
+          color: colorScheme.outline,
+          width: 1.2,
+        ),
       ),
       child: Row(
         children: [
@@ -29,7 +34,7 @@ class PrivacyBanner extends StatelessWidget {
             width: 18.w,
             height: 18.h,
             colorFilter: ColorFilter.mode(
-              AppColors.primary.withValues(alpha: 0.7),
+              colorScheme.primary,
               BlendMode.srcIn,
             ),
           ),
@@ -38,7 +43,8 @@ class PrivacyBanner extends StatelessWidget {
             child: Text(
               context.l10n.privacyBannerText,
               style: AppTextStyles.bodySmall.copyWith(
-                color: AppColors.textSecondary,
+                color: colorScheme.onSurfaceVariant,
+                fontWeight: FontWeight.w500,
               ),
             ),
           ),

@@ -96,31 +96,93 @@ abstract final class AppTextStyles {
   );
 
   static TextStyle get dyslexiaBody => _dyslexiaBase(AppFontSizes.bodyLarge);
-  static TextStyle get dyslexiaHeadline =>
-      _dyslexiaBase(AppFontSizes.headlineMedium)
-          .copyWith(fontWeight: FontWeight.w700);
-  static TextStyle get dyslexiaLabel =>
-      _dyslexiaBase(AppFontSizes.labelMedium)
-          .copyWith(fontWeight: FontWeight.w600);
+  static TextStyle get dyslexiaHeadline => _dyslexiaBase(
+    AppFontSizes.headlineMedium,
+  ).copyWith(fontWeight: FontWeight.w700);
+  static TextStyle get dyslexiaLabel => _dyslexiaBase(
+    AppFontSizes.labelMedium,
+  ).copyWith(fontWeight: FontWeight.w600);
 
-  /// Generates a TextTheme configured for either standard or dyslexia mode.
-  static TextTheme createTextTheme({bool isDyslexia = false}) {
-    if (isDyslexia) {
-      return GoogleFonts.lexendTextTheme().copyWith(
-        headlineLarge: dyslexiaHeadline.copyWith(
-          fontSize: AppFontSizes.headlineLarge,
+  /// Generates a TextTheme configured for standard, dyslexia,
+  /// or high-contrast mode.
+  static TextTheme createTextTheme({
+    bool isDyslexia = false,
+    bool isHighContrast = false,
+  }) {
+    final baseTheme = isDyslexia
+        ? GoogleFonts.lexendTextTheme().copyWith(
+            headlineLarge: dyslexiaHeadline.copyWith(
+              fontSize: AppFontSizes.headlineLarge,
+            ),
+            headlineMedium: dyslexiaHeadline,
+            headlineSmall: dyslexiaHeadline.copyWith(
+              fontSize: AppFontSizes.headlineSmall,
+            ),
+            bodyLarge: dyslexiaBody,
+            bodyMedium: dyslexiaBody.copyWith(
+              fontSize: AppFontSizes.bodyMedium,
+            ),
+            bodySmall: dyslexiaBody.copyWith(fontSize: AppFontSizes.bodySmall),
+            labelLarge: dyslexiaLabel.copyWith(
+              fontSize: AppFontSizes.labelLarge,
+            ),
+            labelMedium: dyslexiaLabel,
+          )
+        : GoogleFonts.interTextTheme();
+
+    if (isHighContrast) {
+      return baseTheme.copyWith(
+        headlineLarge: baseTheme.headlineLarge?.copyWith(
+          color: AppColors.hcTextPrimary,
+          fontWeight: FontWeight.w800,
         ),
-        headlineMedium: dyslexiaHeadline,
-        headlineSmall: dyslexiaHeadline.copyWith(
-          fontSize: AppFontSizes.headlineSmall,
+        headlineMedium: baseTheme.headlineMedium?.copyWith(
+          color: AppColors.hcTextPrimary,
+          fontWeight: FontWeight.w800,
         ),
-        bodyLarge: dyslexiaBody,
-        bodyMedium: dyslexiaBody.copyWith(fontSize: AppFontSizes.bodyMedium),
-        bodySmall: dyslexiaBody.copyWith(fontSize: AppFontSizes.bodySmall),
-        labelLarge: dyslexiaLabel.copyWith(fontSize: AppFontSizes.labelLarge),
-        labelMedium: dyslexiaLabel,
+        headlineSmall: baseTheme.headlineSmall?.copyWith(
+          color: AppColors.hcTextPrimary,
+          fontWeight: FontWeight.w700,
+        ),
+        titleLarge: baseTheme.titleLarge?.copyWith(
+          color: AppColors.hcTextPrimary,
+          fontWeight: FontWeight.w700,
+        ),
+        titleMedium: baseTheme.titleMedium?.copyWith(
+          color: AppColors.hcTextPrimary,
+          fontWeight: FontWeight.w700,
+        ),
+        titleSmall: baseTheme.titleSmall?.copyWith(
+          color: AppColors.hcTextPrimary,
+          fontWeight: FontWeight.w700,
+        ),
+        bodyLarge: baseTheme.bodyLarge?.copyWith(
+          color: AppColors.hcTextSecondary,
+          fontWeight: FontWeight.w600,
+        ),
+        bodyMedium: baseTheme.bodyMedium?.copyWith(
+          color: AppColors.hcTextSecondary,
+          fontWeight: FontWeight.w600,
+        ),
+        bodySmall: baseTheme.bodySmall?.copyWith(
+          color: AppColors.hcTextSecondary,
+          fontWeight: FontWeight.w600,
+        ),
+        labelLarge: baseTheme.labelLarge?.copyWith(
+          color: AppColors.hcTextPrimary,
+          fontWeight: FontWeight.w700,
+        ),
+        labelMedium: baseTheme.labelMedium?.copyWith(
+          color: AppColors.hcTextPrimary,
+          fontWeight: FontWeight.w700,
+        ),
+        labelSmall: baseTheme.labelSmall?.copyWith(
+          color: AppColors.hcTextPrimary,
+          fontWeight: FontWeight.w700,
+        ),
       );
     }
-    return GoogleFonts.interTextTheme();
+
+    return baseTheme;
   }
 }

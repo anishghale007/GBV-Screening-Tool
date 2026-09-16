@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gbv/core/constants/asset_constants.dart';
-import 'package:gbv/core/theme/app_colors.dart';
 import 'package:gbv/core/theme/app_spacing.dart';
 import 'package:gbv/core/theme/app_text_styles.dart';
 import 'package:gbv/core/utils/voidcallback_extension.dart';
+import 'package:gbv/features/accessibility/bloc/accessibility_bloc.dart';
 
 /// Selectable Incident Category Tile.
 class IncidentCategoryTile extends StatelessWidget {
@@ -30,11 +31,27 @@ class IncidentCategoryTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final borderColor = isSelected ? AppColors.primary : AppColors.border;
+    final colorScheme = Theme.of(context).colorScheme;
+    final isHighContrast = context.select(
+      (AccessibilityBloc bloc) => bloc.state.settings.isHighContrastEnabled,
+    );
+    final backgroundColor = (isSelected && isHighContrast)
+        ? colorScheme.primaryContainer
+        : colorScheme.surface;
+    final borderColor = isSelected ? colorScheme.primary : colorScheme.outline;
     final borderWidth = isSelected ? 2.0 : 1.2;
 
+    final iconBgColor = isSelected
+        ? (isHighContrast
+            ? colorScheme.primary
+            : colorScheme.primary.withValues(alpha: 0.12))
+        : colorScheme.surfaceContainerHighest;
+    final iconColor = isSelected
+        ? (isHighContrast ? colorScheme.onPrimary : colorScheme.primary)
+        : colorScheme.primary;
+
     return Material(
-      color: AppColors.surface,
+      color: backgroundColor,
       borderRadius: AppSpacing.borderRadiusMd,
       child: InkWell(
         onTap: onTap.withMediumImpact(),
@@ -45,6 +62,7 @@ class IncidentCategoryTile extends StatelessWidget {
             vertical: 12,
           ),
           decoration: BoxDecoration(
+            color: backgroundColor,
             borderRadius: AppSpacing.borderRadiusMd,
             border: Border.all(color: borderColor, width: borderWidth),
           ),
@@ -56,17 +74,15 @@ class IncidentCategoryTile extends StatelessWidget {
                 height: 38.h,
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
-                  color: isSelected
-                      ? AppColors.primary.withValues(alpha: 0.12)
-                      : AppColors.surfaceVariant,
+                  color: iconBgColor,
                   shape: BoxShape.circle,
                 ),
                 child: SvgPicture.asset(
                   iconPath,
                   width: 20,
                   height: 20,
-                  colorFilter: const ColorFilter.mode(
-                    AppColors.primary,
+                  colorFilter: ColorFilter.mode(
+                    iconColor,
                     BlendMode.srcIn,
                   ),
                 ),
@@ -83,14 +99,20 @@ class IncidentCategoryTile extends StatelessWidget {
                       title,
                       style: AppTextStyles.labelLarge.copyWith(
                         fontWeight: FontWeight.w700,
-                        color: AppColors.textPrimary,
+                        color: isSelected
+                            ? colorScheme.primary
+                            : colorScheme.onSurface,
                       ),
                     ),
                     const SizedBox(height: 2),
                     Text(
                       description,
                       style: AppTextStyles.bodySmall.copyWith(
-                        color: AppColors.textSecondary,
+                        color: isSelected
+                            ? colorScheme.onSurface
+                            : colorScheme.onSurfaceVariant,
+                        fontWeight:
+                            isSelected ? FontWeight.w600 : FontWeight.w400,
                         height: 1.25,
                       ),
                     ),
@@ -100,11 +122,18 @@ class IncidentCategoryTile extends StatelessWidget {
               const SizedBox(width: AppSpacing.sm),
 
               // Audio narration button
-              _AudioIconButton(onTap: onAudioTap, isPlaying: isPlaying),
+              _AudioIconButton(
+                onTap: onAudioTap,
+                isSelected: isSelected,
+                isPlaying: isPlaying,
+              ),
               const SizedBox(width: AppSpacing.sm),
 
               // Custom Rounded Checkbox
-              _CustomCheckbox(isSelected: isSelected),
+              _CustomCheckbox(
+                isSelected: isSelected,
+                isHighContrast: isHighContrast,
+              ),
             ],
           ),
         ),
@@ -115,30 +144,36 @@ class IncidentCategoryTile extends StatelessWidget {
 
 /// Custom Rounded Checkbox matching the design reference.
 class _CustomCheckbox extends StatelessWidget {
-  const _CustomCheckbox({required this.isSelected});
+  const _CustomCheckbox({
+    required this.isSelected,
+    required this.isHighContrast,
+  });
 
   final bool isSelected;
+  final bool isHighContrast;
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+
     return AnimatedContainer(
       duration: const Duration(milliseconds: 180),
       width: 22.w,
       height: 22.h,
       decoration: BoxDecoration(
-        color: isSelected ? AppColors.primary : Colors.transparent,
+        color: isSelected ? colorScheme.primary : Colors.transparent,
         borderRadius: BorderRadius.circular(6),
         border: Border.all(
-          color: isSelected ? AppColors.primary : AppColors.border,
-          width: 1.5,
+          color: isSelected ? colorScheme.primary : colorScheme.outline,
+          width: isSelected ? 2.0 : 1.5,
         ),
       ),
       child: isSelected
-          ? const Center(
+          ? Center(
               child: Icon(
                 Icons.check_rounded,
                 size: 16,
-                color: AppColors.textOnPrimary,
+                color: colorScheme.onPrimary,
               ),
             )
           : null,
@@ -148,25 +183,42 @@ class _CustomCheckbox extends StatelessWidget {
 
 /// Audio narration button.
 class _AudioIconButton extends StatelessWidget {
-  const _AudioIconButton({required this.onTap, this.isPlaying = false});
+  const _AudioIconButton({
+    required this.onTap,
+    required this.isSelected,
+    this.isPlaying = false,
+  });
 
   final VoidCallback onTap;
+  final bool isSelected;
   final bool isPlaying;
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+    final isHighContrast = context.select(
+      (AccessibilityBloc bloc) => bloc.state.settings.isHighContrastEnabled,
+    );
     final backgroundColor = isPlaying
-        ? AppColors.primary
-        : AppColors.surfaceVariant;
+        ? colorScheme.primary
+        : isSelected
+        ? (isHighContrast
+            ? colorScheme.surface
+            : colorScheme.primary.withValues(alpha: 0.12))
+        : colorScheme.surfaceContainerHighest;
     final iconColor = isPlaying
-        ? AppColors.textOnPrimary
-        : AppColors.textSecondary;
+        ? colorScheme.onPrimary
+        : isSelected
+        ? colorScheme.primary
+        : colorScheme.onSurfaceVariant;
     final borderColor = isPlaying
-        ? AppColors.primary
-        : AppColors.borderSelected;
+        ? colorScheme.primary
+        : isSelected
+        ? colorScheme.primary
+        : colorScheme.outline;
 
     return GestureDetector(
-      onTap: onTap,
+      onTap: onTap.withMediumImpact(),
       behavior: HitTestBehavior.opaque,
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 150),

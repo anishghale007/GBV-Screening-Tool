@@ -5,7 +5,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gbv/common/common.dart';
 import 'package:gbv/core/core.dart';
 import 'package:gbv/features/accessibility/bloc/accessibility_bloc.dart';
-import 'package:gbv/features/accessibility/view/accessibility_page.dart';
 import 'package:gbv/features/pathway/widgets/assessment_gauge.dart';
 import 'package:gbv/features/pathway/widgets/digital_rights_modal.dart';
 import 'package:gbv/features/pathway/widgets/pathway_action_card.dart';
@@ -110,11 +109,6 @@ class _PathwayPageState extends State<PathwayPage>
 
         return AppScaffold(
           appBar: CommonAppBar(title: l10n.screeningTitle),
-          floatingActionButton: FloatingActionButton(
-            onPressed: () => AccessibilityBottomSheet.show(context),
-            tooltip: l10n.accessibilitySettings,
-            child: const Icon(Icons.accessible_forward_rounded),
-          ),
           body: SingleChildScrollView(
             padding: const EdgeInsets.symmetric(
               // horizontal: AppSpacing.lg,
@@ -208,7 +202,7 @@ class _PathwayPageState extends State<PathwayPage>
                         style: AppTextStyles.bodyMedium.copyWith(
                           fontSize: 13.5,
                           height: 1.45,
-                          color: const Color(0xFF334155),
+                          color: const Color(0xFF1F2933),
                         ),
                         textAlign: TextAlign.left,
                       ),
@@ -221,8 +215,8 @@ class _PathwayPageState extends State<PathwayPage>
                 PathwayActionCard(
                   icon: SvgPicture.asset(
                     AssetConstants.phoneIcon,
-                    width: 22,
-                    height: 22,
+                    width: 18.w,
+                    height: 18.h,
                     colorFilter: const ColorFilter.mode(
                       AppColors.primary,
                       BlendMode.srcIn,
@@ -240,8 +234,8 @@ class _PathwayPageState extends State<PathwayPage>
                 PathwayActionCard(
                   icon: SvgPicture.asset(
                     AssetConstants.bookIcon,
-                    width: 22,
-                    height: 22,
+                    width: 18.w,
+                    height: 18.h,
                     colorFilter: const ColorFilter.mode(
                       AppColors.primary,
                       BlendMode.srcIn,

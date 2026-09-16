@@ -190,5 +190,29 @@
                 "type": "String"
             }
         }
+    },
+    "homePrivacyBanner": "100% On-device & Encrypted. No personal data leaves this phone.",
+    "@homePrivacyBanner": {
+        "description": "Privacy assurance banner on the home page"
+    },
+    "wellbeingScreeningTitle": "Wellbeing Screening",
+    "@wellbeingScreeningTitle": {
+        "description": "Title of the wellbeing screening card on home page"
+    },
+    "wellbeingScreeningDesc": "A quick, 15-question guided audio check to help understand your situation and suggest safe options.",
+    "@wellbeingScreeningDesc": {
+        "description": "Description of the wellbeing screening card on home page"
+    },
+    "startScreeningButton": "Start Screening",
+    "@startScreeningButton": {
+        "description": "Button to begin the wellbeing screening"
+    },
+    "supportResourcesDesc": "Always-accessible emergency numbers, helplines, and local counselors.",
+    "@supportResourcesDesc": {
+        "description": "Description of the support resources card on home page"
+    },
+    "viewResourcesButton": "View Resources",
+    "@viewResourcesButton": {
+        "description": "Button to navigate to support directory from home page"
     }
 }

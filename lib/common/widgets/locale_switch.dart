@@ -16,6 +16,7 @@ class LocaleSwitch extends StatelessWidget {
       builder: (context, currentLocale) {
         final isNepali = currentLocale.languageCode == 'ne';
         final cubit = context.read<LocaleCubit>();
+        final colorScheme = Theme.of(context).colorScheme;
 
         return Container(
           height: 32.h,
@@ -23,7 +24,7 @@ class LocaleSwitch extends StatelessWidget {
             color: const Color(0xFFE2EBEB),
             borderRadius: BorderRadius.circular(8),
             border: Border.all(
-              color: AppColors.primary.withValues(alpha: 0.18),
+              color: colorScheme.primary.withValues(alpha: 0.25),
             ),
           ),
           child: ClipRRect(
@@ -71,8 +72,10 @@ class _LocaleSegment extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+
     return InkWell(
-      onTap: onTap.withMediumImpate(),
+      onTap: onTap.withMediumImpact(),
       borderRadius: borderRadius,
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 180),
@@ -80,13 +83,13 @@ class _LocaleSegment extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 14),
         alignment: Alignment.center,
         decoration: BoxDecoration(
-          color: isActive ? AppColors.primary : Colors.transparent,
+          color: isActive ? colorScheme.primary : Colors.transparent,
           borderRadius: borderRadius,
         ),
         child: Text(
           label,
           style: TextStyle(
-            color: isActive ? AppColors.textOnPrimary : const Color(0xFF2C3E50),
+            color: isActive ? colorScheme.onPrimary : colorScheme.onSurface,
             fontWeight: isActive ? FontWeight.w700 : FontWeight.w600,
             fontSize: 13,
             letterSpacing: 0.2,

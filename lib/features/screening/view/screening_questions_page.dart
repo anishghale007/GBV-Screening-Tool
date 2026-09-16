@@ -5,7 +5,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gbv/common/common.dart';
 import 'package:gbv/core/core.dart';
-import 'package:gbv/features/accessibility/view/accessibility_page.dart';
 import 'package:gbv/features/screening/bloc/screening_cubit.dart';
 import 'package:gbv/features/screening/bloc/screening_state.dart';
 import 'package:gbv/features/screening/data/screening_questions_data.dart';
@@ -120,11 +119,6 @@ class _ScreeningQuestionsPageState extends State<ScreeningQuestionsPage> {
             title: l10n.screeningTitle,
             onBackPressed: _onPrevious,
           ),
-          floatingActionButton: FloatingActionButton(
-            onPressed: () => AccessibilityBottomSheet.show(context),
-            tooltip: l10n.accessibilitySettings,
-            child: const Icon(Icons.accessible_forward_rounded),
-          ),
           body: Column(
             children: [
               // Pinned Header with Progress Bar & Question Counter
@@ -223,8 +217,10 @@ class _ScreeningQuestionsPageState extends State<ScreeningQuestionsPage> {
                                 l10n.preferNotToSay,
                                 style: AppTextStyles.bodyMedium.copyWith(
                                   color: currentAnswer == 'prefer_not_to_say'
-                                      ? AppColors.primary
-                                      : AppColors.textSecondary,
+                                      ? Theme.of(context).colorScheme.primary
+                                      : Theme.of(
+                                          context,
+                                        ).colorScheme.onSurfaceVariant,
                                   decoration: TextDecoration.underline,
                                   fontWeight:
                                       currentAnswer == 'prefer_not_to_say'
@@ -267,7 +263,7 @@ class _QuestionAudioButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: onTap,
+      onTap: onTap.withMediumImpact(),
       behavior: HitTestBehavior.opaque,
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 150),

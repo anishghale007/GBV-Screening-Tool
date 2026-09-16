@@ -45,11 +45,17 @@ abstract final class AppColors {
   static const Color quickExit = Color(0xFFEF5350);
   static const Color quickExitPressed = Color(0xFFC62828);
 
-  // ── High-contrast overrides ─────────────────────────────────────────
-  static const Color hcBackground = Color(0xFF000000);
-  static const Color hcSurface = Color(0xFF1A1A1A);
-  static const Color hcTextPrimary = Color(0xFFFFFFFF);
-  static const Color hcTextSecondary = Color(0xFFE0E0E0);
-  static const Color hcPrimary = Color(0xFF80CBC4);
-  static const Color hcBorder = Color(0xFFFFFFFF);
+  // ── High-contrast overrides (WCAG AAA compliant Light Mode) ─────────
+  static const Color hcBackground = Color(0xFFF8F9F7);
+  static const Color hcSurface = Color(0xFFFFFFFF);
+  static const Color hcTextPrimary = Color(0xFF000000);
+  static const Color hcTextSecondary = Color(0xFF1A202C);
+  static const Color hcPrimary = Color(0xFF0A4445);
+  static const Color hcPrimaryLight = Color(0xFF146062);
+  static const Color hcPrimaryDark = Color(0xFF00292A);
+  static const Color hcPrimaryContainer = Color(0xFFD4ECEB);
+  static const Color hcOnPrimaryContainer = Color(0xFF002223);
+  static const Color hcBorder = Color(0xFF6B7280);
+  static const Color hcBorderSelected = Color(0xFF0A4445);
+  static const Color hcError = Color(0xFF990000);
 }

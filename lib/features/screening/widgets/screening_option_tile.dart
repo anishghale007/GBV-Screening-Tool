@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gbv/core/core.dart';
+import 'package:gbv/features/accessibility/bloc/accessibility_bloc.dart';
 
 /// Single-choice selectable option card for a screening question.
 class ScreeningOptionTile extends StatelessWidget {
@@ -16,11 +18,18 @@ class ScreeningOptionTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final borderColor = isSelected ? AppColors.primary : AppColors.border;
+    final colorScheme = Theme.of(context).colorScheme;
+    final isHighContrast = context.select(
+      (AccessibilityBloc bloc) => bloc.state.settings.isHighContrastEnabled,
+    );
+    final backgroundColor = (isSelected && isHighContrast)
+        ? colorScheme.primaryContainer
+        : colorScheme.surface;
+    final borderColor = isSelected ? colorScheme.primary : colorScheme.outline;
     final borderWidth = isSelected ? 2.0 : 1.2;
 
     return Material(
-      color: AppColors.surface,
+      color: backgroundColor,
       borderRadius: BorderRadius.circular(12),
       child: InkWell(
         onTap: onTap.withMediumImpact(),
@@ -32,7 +41,7 @@ class ScreeningOptionTile extends StatelessWidget {
             vertical: 16,
           ),
           decoration: BoxDecoration(
-            color: AppColors.surface,
+            color: backgroundColor,
             borderRadius: BorderRadius.circular(12),
             border: Border.all(color: borderColor, width: borderWidth),
           ),
@@ -43,7 +52,9 @@ class ScreeningOptionTile extends StatelessWidget {
                   label,
                   style: AppTextStyles.bodyLarge.copyWith(
                     fontWeight: isSelected ? FontWeight.w700 : FontWeight.w600,
-                    color: AppColors.textPrimary,
+                    color: isSelected
+                        ? colorScheme.primary
+                        : colorScheme.onSurface,
                     fontSize: 15,
                   ),
                 ),
@@ -57,11 +68,28 @@ class ScreeningOptionTile extends StatelessWidget {
                 height: 22,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
+                  color: isSelected && isHighContrast
+                      ? colorScheme.primary
+                      : Colors.transparent,
                   border: Border.all(
-                    color: isSelected ? AppColors.primary : AppColors.border,
-                    width: isSelected ? 5.5 : 2.0,
+                    color: isSelected
+                        ? colorScheme.primary
+                        : colorScheme.outline,
+                    width: isSelected ? (isHighContrast ? 2.0 : 5.5) : 1.8,
                   ),
                 ),
+                child: isSelected && isHighContrast
+                    ? Center(
+                        child: Container(
+                          width: 8,
+                          height: 8,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: colorScheme.onPrimary,
+                          ),
+                        ),
+                      )
+                    : null,
               ),
             ],
           ),

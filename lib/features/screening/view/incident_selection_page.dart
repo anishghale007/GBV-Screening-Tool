@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gbv/common/common.dart';
 import 'package:gbv/core/core.dart';
-import 'package:gbv/features/accessibility/view/accessibility_page.dart';
+import 'package:gbv/features/accessibility/bloc/accessibility_bloc.dart';
 import 'package:gbv/features/screening/bloc/screening_cubit.dart';
 import 'package:gbv/features/screening/data/incident_types.dart';
 import 'package:gbv/features/screening/widgets/incident_category_tile.dart';
@@ -97,11 +97,6 @@ class _IncidentSelectionPageState extends State<IncidentSelectionPage> {
 
     return AppScaffold(
       appBar: CommonAppBar(title: l10n.screeningTitle),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => AccessibilityBottomSheet.show(context),
-        tooltip: l10n.accessibilitySettings,
-        child: const Icon(Icons.accessible_forward_rounded),
-      ),
       body: Column(
         children: [
           Expanded(
@@ -193,11 +188,21 @@ class _NotSureTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+    final isHighContrast = context.select(
+      (AccessibilityBloc bloc) => bloc.state.settings.isHighContrastEnabled,
+    );
+    final backgroundColor = (isSelected && isHighContrast)
+        ? colorScheme.primaryContainer
+        : colorScheme.surface;
+    final borderColor = isSelected ? colorScheme.primary : colorScheme.outline;
+    final borderWidth = isSelected ? 2.0 : 1.2;
+
     return Material(
-      color: AppColors.surface,
+      color: backgroundColor,
       borderRadius: AppSpacing.borderRadiusMd,
       child: InkWell(
-        onTap: onTap.withMediumImpate(),
+        onTap: onTap.withMediumImpact(),
         borderRadius: AppSpacing.borderRadiusMd,
         child: Container(
           padding: const EdgeInsets.symmetric(
@@ -205,11 +210,9 @@ class _NotSureTile extends StatelessWidget {
             vertical: 14,
           ),
           decoration: BoxDecoration(
+            color: backgroundColor,
             borderRadius: AppSpacing.borderRadiusMd,
-            border: Border.all(
-              color: isSelected ? AppColors.primary : AppColors.border,
-              width: isSelected ? 2.0 : 1.2,
-            ),
+            border: Border.all(color: borderColor, width: borderWidth),
           ),
           child: Row(
             children: [
@@ -218,17 +221,17 @@ class _NotSureTile extends StatelessWidget {
                   label,
                   style: AppTextStyles.bodyMedium.copyWith(
                     color: isSelected
-                        ? AppColors.primary
-                        : AppColors.textSecondary,
-                    fontWeight: isSelected ? FontWeight.w600 : FontWeight.w500,
+                        ? colorScheme.primary
+                        : colorScheme.onSurface,
+                    fontWeight: isSelected ? FontWeight.w700 : FontWeight.w500,
                   ),
                 ),
               ),
               if (isSelected)
-                const Icon(
+                Icon(
                   Icons.check_circle_rounded,
                   size: 20,
-                  color: AppColors.primary,
+                  color: colorScheme.primary,
                 ),
             ],
           ),

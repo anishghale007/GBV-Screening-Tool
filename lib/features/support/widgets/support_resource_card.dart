@@ -21,13 +21,15 @@ class SupportResourceCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+
     return Container(
       width: double.infinity,
       padding: EdgeInsets.all(16.w),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: colorScheme.surface,
         borderRadius: BorderRadius.circular(16.r),
-        border: Border.all(color: const Color(0xFFE5E7EB)),
+        border: Border.all(color: colorScheme.outline),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withValues(alpha: 0.03),
@@ -46,12 +48,12 @@ class SupportResourceCard extends StatelessWidget {
               Container(
                 width: 48.w,
                 height: 48.w,
-                decoration: const BoxDecoration(
-                  color: Color(0xFFE5F0F0),
+                decoration: BoxDecoration(
+                  color: colorScheme.primary.withValues(alpha: 0.12),
                   shape: BoxShape.circle,
                 ),
                 alignment: Alignment.center,
-                child: _buildIcon(),
+                child: _buildIcon(colorScheme.primary),
               ),
               SizedBox(width: 12.w),
               // Resource details
@@ -64,7 +66,7 @@ class SupportResourceCard extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 14.sp,
                         fontWeight: FontWeight.w700,
-                        color: AppColors.textPrimary,
+                        color: colorScheme.onSurface,
                       ),
                     ),
                     SizedBox(height: 2.h),
@@ -72,8 +74,8 @@ class SupportResourceCard extends StatelessWidget {
                       resource.localizedDescription(languageCode),
                       style: TextStyle(
                         fontSize: 11.sp,
-                        fontWeight: FontWeight.w400,
-                        color: const Color(0xFF667085),
+                        fontWeight: FontWeight.w500,
+                        color: colorScheme.onSurfaceVariant,
                         height: 1.25,
                       ),
                     ),
@@ -83,7 +85,7 @@ class SupportResourceCard extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 11.sp,
                         fontWeight: FontWeight.w700,
-                        color: const Color(0xFF216A6B),
+                        color: colorScheme.primary,
                       ),
                     ),
                   ],
@@ -99,8 +101,8 @@ class SupportResourceCard extends StatelessWidget {
             child: ElevatedButton(
               onPressed: onCall.withMediumImpact(),
               style: ElevatedButton.styleFrom(
-                backgroundColor: const Color(0xFF1B6B66),
-                foregroundColor: Colors.white,
+                backgroundColor: colorScheme.primary,
+                foregroundColor: colorScheme.onPrimary,
                 elevation: 0,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12.r),
@@ -111,7 +113,7 @@ class SupportResourceCard extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 12.sp,
                   fontWeight: FontWeight.w600,
-                  color: Colors.white,
+                  color: colorScheme.onPrimary,
                 ),
               ),
             ),
@@ -121,18 +123,18 @@ class SupportResourceCard extends StatelessWidget {
     );
   }
 
-  Widget _buildIcon() {
+  Widget _buildIcon(Color color) {
     if (resource.iconAsset != null && resource.iconAsset!.endsWith('.svg')) {
       return SvgPicture.asset(
         resource.iconAsset!,
         width: 20.w,
         height: 20.w,
-        colorFilter: const ColorFilter.mode(Color(0xFF1B6B66), BlendMode.srcIn),
+        colorFilter: ColorFilter.mode(color, BlendMode.srcIn),
       );
     }
     return Icon(
       resource.iconData ?? Icons.phone_rounded,
-      color: const Color(0xFF1B6B66),
+      color: color,
       size: 24.sp,
     );
   }

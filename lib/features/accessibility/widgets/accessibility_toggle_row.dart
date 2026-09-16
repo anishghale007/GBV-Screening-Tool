@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gbv/core/theme/app_colors.dart';
 import 'package:gbv/core/theme/app_spacing.dart';
 import 'package:gbv/core/theme/app_text_styles.dart';
+import 'package:gbv/core/utils/voidcallback_extension.dart';
 
 /// Single interactive toggle setting row with title, description, and Switch.
 class AccessibilityToggleRow extends StatelessWidget {
@@ -58,7 +59,7 @@ class AccessibilityToggleRow extends StatelessWidget {
             scale: 0.88,
             child: Switch(
               value: value,
-              onChanged: isEnabled ? onChanged : null,
+              onChanged: isEnabled ? onChanged.withMediumImpact() : null,
               activeThumbColor: Colors.white,
               activeTrackColor: AppColors.primary,
               inactiveThumbColor: Colors.white,

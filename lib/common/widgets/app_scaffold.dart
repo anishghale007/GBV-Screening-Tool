@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gbv/core/core.dart';
+import 'package:gbv/features/accessibility/view/accessibility_page.dart';
 
 /// Base scaffold providing consistent layout, background colors, padding,
-/// safe area handling, and dismiss-keyboard-on-tap behavior.
+/// safe area handling, default accessibility FAB, and
+/// dismiss-keyboard-on-tap behavior.
 class AppScaffold extends StatelessWidget {
   const AppScaffold({
     required this.body,
@@ -11,6 +13,7 @@ class AppScaffold extends StatelessWidget {
     this.appBar,
     this.bottomNavigationBar,
     this.floatingActionButton,
+    this.showFloatingActionButton = true,
     this.padding = AppSpacing.screenPadding,
     this.useSafeArea = true,
     this.hideKeyboardOnTap = true,
@@ -22,6 +25,7 @@ class AppScaffold extends StatelessWidget {
   final PreferredSizeWidget? appBar;
   final Widget? bottomNavigationBar;
   final Widget? floatingActionButton;
+  final bool showFloatingActionButton;
   final EdgeInsetsGeometry padding;
   final bool useSafeArea;
   final bool hideKeyboardOnTap;
@@ -44,15 +48,26 @@ class AppScaffold extends StatelessWidget {
       );
     }
 
+    final effectiveFab = showFloatingActionButton
+        ? (floatingActionButton ??
+              FloatingActionButton(
+                onPressed: () => AccessibilityBottomSheet.show(context),
+                tooltip: context.l10n.accessibilitySettings,
+                child: const Icon(Icons.accessible_forward_rounded),
+              ))
+        : null;
+
     return Scaffold(
       backgroundColor: backgroundColor,
       appBar: appBar,
       body: content,
       bottomNavigationBar: bottomNavigationBar,
-      floatingActionButton: Padding(
-        padding: EdgeInsets.only(bottom: 60.h),
-        child: floatingActionButton,
-      ),
+      floatingActionButton: effectiveFab != null
+          ? Padding(
+              padding: EdgeInsets.only(bottom: 60.h),
+              child: effectiveFab,
+            )
+          : null,
       resizeToAvoidBottomInset: resizeToAvoidBottomInset,
     );
   }

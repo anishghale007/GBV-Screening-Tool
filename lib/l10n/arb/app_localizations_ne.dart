@@ -401,4 +401,25 @@ class AppLocalizationsNe extends AppLocalizations {
   String callButtonLabel(String number) {
     return 'फोन गर्नुहोस् $number';
   }
+
+  @override
+  String get homePrivacyBanner =>
+      '१००% डिभाइसमै सुरक्षित र इन्क्रिप्टेड। कुनै पनि व्यक्तिगत डेटा यो फोनबाट बाहिर जाँदैन।';
+
+  @override
+  String get wellbeingScreeningTitle => 'सुरक्षा तथा स्वास्थ्य स्क्रिनिङ';
+
+  @override
+  String get wellbeingScreeningDesc =>
+      'तपाईंको अवस्था बुझ्न र सुरक्षित विकल्पहरू सुझाउन मद्दत गर्ने १५ प्रश्नहरूको द्रुत अडियो स्क्रिनिङ।';
+
+  @override
+  String get startScreeningButton => 'स्क्रिनिङ सुरु गर्नुहोस्';
+
+  @override
+  String get supportResourcesDesc =>
+      'सधैं उपलब्ध आपतकालीन नम्बरहरू, हेल्पलाइनहरू र स्थानीय परामर्शदाताहरू।';
+
+  @override
+  String get viewResourcesButton => 'स्रोतहरू हेर्नुहोस्';
 }

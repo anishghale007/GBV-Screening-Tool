@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gbv/common/common.dart';
 import 'package:gbv/core/core.dart';
-import 'package:gbv/features/accessibility/view/accessibility_page.dart';
 import 'package:gbv/features/support/data/support_resources_data.dart';
 import 'package:gbv/features/support/models/support_resource.dart';
 import 'package:gbv/features/support/widgets/emergency_alert_banner.dart';
@@ -82,11 +81,6 @@ class _SupportDirectoryPageState extends State<SupportDirectoryPage> {
 
     return AppScaffold(
       appBar: CommonAppBar(title: l10n.supportDirectoryTitle),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => AccessibilityBottomSheet.show(context),
-        tooltip: l10n.accessibilitySettings,
-        child: const Icon(Icons.accessible_forward_rounded),
-      ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(
           horizontal: AppSpacing.sm,

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gbv/common/common.dart';
 import 'package:gbv/core/core.dart';
-import 'package:gbv/features/accessibility/view/accessibility_page.dart';
 import 'package:go_router/go_router.dart';
 
 /// Simple Home screen serving as the central hub for the screening tool.
@@ -10,19 +9,17 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
+    final colorScheme = context.colorScheme;
+
     return AppScaffold(
       appBar: CommonAppBar(
-        title: context.l10n.appTitle,
+        title: l10n.appTitle,
         showBackButton: false,
         titleStyle: AppTextStyles.headlineSmall.copyWith(
           color: AppColors.primary,
           fontWeight: FontWeight.w700,
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => AccessibilityBottomSheet.show(context),
-        tooltip: context.l10n.accessibilitySettings,
-        child: const Icon(Icons.accessible_forward_rounded),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -33,27 +30,27 @@ class HomePage extends StatelessWidget {
             Container(
               padding: AppSpacing.paddingMd,
               decoration: BoxDecoration(
-                color: AppColors.primaryContainer,
+                color: colorScheme.primaryContainer,
                 borderRadius: AppSpacing.borderRadiusMd,
                 border: Border.all(
-                  color: AppColors.primary.withValues(alpha: 0.15),
+                  color: colorScheme.primary.withValues(alpha: 0.35),
+                  width: 1.2,
                 ),
               ),
               child: Row(
                 children: [
-                  const Icon(
+                  Icon(
                     Icons.security_rounded,
-                    color: AppColors.primary,
+                    color: colorScheme.primary,
                     size: 24,
                   ),
                   const SizedBox(width: AppSpacing.sm),
                   Expanded(
                     child: Text(
-                      '100% On-device & Encrypted. No personal data leaves '
-                      'this phone.',
+                      l10n.homePrivacyBanner,
                       style: AppTextStyles.bodySmall.copyWith(
-                        color: AppColors.primary,
-                        fontWeight: FontWeight.w500,
+                        color: colorScheme.primary,
+                        fontWeight: FontWeight.w600,
                       ),
                     ),
                   ),
@@ -70,18 +67,17 @@ class HomePage extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Wellbeing Screening',
+                      l10n.wellbeingScreeningTitle,
                       style: AppTextStyles.headlineSmall,
                     ),
                     const SizedBox(height: AppSpacing.sm),
                     Text(
-                      'A quick, 15-question guided audio check to help '
-                      'understand your situation and suggest safe options.',
+                      l10n.wellbeingScreeningDesc,
                       style: AppTextStyles.bodyMedium,
                     ),
                     const SizedBox(height: AppSpacing.lg),
                     AppButton(
-                      text: 'Start Screening',
+                      text: l10n.startScreeningButton,
                       icon: const Icon(Icons.play_arrow_rounded),
                       onPressed: () => context.push(AppRoutes.screening),
                     ),
@@ -99,18 +95,17 @@ class HomePage extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      context.l10n.supportResources,
+                      l10n.supportResources,
                       style: AppTextStyles.headlineSmall,
                     ),
                     const SizedBox(height: AppSpacing.sm),
                     Text(
-                      'Always-accessible emergency numbers, helplines, '
-                      'and local counselors in Madhesh and Lumbini.',
+                      l10n.supportResourcesDesc,
                       style: AppTextStyles.bodyMedium,
                     ),
                     const SizedBox(height: AppSpacing.lg),
                     AppButton(
-                      text: 'View Resources',
+                      text: l10n.viewResourcesButton,
                       variant: AppButtonVariant.outlined,
                       icon: const Icon(Icons.phone_in_talk_rounded),
                       foregroundColor: Colors.black,
@@ -121,23 +116,6 @@ class HomePage extends StatelessWidget {
               ),
             ),
             const SizedBox(height: AppSpacing.md),
-
-            // Quick Exit Safety Notice
-            // Center(
-            //   child: TextButton.icon(
-            //     icon: const Icon(
-            //       Icons.exit_to_app_rounded,
-            //       color: AppColors.quickExit,
-            //     ),
-            //     label: Text(
-            //       'Quick Exit (Open Calculator)',
-            //       style: AppTextStyles.labelMedium.copyWith(
-            //         color: AppColors.quickExit,
-            //       ),
-            //     ),
-            //     onPressed: () => context.go(AppRoutes.quickExit),
-            //   ),
-            // ),
           ],
         ),
       ),
